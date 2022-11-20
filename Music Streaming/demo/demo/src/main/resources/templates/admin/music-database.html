@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+</head>
+<body>
+
+    <h1>Music Database</h1>
+    <a th:href="@{/admin}"><button>Go back</button></a><br>
+
+    <div th:if="${pageMessage}">
+        <p>[[${pageMessage}]]</p>
+    </div><br>
+
+    <form th:action="@{/admin/music-database/find}" method="get">
+        <label>id:</label><input type="search" name="id" th:value="${id}">
+        <label>name:</label><input type="search" name="name" th:value="${name}">
+        <button type="submit">Find</button>
+    </form><br>
+
+    <a th:href="@{/admin/music-database/add}"><button>Add new music</button></a><br>
+
+     <div>
+        <table>
+        <thead><tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Release Date</th>
+            <th>Genre ID (name)</th>
+            <th>Artist ID (name)</th>
+            <th></th>
+        </tr></thead>
+        <tbody><th:block th:each="music: ${musicList}"><tr>
+            <td>[[${music.id}]]</td>
+            <td>[[${music.name}]]</td>
+            <td>[[${music.releaseDate}]]</td>
+            <td>[[${music.genre.id}]] ([[${music.genre.name}]])</td>
+            <td>[[${music.artist.id}]] ([[${music.artist.name}]])</td>
+            <td><a th:href="@{'/admin/music-database/preview-id-' + ${music.id}}" target="_blank"><button>Preview</button></a>
+                <a th:href="@{'/admin/music-database/edit-id-' + ${music.id}}"><button>Edit</button></a>
+                <a th:href="@{'/admin/music-database/delete-id-' + ${music.id}}"><button>Delete</button></a>
+            </td></tr>
+        </th:block>
+        </tbody>
+        </table>
+    </div>
+
+</body>
+</html>

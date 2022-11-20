@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+</head>
+<body>
+
+    <h1>[[${pageMessage}]]</h1>
+    <p>[[${errorMessage}]]</p>
+
+    <form th:action="@{/admin/music-database/save}" th:object="${music}" method="post" enctype="multipart/form-data">
+        <input type="hidden" th:field="*{id}"><br>
+        <label>music name:</label><input type="text" th:field="*{name}" required><br>
+        <label>music releaseDate:</label><input type="date" th:field="*{releaseDate}" required><br>
+        <label>artist id:</label><input type="text" th:field="*{artist}" required><br>
+        <label>genre id:</label><input type="text" th:field="*{genre}" required><br>
+        <label>music file:</label><input type="file" accept=".wav" th:name="file" th:required="${is_required} ? 'required' : null"><br>
+        <button type="submit">Save</button>
+        <a th:href="@{/admin/music-database}"><button type="button">Cancel</button></a>
+    </form>
+
+</body>
+</html>

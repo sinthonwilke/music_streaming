@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+</head>
+<body>
+
+    <h1>User Database</h1>
+    <a th:href="@{/admin}"><button>Go back</button></a><br>
+
+     <div>
+        <table>
+        <thead><tr>
+            <th>ID</th>
+            <th>Email</th>
+            <th>Password</th>
+            <th>Role</th>
+            <th></th>
+        </tr></thead>
+        <tbody><th:block th:each="user: ${userList}"><tr>
+            <td>[[${user.id}]]</td>
+            <td>[[${user.email}]]</td>
+            <td>[[${user.password}]]</td>
+            <td>[[${user.role}]]</td>
+        </th:block>
+        </tbody>
+        </table>
+    </div>
+
+</body>
+</html>

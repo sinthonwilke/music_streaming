@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <link href="webjars/bootstrap/3.3.6/css/bootstrap.min.css"rel="stylesheet">
+    <link href="css/example.css" rel="stylesheet">
+    <script src="js/example.js"></script>
+</head>
+<body>
+
+    <h1>Account</h1>
+    <p>[[${userId}]]</p>
+    <p>[[${userEmail}]]</p>
+
+
+
+
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" value="Sign Out"/>
+    </form>
+
+    <a th:href="@{/}"><button>Home</button></a>
+    <a th:href="@{/search}"><button>Search</button></a>
+    <a th:href="@{/library}"><button>Library</button></a>
+    <a th:href="@{/account}"><button>Account</button></a>
+
+</body>
+</html>

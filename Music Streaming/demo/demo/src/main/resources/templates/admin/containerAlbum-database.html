@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+</head>
+<body>
+
+    <h1>Album container Database</h1>
+    <a th:href="@{/admin}"><button>Go back</button></a><br>
+
+     <div>
+        <table>
+        <thead><tr>
+            <th>Album ID (name)</th>
+            <th>Music ID (name)</th>
+            <th></th>
+        </tr></thead>
+        <tbody><th:block th:each="container: ${containers}"><tr>
+            <td>[[${container.album.id}]] ([[${container.album.name}]])</td>
+            <td>[[${container.music.id}]] ([[${container.music.name}]])</td>
+        </th:block>
+        </tbody>
+        </table>
+    </div>
+
+</body>
+</html>

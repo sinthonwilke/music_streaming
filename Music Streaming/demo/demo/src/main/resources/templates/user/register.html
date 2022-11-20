@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+</head>
+<body>
+
+    <h1>Registration - Sign Up</h1>
+
+    <div th:if="${message}">
+        <p>[[${message}]]</p>
+    </div><br>
+
+    <form th:action="@{/register/save}" th:object="${user}" method="post">
+        <label>email: </label><input type="email" th:field="*{email}"><br>
+        <label>password: </label><input type="password" th:field="*{password}" required minlength="8" id="password"><br>
+        <label>Confirm password: </label><input type="password" required minlength="8" id="confirm_password"><br>
+        <button type="submit">Register</button>
+    </form>
+    <a th:href="@{/login}"><button>Cancel</button></a>
+
+
+
+<!-- js -->
+    <script>
+        var password = document.getElementById("password"), confirm_password = document.getElementById("confirm_password");
+        function validatePassword(){
+            if(password.value != confirm_password.value) {
+                confirm_password.setCustomValidity("Passwords Don't Match");
+            }
+            else {
+                confirm_password.setCustomValidity('');
+            }
+        }
+        password.onchange = validatePassword;
+        confirm_password.onkeyup = validatePassword;
+    </script>
+</body>
+</html>
