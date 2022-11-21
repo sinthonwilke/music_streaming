@@ -1,14 +1,19 @@
 package com.example.demo.Entity;
 
 import java.sql.Date;
+import java.util.List;
+
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -30,6 +35,14 @@ public class musicEntity {
     @ManyToOne @JoinColumn(name = "artists", referencedColumnName = "id")
     private artistEntity artist;
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "music", cascade = CascadeType.REMOVE)
+    private List<containerAlbumEntity> cae;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "music", cascade = CascadeType.REMOVE)
+    private List<containerPlaylistEntity> cpe;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "music", cascade = CascadeType.REMOVE)
+    private List<favEntity> fav;
 
     public musicEntity() {}
     public musicEntity(Long id, String name, Date releaseDate, genreEntity genre, artistEntity artist) {

@@ -105,7 +105,7 @@ public class musicController {
             storage.deleteByID(String.valueOf(id));
             ra.addFlashAttribute("pageMessage", "Music id:" + id + " has been deleted."); 
         }
-        catch (musicNotFoundException e) {
+        catch (Exception e) {
             ra.addFlashAttribute("pageMessage", e.getMessage());
         }
         return "redirect:/admin/music-database";

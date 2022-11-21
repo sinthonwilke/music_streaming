@@ -13,8 +13,7 @@ import java.util.Optional;
 @Service
 public class musicService {
 
-    @Autowired
-    private musicRepository repo;
+    @Autowired private musicRepository repo;
 
     public void save(musicEntity music) {
         repo.save(music);
@@ -36,10 +35,7 @@ public class musicService {
         throw new musicNotFoundException("Could not find any music id: " + id);
     }
 
-    public void deleteByID(Long id) throws musicNotFoundException {
-        if (!repo.existsById(id)) {
-            throw new musicNotFoundException("Could not find any music id: " + id);
-        }
+    public void deleteByID(Long id) throws Exception {
         repo.deleteById(id);
     }
 
