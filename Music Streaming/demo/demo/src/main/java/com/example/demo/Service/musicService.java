@@ -50,8 +50,5 @@ public class musicService {
     public List<musicEntity> findByArtist(Long id) {
         return(List<musicEntity>) repo.findByArtist(id);
     }
-
-    // public void updateMusicsArtist(Long id) {
-
-    // }
+    
 }
