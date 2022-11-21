@@ -13,10 +13,6 @@ public class artistService {
     @Autowired
     private artistRepository repo;
 
-    @Autowired
-    private musicService musicService;
-
-
     public List<artistEntity> findAll() {
         return  (List<artistEntity>) repo.findByOrderByIdAsc();
     }
@@ -36,8 +32,6 @@ public class artistService {
     }
 
     public void deleteByID(Long id) throws Exception {
-        // musicService.updateMusicsArtist(id);
         repo.deleteById(id);
     }
-
 }
