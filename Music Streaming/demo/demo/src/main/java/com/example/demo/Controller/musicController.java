@@ -26,9 +26,6 @@ public class musicController {
     @Autowired private musicService musicService;
     @Autowired private StorageService storage;
 
-    // #################################################################################################################################################### //
-    // admin
-
     @GetMapping("/admin/music-database")
     public String showMusicList(Model model) {
         List<musicEntity> musicList = musicService.FindAll();
@@ -119,7 +116,4 @@ public class musicController {
         model.addAttribute("audioSrc", "/assets/musics/" + id + ".wav");
         return "admin/music-database-preview";
     }
-
-    // #################################################################################################################################################### //
-    // user
 }

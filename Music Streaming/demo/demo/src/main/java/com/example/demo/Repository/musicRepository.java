@@ -1,13 +1,21 @@
 package com.example.demo.Repository;
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-
 import com.example.demo.Entity.musicEntity;
-
 import java.util.List;
 
 @Repository
-public interface musicRepository extends CrudRepository<musicEntity, Long> {
+public interface musicRepository extends JpaRepository<musicEntity, Long> {
+
     List<musicEntity> findByIdOrNameLike(Long id, String name);
+
+    List<musicEntity> findByArtist(Long id);
+
+//     @Query("UPATE musicEntity m SET m.artist = NULL WHERE m.artist = :artistID")
+//     void updateArtist(@Param("artistID") Long id);
+//
 }

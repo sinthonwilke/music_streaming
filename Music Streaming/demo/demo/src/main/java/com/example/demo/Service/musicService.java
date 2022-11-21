@@ -16,7 +16,6 @@ public class musicService {
     @Autowired
     private musicRepository repo;
 
-
     public void save(musicEntity music) {
         repo.save(music);
     }
@@ -47,4 +46,12 @@ public class musicService {
     public String getMusicPath(String id) {
         return ("/assets/musics/" + id + ".wav");
     }
+
+    public List<musicEntity> findByArtist(Long id) {
+        return(List<musicEntity>) repo.findByArtist(id);
+    }
+
+    // public void updateMusicsArtist(Long id) {
+
+    // }
 }

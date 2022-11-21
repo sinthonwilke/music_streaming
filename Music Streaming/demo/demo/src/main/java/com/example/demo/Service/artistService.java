@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.example.demo.Entity.artistEntity;
 import com.example.demo.Repository.artistRepository;
 
@@ -13,6 +12,10 @@ public class artistService {
     
     @Autowired
     private artistRepository repo;
+
+    @Autowired
+    private musicService musicService;
+
 
     public List<artistEntity> findAll() {
         return  (List<artistEntity>) repo.findByOrderByIdAsc();
@@ -26,6 +29,15 @@ public class artistService {
         else {
             return null;
         }
+    }
+
+    public void save(artistEntity artist) {
+        repo.save(artist);
+    }
+
+    public void deleteByID(Long id) throws Exception {
+        // musicService.updateMusicsArtist(id);
+        repo.deleteById(id);
     }
 
 }
