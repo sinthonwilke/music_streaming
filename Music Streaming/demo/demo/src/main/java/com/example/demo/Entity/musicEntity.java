@@ -35,13 +35,13 @@ public class musicEntity {
     @ManyToOne @JoinColumn(name = "artists", referencedColumnName = "id")
     private artistEntity artist;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "music", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "music", cascade = CascadeType.REMOVE)
     private List<containerAlbumEntity> cae;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "music", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "music", cascade = CascadeType.REMOVE)
     private List<containerPlaylistEntity> cpe;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "music", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "music", cascade = CascadeType.REMOVE)
     private List<favEntity> fav;
 
     public musicEntity() {}
