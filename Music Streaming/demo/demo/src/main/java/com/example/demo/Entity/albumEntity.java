@@ -20,11 +20,11 @@ public class albumEntity {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne @JoinColumn(name = "artists", referencedColumnName = "id")
-    private artistEntity artist;
-
     @Column(nullable = false)
     private String name;
+
+    @ManyToOne @JoinColumn(name = "artists", referencedColumnName = "id")
+    private artistEntity artist;
 
     @OneToMany(mappedBy = "music", cascade = CascadeType.REMOVE)
     private List<containerAlbumEntity> cae;
