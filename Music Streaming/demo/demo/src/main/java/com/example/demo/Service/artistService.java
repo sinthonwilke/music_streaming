@@ -35,7 +35,7 @@ public class artistService {
         repo.deleteById(id);
     }
 
-    public List<artistEntity> findByIdOrNameLike(Long id, String name) {
-        return (List<artistEntity>) repo.findByIdOrNameLike(id, "%"+name+"%");
+    public List<artistEntity> findByAllColumn(Long id, String name) {
+        return (List<artistEntity>) repo.findByAllColumn(id, name);
     }
 }

@@ -9,15 +9,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import com.example.demo.Entity.musicEntity;
 import com.example.demo.Exception.musicNotFoundException;
 import com.example.demo.Service.StorageService;
 import com.example.demo.Service.musicService;
-
 import org.springframework.ui.Model;
 import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 
 @Controller
@@ -34,34 +31,14 @@ public class musicController {
     }
 
     @GetMapping("/admin/music-database/find")
-    public String findMusicList(Model model, @Param("id") Long id, @Param("name") String name) {
-        if(id == null & name == "") {
-            List<musicEntity> musicList = musicService.FindAll();
-            model.addAttribute("musicList", musicList);
-            model.addAttribute("id", id);
-            model.addAttribute("name", name);
-            return "admin/music-database";
-        }
-        else if(id != null & name == "") {
-            try {
-                musicEntity music = musicService.findByID(id);
-                model.addAttribute("musicList", music);
-                model.addAttribute("id", id);
-                model.addAttribute("name", name);
-                return "admin/music-database";
-            }
-            catch (musicNotFoundException e) {
-                musicEntity music = null;
-                model.addAttribute("musicList", music);
-                model.addAttribute("id", id);
-                model.addAttribute("name", name);
-                return "admin/music-database";
-            }
-        }
-        List<musicEntity> musicList = musicService.findByAllColumn(id, name);
+    public String findMusicList(Model model, @Param("id") Long id, @Param("name") String name, @Param("release") Integer release, @Param("genre") Long genre, @Param("artist") Long artist) {
+        List<musicEntity> musicList = musicService.findByAllColumn(id, name, release, genre, artist);
         model.addAttribute("musicList", musicList);
         model.addAttribute("id", id);
         model.addAttribute("name", name);
+        model.addAttribute("release", release);
+        model.addAttribute("genre", genre);
+        model.addAttribute("artist", artist);
         return "admin/music-database";
     }
 

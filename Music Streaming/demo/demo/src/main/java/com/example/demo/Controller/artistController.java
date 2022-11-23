@@ -29,30 +29,7 @@ public class artistController {
 
     @GetMapping("/admin/artist-database/find")
     public String findArtist(Model model, @Param("id") Long id, @Param("name") String name) {
-        if(id == null & name == "") {
-            List<artistEntity> artist = service.findAll();
-            model.addAttribute("artistList", artist);
-            model.addAttribute("id", id);
-            model.addAttribute("name", name);
-            return "admin/artist-database";
-        }
-        else if(id != null & name == "") {
-            try {
-                artistEntity artist = service.findByID(id);
-                model.addAttribute("artistList", artist);
-                model.addAttribute("id", id);
-                model.addAttribute("name", name);
-                return "admin/artist-database";
-            }
-            catch (Exception e) {
-                artistEntity artist = null;
-                model.addAttribute("artistList", artist);
-                model.addAttribute("id", id);
-                model.addAttribute("name", name);
-                return "admin/artist-database";
-            }
-        }
-        List<artistEntity> artist = service.findByIdOrNameLike(id, name);
+        List<artistEntity> artist = service.findByAllColumn(id, name);
         model.addAttribute("artistList", artist);
         model.addAttribute("id", id);
         model.addAttribute("name", name);

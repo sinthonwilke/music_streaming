@@ -30,10 +30,7 @@ public class genreService {
     }
 
     public List<genreEntity> findByAllColumn(Long id, String name) {
-        if(id == null && name == "") {return (List<genreEntity>) repo.findAll();}
-        if(id == null && name != "") {return (List<genreEntity>) repo.findByNameLike("%"+name+"%");}
-        if(id != null && name != "") {return (List<genreEntity>) repo.findByIdOrNameLike(id, "%"+name+"%");}
-        return null;
+        return (List<genreEntity>) repo.findByAllColumn(id, name);
     }
 
     public void save(genreEntity genre) {

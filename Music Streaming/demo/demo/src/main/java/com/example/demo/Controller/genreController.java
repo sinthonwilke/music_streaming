@@ -29,13 +29,6 @@ public class genreController {
 
     @GetMapping("/admin/genre-database/find")
     public String findGenre(Model model, @Param("id") Long id, @Param("name") String name) {
-        if(id != null && name == "") {
-            genreEntity genre = service.findByID(id);
-            model.addAttribute("genres", genre);
-            model.addAttribute("id", id);
-            model.addAttribute("name", name);
-            return "admin/genre-database";
-        }
         List<genreEntity> genre = service.findByAllColumn(id, name);
         model.addAttribute("genres", genre);
         model.addAttribute("id", id);

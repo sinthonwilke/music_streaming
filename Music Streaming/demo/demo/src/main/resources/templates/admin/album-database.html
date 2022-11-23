@@ -13,9 +13,9 @@
     </div><br>
 
     <form th:action="@{/admin/album-database/find}" method="get">
-        <label>id:</label><input type="search" name="id" th:value="${id}">
-        <label>name:</label><input type="search" name="name" th:value="${name}">
-        <label>artist:</label><input type="search" name="artist" th:value="${artist}">
+        <label>album(id):</label><input type="number" name="id" th:value="${id}">
+        <label>album(name):</label><input type="text" name="name" th:value="${name}">
+        <label>artist(id):</label><input type="number" name="artist" th:value="${artist}">
         <button type="submit">Find</button>
         <a th:href="@{/admin/album-database}"><button type="button">Reset</button></a>
     </form>

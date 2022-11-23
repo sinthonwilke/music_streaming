@@ -29,17 +29,6 @@ public class albumController {
 
     @GetMapping("/admin/album-database/find")
     public String albumFind(Model model, @Param("id") Long id, @Param("name") String name, @Param("artist") Long artist) {
-        if(id!=null && name=="" && artist==null) {
-            try {
-                albumEntity albums = service.findById(id);
-                model.addAttribute("albums", albums);
-                model.addAttribute("id", id);
-                model.addAttribute("name", name);
-                model.addAttribute("artist", artist);
-                return "admin/album-database";
-            } catch (Exception e) {}
-
-        }
         List<albumEntity> albums = service.findByAllColumn(id, name, artist);
         model.addAttribute("albums", albums);
         model.addAttribute("id", id);

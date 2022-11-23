@@ -1,6 +1,8 @@
 package com.example.demo.Repository;
 
 import java.util.List;
+
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 import com.example.demo.Entity.albumEntity;
@@ -16,5 +18,10 @@ public interface albumRepository extends CrudRepository<albumEntity, Long> {
     List<albumEntity> findByIdAndArtistIdOrNameLike(Long id,Long artistId,String name);
     List<albumEntity> findByArtistIsNull();
 
+    @Query("select m from albumEntity m where (?1 is null or id=?1) and " +
+    "(?2 is null or name like %?2%) and " +
+    "(?3 is null or artist=?3)"
+    )
+    List<albumEntity> findByAllColumn(Long id, String name, Long artist);
 
 }

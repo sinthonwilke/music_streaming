@@ -13,8 +13,11 @@
     </div><br>
 
     <form th:action="@{/admin/music-database/find}" method="get">
-        <label>id:</label><input type="search" name="id" th:value="${id}">
-        <label>name:</label><input type="search" name="name" th:value="${name}">
+        <label>music(id):</label><input type="number" name="id" th:value="${id}">
+        <label>music(name):</label><input type="text" name="name" th:value="${name}">
+        <label>release(year):</label><input type="number" name="release" th:value="${release}">
+        <label>genre(id):</label><input type="number" name="genre" th:value="${genre}">
+        <label>artist(id):</label><input type="number" name="artist" th:value="${artist}">
         <button type="submit">Find</button>
         <a th:href="@{/admin/music-database}"><button type="button">Reset</button></a>
     </form><br>

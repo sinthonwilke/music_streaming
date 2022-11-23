@@ -13,14 +13,13 @@
     </div><br>
 
     <form th:action="@{/admin/genre-database/find}" method="get">
-        <label>id:</label><input type="search" name="id" th:value="${id}">
-        <label>name:</label><input type="search" name="name" th:value="${name}">
+        <label>genre(id):</label><input type="number" name="id" th:value="${id}">
+        <label>genre(name):</label><input type="text" name="name" th:value="${name}">
         <button type="submit">Find</button>
         <a th:href="@{/admin/genre-database}"><button type="button">Reset</button></a>
     </form><br>
 
     <a th:href="@{/admin/genre-database/add}"><button>Add new genre</button></a><br>
-
 
     <div>
         <table>

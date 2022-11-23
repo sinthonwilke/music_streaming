@@ -28,15 +28,7 @@ public class albumService {
     }
 
     public List<albumEntity> findByAllColumn(Long id, String name, Long artistID) {
-        if(artistID != null && artistID == -1) {return (List<albumEntity>) repo.findByArtistIsNull();}
-        if(id == null && name == "" && artistID == null) {return (List<albumEntity>) repo.findAll();}
-        if(id == null && name != "" && artistID == null) {return (List<albumEntity>) repo.findByNameLike("%"+name+"%");}
-        if(id == null && name == "" && artistID != null) {return (List<albumEntity>) repo.findAllByArtistId(artistID);}
-        if(id != null && name != "" && artistID == null) {return (List<albumEntity>) repo.findByIdOrNameLike(id, "%"+name+"%");}
-        if(id == null && name != "" && artistID != null) {return (List<albumEntity>) repo.findByNameLikeOrArtistId("%"+name+"%", artistID);}
-        if(id != null && name == "" && artistID != null) {return (List<albumEntity>) repo.findByIdOrArtistId(id, artistID);}
-        if(id != null && name != "" && artistID != null) {return (List<albumEntity>) repo.findByIdAndArtistIdOrNameLike(id, artistID, "%"+name+"%");}
-        return null;
+        return (List<albumEntity>) repo.findByAllColumn(id, name, artistID);
     }
     
     public void save(albumEntity album){
