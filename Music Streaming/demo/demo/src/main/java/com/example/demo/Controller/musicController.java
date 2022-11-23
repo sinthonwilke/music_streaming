@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.example.demo.Entity.musicEntity;
-import com.example.demo.Exception.musicNotFoundException;
 import com.example.demo.Service.StorageService;
 import com.example.demo.Service.musicService;
 import org.springframework.ui.Model;
@@ -68,7 +67,7 @@ public class musicController {
             model.addAttribute("pageMessage", "Edit music id:" + id);
             return "admin/music-database-form";
         }
-        catch (musicNotFoundException e) {
+        catch (Exception e) {
             e.printStackTrace();
             ra.addFlashAttribute("pageMessage", e.getMessage());
             return "redirect:/admin/music-database";

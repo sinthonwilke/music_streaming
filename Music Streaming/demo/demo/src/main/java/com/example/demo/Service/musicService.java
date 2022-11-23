@@ -3,7 +3,6 @@ package com.example.demo.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.example.demo.Entity.musicEntity;
-import com.example.demo.Exception.musicNotFoundException;
 import com.example.demo.Repository.musicRepository;
 import java.util.List;
 import java.util.Optional;
@@ -28,12 +27,12 @@ public class musicService {
         return (List<musicEntity>) repo.findByAllColumn(id, name, release, genre, artist);
     }
 
-    public musicEntity findByID(Long id) throws musicNotFoundException {
+    public musicEntity findByID(Long id) throws Exception {
         Optional<musicEntity> music = repo.findById(id);
         if (music.isPresent()) {
             return music.get();
         }
-        throw new musicNotFoundException("Could not find any music id: " + id);
+        throw new Exception("Could not find any music id: " + id);
     }
 
     public void deleteByID(Long id) throws Exception {
