@@ -26,7 +26,7 @@ public class albumEntity {
     @ManyToOne @JoinColumn(name = "artists", referencedColumnName = "id")
     private artistEntity artist;
 
-    @OneToMany(mappedBy = "music", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "album", cascade = CascadeType.REMOVE)
     private List<containerAlbumEntity> cae;
 
     public albumEntity() {}
