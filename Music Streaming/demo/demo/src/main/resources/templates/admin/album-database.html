@@ -8,6 +8,21 @@
     <h1>Album Database</h1>
     <a th:href="@{/admin}"><button>Go back</button></a><br>
 
+    <div th:if="${pageMessage}">
+        <p>[[${pageMessage}]]</p>
+    </div><br>
+
+    <form th:action="@{/admin/album-database/find}" method="get">
+        <label>id:</label><input type="search" name="id" th:value="${id}">
+        <label>name:</label><input type="search" name="name" th:value="${name}">
+        <label>artist:</label><input type="search" name="artist" th:value="${artist}">
+        <button type="submit">Find</button>
+        <a th:href="@{/admin/album-database}"><button type="button">Reset</button></a>
+    </form>
+
+
+    <a th:href="@{/admin/album-database/add}"><button>Add new album</button></a><br>
+
      <div>
         <table>
         <thead><tr>
@@ -20,6 +35,8 @@
             <td>[[${album.id}]]</td>
             <td>[[${album.name}]]</td>
             <td>[[${album.artist.id}]] ([[${album.artist.name}]])</td>
+            <td><a th:href="@{'/admin/album-database/edit-id-' + ${album.id}}"><button>Edit</button></a>
+                <a th:href="@{'/admin/album-database/delete-id-' + ${album.id}}"><button>Delete</button></a>
         </th:block>
         </tbody>
         </table>

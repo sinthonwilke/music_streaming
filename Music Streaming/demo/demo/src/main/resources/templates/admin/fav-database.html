@@ -11,13 +11,11 @@
      <div>
         <table>
         <thead><tr>
-            <th>ID</th>
             <th>User ID (email)</th>
             <th>Music ID (name)</th>
             <th></th>
         </tr></thead>
         <tbody><th:block th:each="fav: ${favList}"><tr>
-            <td>[[${fav.id}]]</td>
             <td>[[${fav.user.id}]] ([[${fav.user.email}]])</td>
             <td>[[${fav.music.id}]] ([[${fav.music.name}]])</td>
         </th:block>

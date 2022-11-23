@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+</head>
+<body>
+
+    <h1>[[${pageMessage}]]</h1>
+
+    <form th:action="@{/admin/album-database/save}" th:object="${album}" method="post" enctype="multipart/form-data">
+        <input type="hidden" th:field="*{id}"><br>
+        <label>name:</label><input type="text" th:field="*{name}" required><br>
+        <label>artist id:</label><input type="text" th:field="*{artist}" required><br>
+        <button type="submit">Save</button>
+        <a th:href="@{/admin/album-database}"><button type="button">Cancel</button></a>
+    </form>
+
+</body>
+</html>

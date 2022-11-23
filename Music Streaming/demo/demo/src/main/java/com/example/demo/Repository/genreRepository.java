@@ -11,4 +11,7 @@ import com.example.demo.Entity.genreEntity;
 public interface genreRepository extends CrudRepository<genreEntity, Long> {
 
     List<genreEntity> findByOrderByIdAsc();
+    List<genreEntity> findByNameLike(String name);
+    List<genreEntity> findByIdOrNameLike(Long id, String name);
+
 }

@@ -16,6 +16,7 @@
         <label>id:</label><input type="search" name="id" th:value="${id}">
         <label>name:</label><input type="search" name="name" th:value="${name}">
         <button type="submit">Find</button>
+        <a th:href="@{/admin/music-database}"><button type="button">Reset</button></a>
     </form><br>
 
     <a th:href="@{/admin/music-database/add}"><button>Add new music</button></a><br>

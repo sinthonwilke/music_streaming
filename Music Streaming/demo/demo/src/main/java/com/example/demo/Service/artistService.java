@@ -34,4 +34,8 @@ public class artistService {
     public void deleteByID(Long id) throws Exception {
         repo.deleteById(id);
     }
+
+    public List<artistEntity> findByIdOrNameLike(Long id, String name) {
+        return (List<artistEntity>) repo.findByIdOrNameLike(id, "%"+name+"%");
+    }
 }

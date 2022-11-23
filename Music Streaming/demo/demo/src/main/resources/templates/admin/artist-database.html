@@ -8,12 +8,17 @@
     <h1>Artist Database</h1>
     <a th:href="@{/admin}"><button>Go back</button></a><br>
 
-
     <div th:if="${pageMessage}">
         <p>[[${pageMessage}]]</p>
     </div><br>
 
-    
+    <form th:action="@{/admin/artist-database/find}" method="get">
+        <label>id:</label><input type="search" name="id" th:value="${id}">
+        <label>name:</label><input type="search" name="name" th:value="${name}">
+        <button type="submit">Find</button>
+        <a th:href="@{/admin/artist-database}"><button type="button">Reset</button></a>
+    </form><br>
+
     <a th:href="@{/admin/artist-database/add}"><button>Add new artist</button></a><br>
 
      <div>

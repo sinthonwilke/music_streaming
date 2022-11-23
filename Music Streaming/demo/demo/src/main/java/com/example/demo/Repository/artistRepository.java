@@ -11,4 +11,6 @@ import com.example.demo.Entity.artistEntity;
 public interface artistRepository extends CrudRepository<artistEntity, Long> {
     
     List<artistEntity> findByOrderByIdAsc();
+    List<artistEntity> findByIdOrNameLike(Long id, String name);
+
 }

@@ -3,6 +3,7 @@ package com.example.demo.Controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,6 +27,40 @@ public class artistController {
         return "admin/artist-database";
     }
 
+    @GetMapping("/admin/artist-database/find")
+    public String findArtist(Model model, @Param("id") Long id, @Param("name") String name) {
+        if(id == null & name == "") {
+            List<artistEntity> artist = service.findAll();
+            model.addAttribute("artistList", artist);
+            model.addAttribute("id", id);
+            model.addAttribute("name", name);
+            return "admin/artist-database";
+        }
+        else if(id != null & name == "") {
+            try {
+                artistEntity artist = service.findByID(id);
+                model.addAttribute("artistList", artist);
+                model.addAttribute("id", id);
+                model.addAttribute("name", name);
+                return "admin/artist-database";
+            }
+            catch (Exception e) {
+                artistEntity artist = null;
+                model.addAttribute("artistList", artist);
+                model.addAttribute("id", id);
+                model.addAttribute("name", name);
+                return "admin/artist-database";
+            }
+        }
+        List<artistEntity> artist = service.findByIdOrNameLike(id, name);
+        model.addAttribute("artistList", artist);
+        model.addAttribute("id", id);
+        model.addAttribute("name", name);
+        return "admin/artist-database";
+    }
+
+
+
     @GetMapping("/admin/artist-database/add")
     public String addMusic(Model model) {
         model.addAttribute("artist", new artistEntity());
@@ -41,7 +76,7 @@ public class artistController {
     }
 
     @GetMapping("/admin/artist-database/edit-id-{id}")
-    public String editMusic(@PathVariable("id") Long id, Model model, RedirectAttributes ra) {
+    public String editArtist(@PathVariable("id") Long id, Model model, RedirectAttributes ra) {
         try {
             artistEntity artist = service.findByID(id);
             model.addAttribute("artist", artist);
@@ -56,7 +91,7 @@ public class artistController {
     }
 
     @GetMapping("/admin/artist-database/delete-id-{id}")
-    public String deleteMusic(@PathVariable("id") Long id, RedirectAttributes ra) {
+    public String deleteArtist(@PathVariable("id") Long id, RedirectAttributes ra) {
         try {
             service.deleteByID(id);
             ra.addFlashAttribute("pageMessage", "Artist id:" + id + " has been deleted."); 

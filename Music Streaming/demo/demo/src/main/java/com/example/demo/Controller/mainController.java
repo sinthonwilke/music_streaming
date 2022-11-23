@@ -27,6 +27,17 @@ public class mainController {
     public String searchPage(Model model, @AuthenticationPrincipal userDetail user) {
         return "user/search";
     }
+
+    @GetMapping("/search/{search}")
+    public String searchResult() {
+
+        return "user/search";
+    }
+
+
+
+
+
     @GetMapping("/library")
     public String libraryPage(Model model, @AuthenticationPrincipal userDetail user) {
         return "user/library";

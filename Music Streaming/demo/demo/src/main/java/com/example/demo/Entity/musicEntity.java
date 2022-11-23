@@ -7,7 +7,6 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -87,7 +86,8 @@ public class musicEntity {
             artistEntity temp = new artistEntity(-1L, "null");
             return temp;
         }
-        return this.artist;    }
+        return this.artist;
+    }
     public void setArtist(artistEntity artist) {
         this.artist = artist;
     }
