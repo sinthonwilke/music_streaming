@@ -46,4 +46,7 @@ public class musicService {
     public List<musicEntity> findByArtist(Long id) {
         return(List<musicEntity>) repo.findByArtist(id);
     }
-}
+
+    public List<musicEntity> findByName(String name) {
+        return(List<musicEntity>) repo.findByNameLike("%"+name+"%");
+    }}
