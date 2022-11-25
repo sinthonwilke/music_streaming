@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import com.example.demo.Entity.musicEntity;
 import com.example.demo.Entity.userEntity;
+import com.example.demo.Service.StorageService;
 import com.example.demo.Service.musicService;
 import com.example.demo.User.userDetail;
 
@@ -17,7 +18,7 @@ import com.example.demo.User.userDetail;
 public class mainController {
 
     @Autowired private musicService musicService;
-
+    @Autowired private StorageService storageService;
 
     //example
     @GetMapping("/example")
@@ -69,7 +70,7 @@ public class mainController {
 
         @GetMapping("/musicPlayer_id{id}")
         public String musicPlayer(@PathVariable("id") Long id, Model model) {
-            model.addAttribute("audioSrc", "/assets/musics/" + "1" + ".wav");
+            model.addAttribute("audioSrc", storageService.getStaticWavFilePath(String.valueOf(id)));
             return "music";
         }
 
