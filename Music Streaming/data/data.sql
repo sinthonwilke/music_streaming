@@ -24,19 +24,49 @@ insert into genres(name) values
 
 -- artist 
 insert into artists(name) values
-('Medeon'),
-('Jakubi'),
-('Cyberpunk 2077'),
-('Steelix');
-
+('Maroon5'),
+('Ed Sheeran'),
+('Wiz Khalifa'),
+('Punyarb'),
+('Zentyarb'),
+('Musketeers'),
+('YourMOOD'),
+('Blackbean'),
+('YEW'),
+('Safeplanet');
 
 -- musics 
 insert into musics(name, release_date, artists, genres) values
-('No Fear No More', 					'2020-01-01', 1, 4),
-('I Really Want To Stay At Your House', '2020-02-02', 3, 4),
-('Lay it down', 						'2020-03-03', 4, 8),
-('Couch Potato', 						'2020-04-04', 2, 8),
-('Heavy With Hoping', 					'2020-05-05', 1, 4);
+('Sugar', '2015-01-14', 1, 8),
+('Payphone', '2012-05-11', 1, 8),
+('Girl like you', '2018-05-31', 1, 8),
+('Memories', '8-10-2019', 1, 8),
+('Animals', '2014-09-29', 1, 8),
+('Maps', '2014-06-24', 1, 8),
+('Shape of you', '2017-01-30', 2, 8),
+('One more night', '2012-06-26', 1, 8),
+('See you again ft. Charlie Puth', '2015-04-07', 3, 6),
+('Move like jagger', '2011-08-09', 1, 8),
+('คำถาม', '2021-07-10', 4, 6),
+('ฉบับปรับปรุง  x Punyarb ft. lazyloxy', '2022-01-29', 5, 6),
+('KRYPTONITE', '2021-07-29', 4, 8),
+('พิจารณา', '2022-09-08', 6, 8),
+('ลาก่อน', '2020-11-05',7, 8),
+('wish', '2019-06-19', 8, 8),
+('Dance With Me', '2019-03-19', 8, 8),
+('About love', '2020-02-13', 8, 8),
+('Moon', '2018-04-29', 8, 8),
+('ลมแล้ง', '2020-12-10', 9, 8),
+('จะมอบความรัก (wish)', '2019-11-19', 9, 8),
+('ลมที่ลา (wind)', '2018-10-18', 9, 8),
+('ข้างกาย (with you)', '2019-05-06', 10, 8),
+('คำตอบ (Answer)', '2018-09-29', 10, 8),
+('ห้องกระจก (Mirror Room)', '2016-09-22, 10, 8'),
+('ระบาย (PAINT)', '2015-12-14', 10, 8),
+('เพียงเธอ ( Always )', '2019-06-17', 10, 8),
+('ถ้าเธอได้รู้ ( The Secret ∆ )', '2020-11-19', 10, 8),
+('สิ่งที่เธอฝากไว้ ( The Maze )', '2020-03-06', 10, 8),
+('โลกใบใหม่ ( NEW WORLD )', '2021-07-06', 10, 8);
 
 
 -- fav
@@ -62,8 +92,8 @@ insert into playlist_music(playlists, musics) values
 
 -- album
 insert into albums(artists, name) values
-(1, 'Good Faith');
+(1, 'V');
 -- album_music
 insert into album_music(albums, musics) values
 (1, 1),
-(1, 5);
+(1, 6);
