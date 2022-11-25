@@ -89,7 +89,7 @@ public class musicController {
 
     @GetMapping("/admin/music-database/preview-id-{id}")
     public String previewMusic(@PathVariable("id") Long id, Model model) {
-        model.addAttribute("audioSrc", "/assets/musics/" + id + ".wav");
+        model.addAttribute("audioSrc", storage.getStaticWavFilePath(String.valueOf(id)));
         return "admin/music-database-preview";
     }
 }

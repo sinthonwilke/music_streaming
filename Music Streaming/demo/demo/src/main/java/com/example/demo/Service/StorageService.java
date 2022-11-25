@@ -58,8 +58,8 @@ public class StorageService implements Storage
     }
   }
 
-  public String getFilePath(String fileName) {
-    return String.valueOf(this.root.resolve(fileName + ".wav"));
+  public String getStaticWavFilePath(String fileName) {
+    return "/assets/musics/" + String.valueOf(fileName) + ".wav";
   }
 
 }

@@ -16,6 +16,19 @@
     </form><br>
 
 
+    <div>
+        <span th:if="${pageMessage}">
+            <p>Couldn't find "[[${pageMessage}]]"</p>
+            <p>Try searching again using a different spelling or keyword.</p>
+        </span>
+        <span th:unless="${#lists.isEmpty(music)}">
+            <p>Music</p>
+            <th:block th:each="m: ${music}">
+            <a th:href="@{'/musicPlayer_id' + ${m.id}}" target="_blank"><button>[[${m.artist.name}]] - [[${m.name}]]</button></a><br>
+            </th:block>
+        </span>
+    </div><br>
+
     <a th:href="@{/}"><button>Home</button></a>
     <a th:href="@{/search}"><button>Search</button></a>
     <a th:href="@{/library}"><button>Library</button></a>
