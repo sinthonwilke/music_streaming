@@ -1,79 +1,35 @@
 <!DOCTYPE html>
 <html xmlns:th="https://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8" />
-    <link href="webjars/bootstrap/3.3.6/css/bootstrap.min.css"rel="stylesheet">
-    <link href="css/example.css" rel="stylesheet">
-    <script src="js/example.js"></script>
+  <meta charset="UTF-8" />
+  <link href="webjars/bootstrap/3.3.6/css/bootstrap.min.css"rel="stylesheet">
+  <link href="css/home.css" rel="stylesheet">
+  <script src="js/home.js"></script>
 </head>
 <body>
 
-    <h1>Recommend</h1>
+  <h1>Recommend</h1>
 
-    <h2>Recommend Playlist</h2>
-    <div class="dropdown">
+  <h2>Recommend Playlist</h2>
+  <div class="dropdown">
     <button class="dropbtn">Playlist#1</button>
     <div class="dropdown-content">
         <a href="#">music 1</a>
         <a href="#">music 2</a>
         <a href="#">music 3</a>
     </div>
-    </div>
-    
-    <h2>Your Playlist</h2>
-    <div class="dropdown">
+  </div>
+
+  <h2>Your Playlist</h2>
+
+  <div class="dropdown">
     <button class="dropbtn">Playlist#1</button>
     <div class="dropdown-content">
         <a href="#">music 1</a>
         <a href="#">music 2</a>
         <a href="#">music 3</a>
     </div>
-    </div><br>
+  </div>
 
-    <a th:href="@{/}"><button>Home</button></a>
-    <a th:href="@{/search}"><button>Search</button></a>
-    <a th:href="@{/library}"><button>Library</button></a>
-    <a th:href="@{/account}"><button>Account</button></a>
-
-  <!-- css -->
-    <style>
-    .dropbtn {
-        background-color: #04AA6D;
-        color: white;
-        padding: 16px;
-        font-size: 16px;
-        border: none;
-      }
-      
-      .dropdown {
-        position: relative;
-        display: inline-block;
-      }
-      
-      .dropdown-content {
-        display: none;
-        position: absolute;
-        background-color: #f1f1f1;
-        min-width: 160px;
-        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-        z-index: 1;
-      }
-      
-      .dropdown-content a {
-        color: black;
-        padding: 12px 16px;
-        text-decoration: none;
-        display: block;
-      }
-      
-      .dropdown-content a:hover {background-color: #ddd;}
-      .dropdown:hover .dropdown-content {display: block;}
-      .dropdown:hover .dropbtn {background-color: #3e8e41;}
-    </style>
-
-  <!-- js -->
-    <script>
-    </script>
-    
 </body>
 </html>

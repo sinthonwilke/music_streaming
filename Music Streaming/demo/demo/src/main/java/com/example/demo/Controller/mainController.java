@@ -7,10 +7,8 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import com.example.demo.Entity.musicEntity;
 import com.example.demo.Entity.userEntity;
-import com.example.demo.Service.StorageService;
 import com.example.demo.Service.musicService;
 import com.example.demo.User.userDetail;
 
@@ -18,13 +16,6 @@ import com.example.demo.User.userDetail;
 public class mainController {
 
     @Autowired private musicService musicService;
-    @Autowired private StorageService storageService;
-
-    //example
-    @GetMapping("/example")
-    public String examplePage() {        
-        return "example";
-    }
 
 
     //admin
@@ -49,6 +40,12 @@ public class mainController {
 
     //user
     @GetMapping("/")
+    public String index() {
+        return "index";
+    }
+
+
+    @GetMapping("/home")
     public String homePage(Model model) {      
         return "user/home";
     }
@@ -57,7 +54,7 @@ public class mainController {
         return "user/search";
     }
 
-        @GetMapping("/search/")
+        @GetMapping("/search/result")
         public String searchResult(Model model, @Param("search") String search) {
             List<musicEntity> music = musicService.findByName(search);
             if(music.isEmpty()) {
@@ -68,21 +65,15 @@ public class mainController {
             return "user/search";
         }
 
-        @GetMapping("/musicPlayer_id{id}")
-        public String musicPlayer(@PathVariable("id") Long id, Model model) {
-            model.addAttribute("audioSrc", storageService.getStaticWavFilePath(String.valueOf(id)));
-            return "music";
-        }
-
     @GetMapping("/library")
     public String libraryPage(Model model) {
         return "user/library";
     }
+
     @GetMapping("/account")
     public String accountPage(Model model, @AuthenticationPrincipal userDetail user) {
         model.addAttribute("userEmail", user.getUsername());
         model.addAttribute("userId", user.getId());
         return "user/account";
     }
-
 }
