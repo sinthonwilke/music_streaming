@@ -2,22 +2,17 @@
 <html xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8" />
-    <link href="webjars/bootstrap/3.3.6/css/bootstrap.min.css"rel="stylesheet">
-    <link href="css/example.css" rel="stylesheet">
-    <script src="js/search.js"></script>
 </head>
 <body>
 
     <h1>Search</h1>
 
     <div>
-        <form>
-            <input type="text" id="searchText">
-            <button type="button" onclick="searchButton()">search</button>
-        </form>
+        <input type="text" id="searchBox" oninput="searchResult()">
     </div>
 
-
+    <div id="result">
+    </div>
 
 </body>
 </html>

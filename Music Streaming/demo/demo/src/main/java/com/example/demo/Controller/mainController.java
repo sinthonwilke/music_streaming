@@ -1,12 +1,17 @@
 package com.example.demo.Controller;
 
+import java.util.ArrayList;
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+
 import com.example.demo.Entity.musicEntity;
 import com.example.demo.Entity.userEntity;
 import com.example.demo.Service.musicService;
@@ -16,7 +21,6 @@ import com.example.demo.User.userDetail;
 public class mainController {
 
     @Autowired private musicService musicService;
-
 
     //admin
     @GetMapping("/admin")
@@ -54,16 +58,16 @@ public class mainController {
         return "user/search";
     }
 
-        @GetMapping("/search/result")
-        public String searchResult(Model model, @Param("search") String search) {
-            List<musicEntity> music = musicService.findByName(search);
-            if(music.isEmpty()) {
-                model.addAttribute("pageMessage", search);
+        @GetMapping("/search_results={str}")
+        public ResponseEntity<List<musicEntity>> searchResult(@PathVariable("str") String str, Model model) {
+            for(int i = 0; i < 10; i++) {
+                System.out.println(str);
             }
-            model.addAttribute("search", search);
-            model.addAttribute("music", music);
-            return "user/search";
+            List <musicEntity> music = new ArrayList<musicEntity>();
+            musicService.findByName(str).forEach(music::add);
+            return new ResponseEntity<>(music, HttpStatus.OK);
         }
+
 
     @GetMapping("/library")
     public String libraryPage(Model model) {

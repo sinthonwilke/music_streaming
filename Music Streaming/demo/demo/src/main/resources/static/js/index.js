@@ -2,7 +2,7 @@ window.onload = function() {
     home()
   };
 
-  
+
 function home() {
     const xhttp = new XMLHttpRequest();
     xhttp.onload = function() {
