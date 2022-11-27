@@ -1,8 +1,8 @@
 window.onload = function() {
-    home()
+    homePage()
   };
 
-function home() {
+function homePage() {
     const xhttp = new XMLHttpRequest();
     xhttp.onload = function() {
         document.getElementById("demo").innerHTML = this.response;
@@ -11,7 +11,7 @@ function home() {
     xhttp.send();
 }
 
-function search() {
+function searchPage() {
     const xhttp = new XMLHttpRequest();
     xhttp.onload = function() {
         document.getElementById("demo").innerHTML = this.response;
@@ -53,7 +53,7 @@ function search() {
         document.getElementById("result").innerHTML = out;
     }
 
-function library() {
+function libraryPage() {
     const xhttp = new XMLHttpRequest();
     xhttp.onload = function() {
         document.getElementById("demo").innerHTML = this.response;
@@ -62,7 +62,7 @@ function library() {
     xhttp.send();
 }
 
-function account() {
+function accountPage() {
     const xhttp = new XMLHttpRequest();
     xhttp.onload = function() {
         document.getElementById("demo").innerHTML = this.response;
@@ -71,7 +71,7 @@ function account() {
     xhttp.send();
 }
 
-function playMusic(id) {
+function playAudio(id) {
     var audio = document.getElementById("audio");
     audio.src="assets/musics/" + id + ".wav";
     audio.volume = 0.25;
