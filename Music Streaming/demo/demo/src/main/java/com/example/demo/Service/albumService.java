@@ -38,4 +38,8 @@ public class albumService {
     public void deleteByID(Long id) {
         repo.deleteById(id);
     }
+
+    public List<albumEntity> findByName(String name) {
+        return (List<albumEntity>) repo.findByName(name);
+    }
 }

@@ -23,5 +23,5 @@ public interface albumRepository extends CrudRepository<albumEntity, Long> {
     "(?3 is null or artist=?3)"
     )
     List<albumEntity> findByAllColumn(Long id, String name, Long artist);
-
+    List<albumEntity> findByName(String name);
 }

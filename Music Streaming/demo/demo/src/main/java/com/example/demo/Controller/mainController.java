@@ -12,8 +12,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import com.example.demo.Entity.albumEntity;
 import com.example.demo.Entity.musicEntity;
 import com.example.demo.Entity.userEntity;
+import com.example.demo.Service.albumService;
 import com.example.demo.Service.musicService;
 import com.example.demo.User.userDetail;
 
@@ -21,6 +23,7 @@ import com.example.demo.User.userDetail;
 public class mainController {
 
     @Autowired private musicService musicService;
+    @Autowired private albumService albumService;
 
     //admin
     @GetMapping("/admin")
@@ -59,10 +62,16 @@ public class mainController {
     }
 
         @GetMapping("/search_results={str}")
-        public ResponseEntity<List<musicEntity>> searchResult(@PathVariable("str") String str, Model model) {
+        public ResponseEntity<List<musicEntity>> searchMusicResult(@PathVariable("str") String str, Model model) {
             List <musicEntity> music = new ArrayList<musicEntity>();
             musicService.findByName(str).forEach(music::add);
             return new ResponseEntity<>(music, HttpStatus.OK);
+        }
+        @GetMapping("/search_albums={str}")
+        public ResponseEntity<List<albumEntity>> searchAlbumResult(@PathVariable("str") String str, Model model) {
+            List <albumEntity> album = new ArrayList<albumEntity>();
+            albumService.findByName(str).forEach(album::add);
+            return new ResponseEntity<>(album, HttpStatus.OK);
         }
 
 
