@@ -11,7 +11,18 @@
         <input type="text" id="searchBox" oninput="searchResult()">
     </div>
 
+    <script>
+        window.onload = function(){
+            searchResult();
+        }
+    </script>
+
     <div id="result">
+    </div>
+
+
+    <div id="defualtResult" hidden>
+        <p>Search for a song.</p>
     </div>
 
 </body>
