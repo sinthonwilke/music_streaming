@@ -1,21 +1,29 @@
 function searchResult() {
 
-    var delayInMilliseconds = 500;
+    var delayInMilliseconds = 0;
     setTimeout(function() {
         var str = document.getElementById("searchBox").value;
         var url = "/search_results=" + str;
-    
-        var music = JSON.parse(load(url));
-        document.getElementById("result").innerHTML = music;
+
+        showTable(load(url))
+
+        document.getElementById("test1").innerHTML = load(url);
     }, delayInMilliseconds);
+
 }
 
 function load(url) {
     const xhttp = new XMLHttpRequest();
+    var res;
     xhttp.onload = function() {
-        document.getElementById("result").innerHTML = this.response;
+        res = this.response;
     }
-    xhttp.open("GET", url);
+    xhttp.open("GET", url, false);
     xhttp.send();
-    return xhttp.onload;
+    return res;
+}
+
+function showTable(musics) {
+    var out;
+
 }
