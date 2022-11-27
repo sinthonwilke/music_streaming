@@ -40,6 +40,6 @@ public class albumService {
     }
 
     public List<albumEntity> findByName(String name) {
-        return (List<albumEntity>) repo.findByName(name);
+        return (List<albumEntity>) repo.findByNameLike("%"+name+"%");
     }
 }

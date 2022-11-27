@@ -22,23 +22,31 @@ function searchPage() {
 }
 
     function searchResult() {
+        var str = document.getElementById("searchBox").value;
+        var musicOut = "";
+        var albumOut = "";
+        var music = JSON.parse(load("/search_results=" + str));
+        var album = JSON.parse(load("/search_albums=" + str));
 
-        var delayInMilliseconds = 0;
-        setTimeout(function() {
-            var str = document.getElementById("searchBox").value;
-            var url = "/search_results=" + str;
-            var out = "";
-            if(str.length > 0) {
-                var music = JSON.parse(load(url));
+        if(str.length > 0) {
+            if(music.length > 0) {
                 for(var i = 0; i < music.length; i++) {
-                    out += '<button type="button" onclick="playAudio(' + music[i].id + ')">' + music[i].artist.name + " - " + music[i].name + '</button><br>';
+                    musicOut += '<a onclick="playAudio(' + music[i].id + ')">' + music[i].artist.name + " - " + music[i].name + '</a>';
                 }
+            } else {
+                musicOut = "No music results found";
             }
-            else {
-                out = document.getElementById("defualtResult").innerHTML;
+        document.getElementById("resultMusic").innerHTML = musicOut;
+
+        if(album.length > 0) {
+            for(var i = 0; i < album.length; i++) {
+                albumOut += '<a>' + album[i].name + " (" + album[i].artist.name + ")" +'</a>';
             }
-            document.getElementById("result").innerHTML = out;
-        }, delayInMilliseconds);
+            } else {
+                albumOut = "No album results found";
+            }
+        document.getElementById("resultAlbum").innerHTML = albumOut;
+        }
     }
 
     function load(url) {
