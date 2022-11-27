@@ -41,15 +41,6 @@ function searchPage() {
         }, delayInMilliseconds);
     }
 
-    function showMusic(musics) {
-        var music = JSON.parse(musics);
-        var out = "";
-        for(var i = 0; i < music.length; i++) {
-            out += '<button type="button" onclick="playAudio(' + music[i].id + ')">' + music[i].artist.name + " - " + music[i].name + '</button><br>';
-        }
-        document.getElementById("result").innerHTML = out;
-    }
-
     function load(url) {
         const xhttp = new XMLHttpRequest();
         var res;
