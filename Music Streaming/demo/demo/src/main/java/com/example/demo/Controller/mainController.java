@@ -60,9 +60,6 @@ public class mainController {
 
         @GetMapping("/search_results={str}")
         public ResponseEntity<List<musicEntity>> searchResult(@PathVariable("str") String str, Model model) {
-            for(int i = 0; i < 10; i++) {
-                System.out.println(str);
-            }
             List <musicEntity> music = new ArrayList<musicEntity>();
             musicService.findByName(str).forEach(music::add);
             return new ResponseEntity<>(music, HttpStatus.OK);
