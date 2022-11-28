@@ -1,0 +1,32 @@
+.vertical-menu {
+    width: 250px;
+    overflow:visible;
+}
+  .vertical-menu a {
+    background-color: #eee;
+    color: black;
+    display: block;
+    padding: 12px;
+    text-decoration: none;
+  }
+  .vertical-menu a:hover {
+    background-color: #ccc;
+  }
+
+
+div.scrollmenu {
+    background-color: #333;
+    overflow: auto;
+    white-space: nowrap;
+    width: 250px;
+}
+  div.scrollmenu a {
+    display: inline-block;
+    color: white;
+    text-align: center;
+    padding: 14px;
+    text-decoration: none;
+  }
+  div.scrollmenu a:hover {
+    background-color: #777;
+  }
