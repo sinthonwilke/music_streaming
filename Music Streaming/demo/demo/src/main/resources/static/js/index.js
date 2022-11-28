@@ -18,7 +18,7 @@ function searchPage() {
     }
     xhttp.open("GET", "/search", false);
     xhttp.send();
-    document.getElementById("result").innerHTML = document.getElementById("defualtResult").innerHTML;
+    document.getElementById("searchResult").innerHTML = document.getElementById("defualtResult").innerHTML;
 }
 
     function searchResult() {
