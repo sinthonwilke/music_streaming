@@ -32,7 +32,6 @@ function searchPage() {
         if(str.length > 0) {
             if(music.length > 0) {
                 for(var i = 0; i < music.length; i++) {
-                    // div?
                     musicOut += '<a onclick="playAudio(' + music[i].id + ')">' + music[i].artist.name + " - " + music[i].name + '</a>';
                 }
             } else {
@@ -42,12 +41,12 @@ function searchPage() {
         document.getElementById("searchResult").innerHTML = musicOut;
 
         albumOut += "<div class='scrollmenu'>";
-        if(album.length > 0) {
-            for(var i = 0; i < album.length; i++) {
-                albumOut += '<a>' + album[i].name + " (" + album[i].artist.name + ")" +'</a>';
-            }
+            if(album.length > 0) {
+                for(var i = 0; i < album.length; i++) {
+                    albumOut += '<a>' + album[i].name + " (" + album[i].artist.name + ")" +'</a>';
+                }
             } else {
-                albumOut += '<a>No album results found</a>';
+                    albumOut += '<a>No album results found</a>';
             }
         albumOut += "</div>";
         document.getElementById("searchResult").innerHTML += albumOut;
