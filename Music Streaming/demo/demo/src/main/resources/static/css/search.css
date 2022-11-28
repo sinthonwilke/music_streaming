@@ -18,6 +18,7 @@ div.scrollmenu {
     background-color: #333;
     overflow: auto;
     white-space: nowrap;
+    width: 250px;
 }
   div.scrollmenu a {
     display: inline-block;

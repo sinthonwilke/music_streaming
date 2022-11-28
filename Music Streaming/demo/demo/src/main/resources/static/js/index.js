@@ -31,6 +31,7 @@ function searchPage() {
         if(str.length > 0) {
             if(music.length > 0) {
                 for(var i = 0; i < music.length; i++) {
+                    // div?
                     musicOut += '<a onclick="playAudio(' + music[i].id + ')">' + music[i].artist.name + " - " + music[i].name + '</a>';
                 }
             } else {
