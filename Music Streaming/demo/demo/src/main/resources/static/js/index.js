@@ -28,6 +28,7 @@ function searchPage() {
         var music = JSON.parse(load("/search_results=" + str));
         var album = JSON.parse(load("/search_albums=" + str));
 
+        musicOut += "<div class='vertical-menu'>";
         if(str.length > 0) {
             if(music.length > 0) {
                 for(var i = 0; i < music.length; i++) {
@@ -35,18 +36,21 @@ function searchPage() {
                     musicOut += '<a onclick="playAudio(' + music[i].id + ')">' + music[i].artist.name + " - " + music[i].name + '</a>';
                 }
             } else {
-                musicOut = "No music results found";
+                musicOut += '<a>No music results found</a>';
             }
-        document.getElementById("resultMusic").innerHTML = musicOut;
+        musicOut += "</div>";
+        document.getElementById("searchResult").innerHTML = musicOut;
 
+        albumOut += "<div class='scrollmenu'>";
         if(album.length > 0) {
             for(var i = 0; i < album.length; i++) {
                 albumOut += '<a>' + album[i].name + " (" + album[i].artist.name + ")" +'</a>';
             }
             } else {
-                albumOut = "No album results found";
+                albumOut += '<a>No album results found</a>';
             }
-        document.getElementById("resultAlbum").innerHTML = albumOut;
+        albumOut += "</div>";
+        document.getElementById("searchResult").innerHTML += albumOut;
         }
     }
 
