@@ -16,8 +16,8 @@ public interface musicRepository extends JpaRepository<musicEntity, Long> {
     @Query("select m from musicEntity m where (?1 is null or id=?1) and " +
         "(?2 is null or name like %?2%) and " +
         "(?3 is null or year(m.releaseDate)=?3) and " +
-        "(?4 is null or genre=?4) and " +
-        "(?5 is null or artist=?5)"
+        "(?4 is null or genre=?4 or genre=null) and " +
+        "(?5 is null or artist=?5 or artist=null)"
         )
     List<musicEntity> findByAllColumn(Long id, String name, Integer release, Long genre, Long artist);
     

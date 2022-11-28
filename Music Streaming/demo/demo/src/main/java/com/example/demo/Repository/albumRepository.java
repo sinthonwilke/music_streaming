@@ -20,7 +20,7 @@ public interface albumRepository extends CrudRepository<albumEntity, Long> {
 
     @Query("select m from albumEntity m where (?1 is null or id=?1) and " +
     "(?2 is null or name like %?2%) and " +
-    "(?3 is null or artist=?3)"
+    "(?3 is null or artist=?3 or artist.id=null)"
     )
     List<albumEntity> findByAllColumn(Long id, String name, Long artist);
 }
