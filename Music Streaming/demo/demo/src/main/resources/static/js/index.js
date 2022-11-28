@@ -23,33 +23,33 @@ function searchPage() {
 
     function searchResult() {
         var str = document.getElementById("searchBox").value;
-        var musicOut = "";
-        var albumOut = "";
+        var out = "";
         var music = JSON.parse(load("/search_results=" + str));
         var album = JSON.parse(load("/search_albums=" + str));
 
-        musicOut += "<div class='vertical-menu'>";
+        out += "<div class='vertical-menu'>";
         if(str.length > 0) {
             if(music.length > 0) {
                 for(var i = 0; i < music.length; i++) {
-                    musicOut += '<a onclick="playAudio(' + music[i].id + ')">' + music[i].artist.name + " - " + music[i].name + '</a>';
+                    out += '<a onclick="playAudio(' + music[i].id + ')">' + music[i].artist.name + " - " + music[i].name + '</a>';
                 }
             } else {
-                musicOut += '<a>No music results found</a>';
+                out += '<a>No music results found</a>';
             }
-        musicOut += "</div>";
-        document.getElementById("searchResult").innerHTML = musicOut;
+            out += "</div>";
 
-        albumOut += "<div class='scrollmenu'>";
+        out += "<div class='scrollmenu'>";
             if(album.length > 0) {
                 for(var i = 0; i < album.length; i++) {
-                    albumOut += '<a>' + album[i].name + " (" + album[i].artist.name + ")" +'</a>';
+                    out += '<a>' + album[i].name + " (" + album[i].artist.name + ")" +'</a>';
                 }
             } else {
-                    albumOut += '<a>No album results found</a>';
+                out += '<a>No album results found</a>';
             }
-        albumOut += "</div>";
-        document.getElementById("searchResult").innerHTML += albumOut;
+            out += "</div>";
+        document.getElementById("searchResult").innerHTML = out;
+        } else {
+            document.getElementById("searchResult").innerHTML = document.getElementById("defualtResult").innerHTML;
         }
     }
 
