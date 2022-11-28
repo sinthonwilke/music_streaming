@@ -39,16 +39,22 @@ public class containerAlbumEntity {
     }
 
     public albumEntity getAlbum() {
-        return album;
-    }
+        if(this.album == null) {
+            albumEntity temp = new albumEntity(-1L, null, "null");
+            return temp;
+        }
+        return this.album;    }
 
     public void setAlbum(albumEntity album) {
         this.album = album;
     }
 
     public musicEntity getMusic() {
-        return music;
-    }
+        if(this.music == null) {
+            musicEntity temp = new musicEntity(-1L, "null", null, null, null);
+            return temp;
+        }
+        return this.music;    }
 
     public void setMusic(musicEntity music) {
         this.music = music;
