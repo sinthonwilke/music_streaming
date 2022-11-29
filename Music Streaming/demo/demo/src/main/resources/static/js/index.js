@@ -116,6 +116,10 @@ function libraryPage() {
         listPop();
     }
 
+    function playlists() {
+
+    }
+
 
 
 function accountPage() {

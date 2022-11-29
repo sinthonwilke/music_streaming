@@ -16,11 +16,13 @@ import com.example.demo.Entity.albumEntity;
 import com.example.demo.Entity.containerAlbumEntity;
 import com.example.demo.Entity.favEntity;
 import com.example.demo.Entity.musicEntity;
+import com.example.demo.Entity.playlistEntity;
 import com.example.demo.Entity.userEntity;
 import com.example.demo.Service.albumService;
 import com.example.demo.Service.containerAlbumService;
 import com.example.demo.Service.favService;
 import com.example.demo.Service.musicService;
+import com.example.demo.Service.playlistService;
 import com.example.demo.User.userDetail;
 
 @Controller
@@ -30,6 +32,7 @@ public class mainController {
     @Autowired private albumService albumService;
     @Autowired private containerAlbumService containerAlbumService;
     @Autowired private favService favService;
+    @Autowired private playlistService playlistService;
 
     //admin
     @GetMapping("/admin")
@@ -97,6 +100,13 @@ public class mainController {
             List <favEntity> fav = new ArrayList<favEntity>();
             favService.findByUserId(user.getId()).forEach(fav::add);
             return new ResponseEntity<>(fav, HttpStatus.OK);
+        }
+
+        @GetMapping("/library_playlist")
+        public ResponseEntity<List<playlistEntity>> libraryPlaylist(@AuthenticationPrincipal userDetail user) {
+            List <playlistEntity> playlist = new ArrayList<playlistEntity>();
+            playlistService.findByUserId(user.getId()).forEach(playlist::add);
+            return new ResponseEntity<>(playlist, HttpStatus.OK);
         }
 
 
