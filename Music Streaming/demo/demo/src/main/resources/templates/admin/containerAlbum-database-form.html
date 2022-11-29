@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+</head>
+<body>
+
+    <h1>[[${pageMessage}]]</h1>
+
+    <form th:action="@{/admin/containerAlbum-database/save}" th:object="${containerAlbum}" method="post" enctype="multipart/form-data">
+        <input type="hidden" th:field="*{id}"><br>
+        <label>album(id):</label><input type="text" th:field="*{album}" required><br>
+        <label>music(id):</label><input type="text" th:field="*{music}" required><br>
+        <button type="submit">Save</button>
+        <a th:href="@{/admin/containerAlbum-database}"><button type="button">Cancel</button></a>
+    </form>
+
+</body>
+</html>

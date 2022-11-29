@@ -1,31 +1,41 @@
 package com.example.demo.Controller;
 
+import java.util.ArrayList;
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+
+import com.example.demo.Entity.albumEntity;
+import com.example.demo.Entity.containerAlbumEntity;
+import com.example.demo.Entity.containerPlaylistEntity;
+import com.example.demo.Entity.favEntity;
 import com.example.demo.Entity.musicEntity;
+import com.example.demo.Entity.playlistEntity;
 import com.example.demo.Entity.userEntity;
-import com.example.demo.Service.StorageService;
+import com.example.demo.Service.albumService;
+import com.example.demo.Service.containerAlbumService;
+import com.example.demo.Service.containerPlaylistService;
+import com.example.demo.Service.favService;
 import com.example.demo.Service.musicService;
+import com.example.demo.Service.playlistService;
 import com.example.demo.User.userDetail;
 
 @Controller
 public class mainController {
 
     @Autowired private musicService musicService;
-    @Autowired private StorageService storageService;
-
-    //example
-    @GetMapping("/example")
-    public String examplePage() {        
-        return "example";
-    }
-
+    @Autowired private albumService albumService;
+    @Autowired private containerAlbumService containerAlbumService;
+    @Autowired private favService favService;
+    @Autowired private playlistService playlistService;
+    @Autowired private containerPlaylistService containerPlaylistService;
 
     //admin
     @GetMapping("/admin")
@@ -49,6 +59,12 @@ public class mainController {
 
     //user
     @GetMapping("/")
+    public String index() {
+        return "index";
+    }
+
+
+    @GetMapping("/home")
     public String homePage(Model model) {      
         return "user/home";
     }
@@ -57,32 +73,57 @@ public class mainController {
         return "user/search";
     }
 
-        @GetMapping("/search/")
-        public String searchResult(Model model, @Param("search") String search) {
-            List<musicEntity> music = musicService.findByName(search);
-            if(music.isEmpty()) {
-                model.addAttribute("pageMessage", search);
-            }
-            model.addAttribute("search", search);
-            model.addAttribute("music", music);
-            return "user/search";
+        @GetMapping("/search_results={str}")
+        public ResponseEntity<List<musicEntity>> searchMusicResult(@PathVariable("str") String str) {
+            List <musicEntity> music = new ArrayList<musicEntity>();
+            musicService.findByName(str).forEach(music::add);
+            return new ResponseEntity<>(music, HttpStatus.OK);
+        }
+        @GetMapping("/search_albums={str}")
+        public ResponseEntity<List<albumEntity>> searchAlbumResult(@PathVariable("str") String str) {
+            List <albumEntity> album = new ArrayList<albumEntity>();
+            albumService.findByName(str).forEach(album::add);
+            return new ResponseEntity<>(album, HttpStatus.OK);
+        }
+        @GetMapping("/albums={id}")
+        public ResponseEntity<List<containerAlbumEntity>> albumList(@PathVariable("id") Long id) {
+            List <containerAlbumEntity> albumList = new ArrayList<containerAlbumEntity>();
+            containerAlbumService.findByAlbumID(id).forEach(albumList::add);
+            return new ResponseEntity<>(albumList, HttpStatus.OK);
         }
 
-        @GetMapping("/musicPlayer_id{id}")
-        public String musicPlayer(@PathVariable("id") Long id, Model model) {
-            model.addAttribute("audioSrc", storageService.getStaticWavFilePath(String.valueOf(id)));
-            return "music";
-        }
 
     @GetMapping("/library")
     public String libraryPage(Model model) {
         return "user/library";
     }
+
+        @GetMapping("/library_fav")
+        public ResponseEntity<List<favEntity>> libraryFav(@AuthenticationPrincipal userDetail user) {
+            List <favEntity> fav = new ArrayList<favEntity>();
+            favService.findByUserId(user.getId()).forEach(fav::add);
+            return new ResponseEntity<>(fav, HttpStatus.OK);
+        }
+
+        @GetMapping("/library_playlist")
+        public ResponseEntity<List<playlistEntity>> libraryPlaylist(@AuthenticationPrincipal userDetail user) {
+            List <playlistEntity> playlist = new ArrayList<playlistEntity>();
+            playlistService.findByUserId(user.getId()).forEach(playlist::add);
+            return new ResponseEntity<>(playlist, HttpStatus.OK);
+        }
+
+        @GetMapping("/playlists={id}")
+        public ResponseEntity<List<containerPlaylistEntity>> playlist(@PathVariable("id") Long id) {
+            List <containerPlaylistEntity> playlist = new ArrayList<containerPlaylistEntity>();
+            containerPlaylistService.findByPlaylistId(id).forEach(playlist::add);
+            return new ResponseEntity<>(playlist, HttpStatus.OK);
+        }
+
+
     @GetMapping("/account")
     public String accountPage(Model model, @AuthenticationPrincipal userDetail user) {
         model.addAttribute("userEmail", user.getUsername());
         model.addAttribute("userId", user.getId());
         return "user/account";
     }
-
 }

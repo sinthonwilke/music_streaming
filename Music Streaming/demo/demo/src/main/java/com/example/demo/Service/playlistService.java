@@ -18,5 +18,8 @@ public class playlistService {
         return(List<playlistEntity>) repo.findAll();
     }
 
+    public List<playlistEntity> findByUserId(Long id) {
+        return(List<playlistEntity>) repo.findByUserId(id);
+    }
 
 }

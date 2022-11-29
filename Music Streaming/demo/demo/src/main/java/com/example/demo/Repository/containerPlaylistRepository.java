@@ -11,5 +11,6 @@ import com.example.demo.Entity.containerPlaylistEntity;
 public interface containerPlaylistRepository extends CrudRepository<containerPlaylistEntity, Long> {
     
     List<containerPlaylistEntity> findByOrderByPlaylistAsc();
+    List<containerPlaylistEntity> findByPlaylistId(Long id);
     
 }

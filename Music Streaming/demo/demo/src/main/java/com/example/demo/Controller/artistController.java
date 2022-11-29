@@ -39,16 +39,16 @@ public class artistController {
 
 
     @GetMapping("/admin/artist-database/add")
-    public String addMusic(Model model) {
+    public String addArtist(Model model) {
         model.addAttribute("artist", new artistEntity());
-        model.addAttribute("pageMessage", "Add new music");
+        model.addAttribute("pageMessage", "Add new artist");
         return "admin/artist-database-form";
     }
 
     @PostMapping("/admin/artist-database/save")
     public String savePost(artistEntity artist, RedirectAttributes ra) {
         service.save(artist);
-        ra.addFlashAttribute("pageMessage", "Music id:" + artist.getId() + " has been saved."); 
+        ra.addFlashAttribute("pageMessage", "Artist id:" + artist.getId() + " has been saved."); 
         return "redirect:/admin/artist-database";
     }
 
