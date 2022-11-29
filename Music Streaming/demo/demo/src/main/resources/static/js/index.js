@@ -121,10 +121,22 @@ function libraryPage() {
         var out = '';
         var playlist = JSON.parse(load("/library_playlist"));
         for(var i = 0; i < playlist.length; i++) {
-            out += '<button onclick="favList()" class="dropbtn">' + playlist[i].name + '</button><br>'
+            out += '<button onclick="showlists(' + playlist[i].id + ')" class="dropbtn">' + playlist[i].name + '</button><br>'
         }
 
         document.getElementById("playlist").innerHTML = out;
+        listPop();
+    }
+
+    function showlists(id) {
+        var out = '';
+
+        var list = JSON.parse(load("/playlists=" + id));
+        for(var i = 0; i < list.length; i++) {
+            out += '<a class="dropbtn" onclick="playAudio(' + list[i].music.id + ')">' + list[i].music.artist.name + " - " + list[i].music.name + '</a>';
+        }
+        
+        document.getElementById("myDropdown").innerHTML = out;
         listPop();
     }
 

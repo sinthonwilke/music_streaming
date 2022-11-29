@@ -17,4 +17,8 @@ public class containerPlaylistService {
     public List<containerPlaylistEntity> findAll() {
         return (List<containerPlaylistEntity>) repo.findByOrderByPlaylistAsc();
     }
+
+    public List<containerPlaylistEntity> findByPlaylistId(Long id) {
+        return (List<containerPlaylistEntity>) repo.findByPlaylistId(id);
+    }
 }

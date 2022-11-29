@@ -14,12 +14,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import com.example.demo.Entity.albumEntity;
 import com.example.demo.Entity.containerAlbumEntity;
+import com.example.demo.Entity.containerPlaylistEntity;
 import com.example.demo.Entity.favEntity;
 import com.example.demo.Entity.musicEntity;
 import com.example.demo.Entity.playlistEntity;
 import com.example.demo.Entity.userEntity;
 import com.example.demo.Service.albumService;
 import com.example.demo.Service.containerAlbumService;
+import com.example.demo.Service.containerPlaylistService;
 import com.example.demo.Service.favService;
 import com.example.demo.Service.musicService;
 import com.example.demo.Service.playlistService;
@@ -33,6 +35,7 @@ public class mainController {
     @Autowired private containerAlbumService containerAlbumService;
     @Autowired private favService favService;
     @Autowired private playlistService playlistService;
+    @Autowired private containerPlaylistService containerPlaylistService;
 
     //admin
     @GetMapping("/admin")
@@ -106,6 +109,13 @@ public class mainController {
         public ResponseEntity<List<playlistEntity>> libraryPlaylist(@AuthenticationPrincipal userDetail user) {
             List <playlistEntity> playlist = new ArrayList<playlistEntity>();
             playlistService.findByUserId(user.getId()).forEach(playlist::add);
+            return new ResponseEntity<>(playlist, HttpStatus.OK);
+        }
+
+        @GetMapping("/playlists={id}")
+        public ResponseEntity<List<containerPlaylistEntity>> playlist(@PathVariable("id") Long id) {
+            List <containerPlaylistEntity> playlist = new ArrayList<containerPlaylistEntity>();
+            containerPlaylistService.findByPlaylistId(id).forEach(playlist::add);
             return new ResponseEntity<>(playlist, HttpStatus.OK);
         }
 
