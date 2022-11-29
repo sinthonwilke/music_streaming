@@ -2,6 +2,7 @@ window.onload = function() {
     homePage()
 };
 
+
 function homePage() {
     const xhttp = new XMLHttpRequest();
     xhttp.onload = function() {
@@ -10,6 +11,7 @@ function homePage() {
     xhttp.open("GET", "/home", false);
     xhttp.send();
 }
+
 
 function searchPage() {
     const xhttp = new XMLHttpRequest();
@@ -92,6 +94,7 @@ function searchPage() {
         return res;
     }
 
+
 function libraryPage() {
     const xhttp = new XMLHttpRequest();
     xhttp.onload = function() {
@@ -101,6 +104,12 @@ function libraryPage() {
     xhttp.send();
 }
 
+    function favList() {
+  
+    }
+
+
+
 function accountPage() {
     const xhttp = new XMLHttpRequest();
     xhttp.onload = function() {
@@ -109,6 +118,7 @@ function accountPage() {
     xhttp.open("GET", "/account", false);
     xhttp.send();
 }
+
 
 function playAudio(id) {
     var audio = document.getElementById("audio");

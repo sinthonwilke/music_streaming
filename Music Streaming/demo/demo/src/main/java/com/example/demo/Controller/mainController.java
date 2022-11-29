@@ -14,10 +14,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import com.example.demo.Entity.albumEntity;
 import com.example.demo.Entity.containerAlbumEntity;
+import com.example.demo.Entity.favEntity;
 import com.example.demo.Entity.musicEntity;
 import com.example.demo.Entity.userEntity;
 import com.example.demo.Service.albumService;
 import com.example.demo.Service.containerAlbumService;
+import com.example.demo.Service.favService;
 import com.example.demo.Service.musicService;
 import com.example.demo.User.userDetail;
 
@@ -27,6 +29,7 @@ public class mainController {
     @Autowired private musicService musicService;
     @Autowired private albumService albumService;
     @Autowired private containerAlbumService containerAlbumService;
+    @Autowired private favService favService;
 
     //admin
     @GetMapping("/admin")
@@ -88,6 +91,14 @@ public class mainController {
     public String libraryPage(Model model) {
         return "user/library";
     }
+
+        @GetMapping("/library_fav")
+        public ResponseEntity<List<favEntity>> libraryFav(@AuthenticationPrincipal userDetail user) {
+            List <favEntity> fav = new ArrayList<favEntity>();
+            favService.findByUserId(user.getId()).forEach(fav::add);
+            return new ResponseEntity<>(fav, HttpStatus.OK);
+        }
+
 
     @GetMapping("/account")
     public String accountPage(Model model, @AuthenticationPrincipal userDetail user) {
