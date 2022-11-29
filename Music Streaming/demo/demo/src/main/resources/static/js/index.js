@@ -102,6 +102,7 @@ function libraryPage() {
     }
     xhttp.open("GET", "/library", false);
     xhttp.send();
+    playlists();
 }
 
     function favList() {
@@ -117,7 +118,14 @@ function libraryPage() {
     }
 
     function playlists() {
+        var out = '';
+        var playlist = JSON.parse(load("/library_playlist"));
+        for(var i = 0; i < playlist.length; i++) {
+            out += '<button onclick="favList()" class="dropbtn">' + playlist[i].name + '</button><br>'
+        }
 
+        document.getElementById("playlist").innerHTML = out;
+        listPop();
     }
 
 
