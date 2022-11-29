@@ -55,12 +55,12 @@ function searchPage() {
 
     function showAlbum(id) {
         var out = '';
-        out = "<a> test1 </a>" + "<a> test2 </a>" + "<a> test3 </a>";
 
-        // var albumList = JSON.parse(load("/album=" + id));
-        // var albumList = load("/album=" + id);
-        // out += albumList
-        // no message, error 404
+        var albumList = JSON.parse(load("/albums=" + id));
+        for(var i = 0; i < albumList.length; i++) {
+            out += '<a class="dropbtn" onclick="playAudio(' + albumList[i].music.id + ')">' + albumList[i].music.artist.name + " - " + albumList[i].music.name + '</a>';
+        }
+
         document.getElementById("myDropdown").innerHTML = out;
         listPop();
     }
@@ -68,16 +68,16 @@ function searchPage() {
     function listPop() {
         document.getElementById("myDropdown").classList.toggle("show");
         window.onclick = function(event) {
-        if (!event.target.matches('.dropbtn')) {
-            var dropdowns = document.getElementsByClassName("dropdown-content");
-            var i;
-            for (i = 0; i < dropdowns.length; i++) {
-            var openDropdown = dropdowns[i];
-                if (openDropdown.classList.contains('show')) {
-                    openDropdown.classList.remove('show');
+            if (!event.target.matches('.dropbtn')) {
+                var dropdowns = document.getElementsByClassName("dropdown-content");
+                var i;
+                for (i = 0; i < dropdowns.length; i++) {
+                var openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('show')) {
+                        openDropdown.classList.remove('show');
+                    }
                 }
             }
-        }
         }
     }
     
@@ -113,6 +113,6 @@ function accountPage() {
 function playAudio(id) {
     var audio = document.getElementById("audio");
     audio.src="assets/musics/" + id + ".wav";
-    audio.volume = 0.25;
+    audio.volume = 0.75;
     audio.play();
 }
