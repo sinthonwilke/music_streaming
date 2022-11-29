@@ -11,6 +11,7 @@ import com.example.demo.Entity.containerAlbumEntity;
 public interface containerAlbumRepository extends JpaRepository<containerAlbumEntity, Long> {
     
     List<containerAlbumEntity> findByOrderByAlbumAsc();
+    List<containerAlbumEntity> findByAlbum(Long id);
 
     @Query("select m from containerAlbumEntity m where (?1 is null or album=?1) and " +
     "(?2 is null or music=?2)"

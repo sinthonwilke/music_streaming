@@ -40,4 +40,8 @@ public class containerAlbumService {
     public void deleteByID(Long id) {
         repo.deleteById(id);
     }
+
+    public List<containerAlbumEntity> findByAlbumID(Long album_id) {
+        return (List<containerAlbumEntity>) repo.findByAlbum(album_id);
+    }
 }
