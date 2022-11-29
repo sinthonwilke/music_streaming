@@ -41,7 +41,7 @@ function searchPage() {
         out += "<div class='scrollmenu'>";
             if(album.length > 0) {
                 for(var i = 0; i < album.length; i++) {
-                    out += '<a>' + album[i].name + " (" + album[i].artist.name + ")" +'</a>';
+                    out += '<a class="dropbtn" onclick="showAlbum(' + album[i].id + ')">' + album[i].name + " (" + album[i].artist.name + ")";
                 }
             } else {
                 out += '<a>No album results found</a>';
@@ -53,6 +53,34 @@ function searchPage() {
         }
     }
 
+    function showAlbum(id) {
+        var out = '';
+        out = "<a> test1 </a>" + "<a> test2 </a>" + "<a> test3 </a>";
+
+        // var albumList = JSON.parse(load("/album=" + id));
+        // var albumList = load("/album=" + id);
+        // out += albumList
+        // no message, error 404
+        document.getElementById("myDropdown").innerHTML = out;
+        listPop();
+    }
+
+    function listPop() {
+        document.getElementById("myDropdown").classList.toggle("show");
+        window.onclick = function(event) {
+        if (!event.target.matches('.dropbtn')) {
+            var dropdowns = document.getElementsByClassName("dropdown-content");
+            var i;
+            for (i = 0; i < dropdowns.length; i++) {
+            var openDropdown = dropdowns[i];
+                if (openDropdown.classList.contains('show')) {
+                    openDropdown.classList.remove('show');
+                }
+            }
+        }
+        }
+    }
+    
     function load(url) {
         const xhttp = new XMLHttpRequest();
         var res;
