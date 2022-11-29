@@ -48,7 +48,7 @@ function searchPage() {
             } else {
                 out += '<a>No album results found</a>';
             }
-            out += "</div>";
+        out += "</div>";
         document.getElementById("searchResult").innerHTML = out;
         } else {
             document.getElementById("searchResult").innerHTML = document.getElementById("defualtResult").innerHTML;
@@ -105,7 +105,15 @@ function libraryPage() {
 }
 
     function favList() {
-  
+        var out = '';
+
+        var favList = JSON.parse(load("/library_fav"));
+        for(var i = 0; i < favList.length; i++) {
+            out += '<a class="dropbtn" onclick="playAudio(' + favList[i].music.id + ')">' + favList[i].music.artist.name + " - " + favList[i].music.name + '</a>';
+        }
+
+        document.getElementById("myDropdown").innerHTML = out;
+        listPop();
     }
 
 
