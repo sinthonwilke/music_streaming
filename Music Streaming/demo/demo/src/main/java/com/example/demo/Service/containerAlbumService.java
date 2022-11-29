@@ -42,6 +42,6 @@ public class containerAlbumService {
     }
 
     public List<containerAlbumEntity> findByAlbumID(Long album_id) {
-        return (List<containerAlbumEntity>) repo.findByAlbum(album_id);
+        return (List<containerAlbumEntity>) repo.findByAlbumId(album_id);
     }
 }
