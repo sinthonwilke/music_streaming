@@ -21,6 +21,6 @@ public class favService {
         return(List<favEntity>) repo.findAll();
     }
 
-    public List<favEntity> findByUser(Long id) {
-        return(List<favEntity>) repo.findByUser(id);
+    public List<favEntity> findByUserId(Long id) {
+        return(List<favEntity>) repo.findByUserId(id);
     }}

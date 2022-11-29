@@ -2,6 +2,7 @@ window.onload = function() {
     homePage()
 };
 
+
 function homePage() {
     const xhttp = new XMLHttpRequest();
     xhttp.onload = function() {
@@ -10,6 +11,7 @@ function homePage() {
     xhttp.open("GET", "/home", false);
     xhttp.send();
 }
+
 
 function searchPage() {
     const xhttp = new XMLHttpRequest();
@@ -41,18 +43,46 @@ function searchPage() {
         out += "<div class='scrollmenu'>";
             if(album.length > 0) {
                 for(var i = 0; i < album.length; i++) {
-                    out += '<a>' + album[i].name + " (" + album[i].artist.name + ")" +'</a>';
+                    out += '<a class="dropbtn" onclick="showAlbum(' + album[i].id + ')">' + album[i].name + " (" + album[i].artist.name + ")";
                 }
             } else {
                 out += '<a>No album results found</a>';
             }
-            out += "</div>";
+        out += "</div>";
         document.getElementById("searchResult").innerHTML = out;
         } else {
             document.getElementById("searchResult").innerHTML = document.getElementById("defualtResult").innerHTML;
         }
     }
 
+    function showAlbum(id) {
+        var out = '';
+
+        var albumList = JSON.parse(load("/albums=" + id));
+        for(var i = 0; i < albumList.length; i++) {
+            out += '<a class="dropbtn" onclick="playAudio(' + albumList[i].music.id + ')">' + albumList[i].music.artist.name + " - " + albumList[i].music.name + '</a>';
+        }
+
+        document.getElementById("myDropdown").innerHTML = out;
+        listPop();
+    }
+
+    function listPop() {
+        document.getElementById("myDropdown").classList.toggle("show");
+        window.onclick = function(event) {
+            if (!event.target.matches('.dropbtn')) {
+                var dropdowns = document.getElementsByClassName("dropdown-content");
+                var i;
+                for (i = 0; i < dropdowns.length; i++) {
+                var openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('show')) {
+                        openDropdown.classList.remove('show');
+                    }
+                }
+            }
+        }
+    }
+    
     function load(url) {
         const xhttp = new XMLHttpRequest();
         var res;
@@ -64,6 +94,7 @@ function searchPage() {
         return res;
     }
 
+
 function libraryPage() {
     const xhttp = new XMLHttpRequest();
     xhttp.onload = function() {
@@ -71,7 +102,45 @@ function libraryPage() {
     }
     xhttp.open("GET", "/library", false);
     xhttp.send();
+    playlists();
 }
+
+    function favList() {
+        var out = '';
+
+        var favList = JSON.parse(load("/library_fav"));
+        for(var i = 0; i < favList.length; i++) {
+            out += '<a class="dropbtn" onclick="playAudio(' + favList[i].music.id + ')">' + favList[i].music.artist.name + " - " + favList[i].music.name + '</a>';
+        }
+
+        document.getElementById("myDropdown").innerHTML = out;
+        listPop();
+    }
+
+    function playlists() {
+        var out = '';
+        var playlist = JSON.parse(load("/library_playlist"));
+        for(var i = 0; i < playlist.length; i++) {
+            out += '<button onclick="showlists(' + playlist[i].id + ')" class="dropbtn">' + playlist[i].name + '</button><br>'
+        }
+
+        document.getElementById("playlist").innerHTML = out;
+        listPop();
+    }
+
+    function showlists(id) {
+        var out = '';
+
+        var list = JSON.parse(load("/playlists=" + id));
+        for(var i = 0; i < list.length; i++) {
+            out += '<a class="dropbtn" onclick="playAudio(' + list[i].music.id + ')">' + list[i].music.artist.name + " - " + list[i].music.name + '</a>';
+        }
+        
+        document.getElementById("myDropdown").innerHTML = out;
+        listPop();
+    }
+
+
 
 function accountPage() {
     const xhttp = new XMLHttpRequest();
@@ -82,9 +151,10 @@ function accountPage() {
     xhttp.send();
 }
 
+
 function playAudio(id) {
     var audio = document.getElementById("audio");
     audio.src="assets/musics/" + id + ".wav";
-    audio.volume = 0.25;
+    audio.volume = 0.75;
     audio.play();
 }

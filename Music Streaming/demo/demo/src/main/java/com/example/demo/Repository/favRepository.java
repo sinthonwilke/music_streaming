@@ -10,5 +10,5 @@ import java.util.List;
 @Repository
 public interface favRepository extends CrudRepository<favEntity, Long> {
     
-    List<favEntity> findByUser(Long id);
+    List<favEntity> findByUserId(Long id);
 }

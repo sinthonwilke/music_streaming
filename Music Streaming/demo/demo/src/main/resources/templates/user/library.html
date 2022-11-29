@@ -2,13 +2,23 @@
 <html xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8" />
-    <link href="webjars/bootstrap/3.3.6/css/bootstrap.min.css"rel="stylesheet">
-    <link href="css/example.css" rel="stylesheet">
-    <script src="js/example.js"></script>
+    <link href="css/index.css" rel="stylesheet">
 </head>
 <body>
 
-        <h1>Library</h1>
+    <h1>Library</h1>
+
+    <div class="dropdown" hidden>
+        <div id="myDropdown" class="dropdown-content" hidden>
+        </div>
+    </div>
+
+    <div id="favList">
+        <button onclick="favList()" class="dropbtn">My Favorite</button>
+    </div>
+
+    <div id="playlist">
+    </div>
 
 </body>
 </html>

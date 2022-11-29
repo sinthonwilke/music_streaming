@@ -13,10 +13,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import com.example.demo.Entity.albumEntity;
+import com.example.demo.Entity.containerAlbumEntity;
+import com.example.demo.Entity.containerPlaylistEntity;
+import com.example.demo.Entity.favEntity;
 import com.example.demo.Entity.musicEntity;
+import com.example.demo.Entity.playlistEntity;
 import com.example.demo.Entity.userEntity;
 import com.example.demo.Service.albumService;
+import com.example.demo.Service.containerAlbumService;
+import com.example.demo.Service.containerPlaylistService;
+import com.example.demo.Service.favService;
 import com.example.demo.Service.musicService;
+import com.example.demo.Service.playlistService;
 import com.example.demo.User.userDetail;
 
 @Controller
@@ -24,6 +32,10 @@ public class mainController {
 
     @Autowired private musicService musicService;
     @Autowired private albumService albumService;
+    @Autowired private containerAlbumService containerAlbumService;
+    @Autowired private favService favService;
+    @Autowired private playlistService playlistService;
+    @Autowired private containerPlaylistService containerPlaylistService;
 
     //admin
     @GetMapping("/admin")
@@ -62,16 +74,22 @@ public class mainController {
     }
 
         @GetMapping("/search_results={str}")
-        public ResponseEntity<List<musicEntity>> searchMusicResult(@PathVariable("str") String str, Model model) {
+        public ResponseEntity<List<musicEntity>> searchMusicResult(@PathVariable("str") String str) {
             List <musicEntity> music = new ArrayList<musicEntity>();
             musicService.findByName(str).forEach(music::add);
             return new ResponseEntity<>(music, HttpStatus.OK);
         }
         @GetMapping("/search_albums={str}")
-        public ResponseEntity<List<albumEntity>> searchAlbumResult(@PathVariable("str") String str, Model model) {
+        public ResponseEntity<List<albumEntity>> searchAlbumResult(@PathVariable("str") String str) {
             List <albumEntity> album = new ArrayList<albumEntity>();
             albumService.findByName(str).forEach(album::add);
             return new ResponseEntity<>(album, HttpStatus.OK);
+        }
+        @GetMapping("/albums={id}")
+        public ResponseEntity<List<containerAlbumEntity>> albumList(@PathVariable("id") Long id) {
+            List <containerAlbumEntity> albumList = new ArrayList<containerAlbumEntity>();
+            containerAlbumService.findByAlbumID(id).forEach(albumList::add);
+            return new ResponseEntity<>(albumList, HttpStatus.OK);
         }
 
 
@@ -79,6 +97,28 @@ public class mainController {
     public String libraryPage(Model model) {
         return "user/library";
     }
+
+        @GetMapping("/library_fav")
+        public ResponseEntity<List<favEntity>> libraryFav(@AuthenticationPrincipal userDetail user) {
+            List <favEntity> fav = new ArrayList<favEntity>();
+            favService.findByUserId(user.getId()).forEach(fav::add);
+            return new ResponseEntity<>(fav, HttpStatus.OK);
+        }
+
+        @GetMapping("/library_playlist")
+        public ResponseEntity<List<playlistEntity>> libraryPlaylist(@AuthenticationPrincipal userDetail user) {
+            List <playlistEntity> playlist = new ArrayList<playlistEntity>();
+            playlistService.findByUserId(user.getId()).forEach(playlist::add);
+            return new ResponseEntity<>(playlist, HttpStatus.OK);
+        }
+
+        @GetMapping("/playlists={id}")
+        public ResponseEntity<List<containerPlaylistEntity>> playlist(@PathVariable("id") Long id) {
+            List <containerPlaylistEntity> playlist = new ArrayList<containerPlaylistEntity>();
+            containerPlaylistService.findByPlaylistId(id).forEach(playlist::add);
+            return new ResponseEntity<>(playlist, HttpStatus.OK);
+        }
+
 
     @GetMapping("/account")
     public String accountPage(Model model, @AuthenticationPrincipal userDetail user) {
