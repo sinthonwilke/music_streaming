@@ -27,16 +27,17 @@ function searchPage() {
         var str = document.getElementById("searchBox").value;
         var out = "";
 
-        out += "<div class='vertical-menu'>";
         if(str.length > 0) {
 
             var music = JSON.parse(load("/search_results=" + str));
             var album = JSON.parse(load("/search_albums=" + str));
 
             if(music.length == 0 && album.length == 0) {
-                out += '<a>No results found for "' + str + '"<br>Try searching for something else.</a>';
+                out += '<p>No results found for "' + str + '"<br>Try searching for something else.</p>';
             }
             else {
+                
+                out += "<div class='vertical-menu'>";
                 if(music.length > 0) {
                     for(var i = 0; i < music.length; i++) {
                         out += '<a onclick="playAudio(' + music[i].id + ')">' + music[i].artist.name + " - " + music[i].name + '</a>';
@@ -45,10 +46,9 @@ function searchPage() {
                 else {
                     out += '<a>No music results found</a>';
                 }
-
                 out += "</div>";
-                out += "<div class='scrollmenu'>";
 
+                out += "<div class='scrollmenu'>";
                 if(album.length > 0) {
                     for(var i = 0; i < album.length; i++) {
                         out += '<a class="dropbtn" onclick="showAlbum(' + album[i].id + ')">' + album[i].name + " (" + album[i].artist.name + ")";
