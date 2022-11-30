@@ -58,9 +58,10 @@ function searchPage() {
                     out += '<a>No album results found</a>';
                 }
             }
-        out += "</div>";
-        document.getElementById("searchResult").innerHTML = out;
-        } else {
+            out += "</div>";
+            document.getElementById("searchResult").innerHTML = out;
+        } 
+        else {
             document.getElementById("searchResult").innerHTML = document.getElementById("defualtResult").innerHTML;
         }
     }
