@@ -190,15 +190,14 @@ function checklike(id) {
 function likeSong() {
     var likeButton = document.getElementById("likeButton");
     var id = document.getElementById("audio").value;
+
     if (likeButton.value == true) {
-        alert("you just unliked the song");
-        likeButton.innerHTML = '<button id="likeButton" onclick="likeSong()">Like</button>';
+        load("/delFavorite=" + id);
     }
     else {
-        alert("you just liked the song");
-        load("/addFavorite=" + id);
-        likeButton.innerHTML = '<button id="likeButton" onclick="likeSong()">Liked</button>';
+        post("/addFavorite", id);
     }
+    checklike(id);
 }
 
 function load(url) {
@@ -211,3 +210,11 @@ function load(url) {
     xhttp.send();
     return res;
 }
+
+function post(url, data) {
+    const xhttp = new XMLHttpRequest();
+    xhttp.open("POST", url, false);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send("data="+data);
+}
+  

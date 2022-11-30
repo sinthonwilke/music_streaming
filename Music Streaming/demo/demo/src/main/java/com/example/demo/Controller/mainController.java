@@ -11,7 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import com.example.demo.Entity.albumEntity;
 import com.example.demo.Entity.containerAlbumEntity;
 import com.example.demo.Entity.containerPlaylistEntity;
@@ -122,13 +123,22 @@ public class mainController {
             return new ResponseEntity<>(playlist, HttpStatus.OK);
         }
 
-        @GetMapping("/addFavorite={id}")
-        public void addFavorite(@PathVariable("id") Long id, @AuthenticationPrincipal userDetail user) throws Exception{
+        @PostMapping("/addFavorite")
+        public ResponseEntity<favEntity> addFavorite(@AuthenticationPrincipal userDetail user, @RequestParam("data") Long id) throws Exception{
             favEntity fav = new favEntity();
             fav.setMusic(musicService.findByID(id));
             fav.setUser(userService.findByID(user.getId()));
             favService.save(fav);
+            return new ResponseEntity<>(null, HttpStatus.CREATED);
         }
+
+        @GetMapping("/delFavorite={id}")
+        public ResponseEntity<favEntity> delFavorite(@AuthenticationPrincipal userDetail user, @PathVariable("id") Long id) {
+            favService.deleteByUserIdAndMusicId(user.getId(), id);
+            return new ResponseEntity<>(null, HttpStatus.ACCEPTED);
+        }
+
+
 
     @GetMapping("/account")
     public String accountPage(Model model, @AuthenticationPrincipal userDetail user) {
