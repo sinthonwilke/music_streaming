@@ -195,7 +195,7 @@ function likeSong() {
         load("/delFavorite=" + id);
     }
     else {
-        post("/addFavorite", id);
+        load("/addFavorite=" + id);
     }
     checklike(id);
 }
@@ -211,10 +211,12 @@ function load(url) {
     return res;
 }
 
-function post(url, data) {
-    const xhttp = new XMLHttpRequest();
-    xhttp.open("POST", url, false);
-    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhttp.send("data="+data);
-}
+// function post(url, data) {
+//     const xhttp = new XMLHttpRequest();
+//     xhttp.open("POST", url, false);
+//     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+//     xhttp.send("data="+data);
+
+//     //http.csrf().disable();
+// }
   
