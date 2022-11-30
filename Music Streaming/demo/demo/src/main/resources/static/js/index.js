@@ -211,6 +211,8 @@ function load(url) {
     return res;
 }
 
+// post request
+//
 // function post(url, data) {
 //     const xhttp = new XMLHttpRequest();
 //     xhttp.open("POST", url, false);
