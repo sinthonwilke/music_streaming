@@ -168,16 +168,22 @@ function checklike(id) {
     var fav = JSON.parse(load("/library_fav"));
     var likeButton = document.getElementById("likeButton");
 
-    for(var i = 0; i < fav.length; i++) {
-        if(fav[i].music.id == id) {
-            likeButton.innerHTML = '<button id="likeButton" onclick="likeSong()">Liked</button>';
-            likeButton.value = true;
-            break;
+    if(fav.length != 0) {
+        for(var i = 0; i < fav.length; i++) {
+            if(fav[i].music.id == id) {
+                likeButton.innerHTML = '<button id="likeButton" onclick="likeSong()">Liked</button>';
+                likeButton.value = true;
+                break;
+            }
+            else {
+                likeButton.innerHTML = '<button id="likeButton" onclick="likeSong()">Like</button>';
+                likeButton.value = false;
+            }
         }
-        else {
-            likeButton.innerHTML = '<button id="likeButton" onclick="likeSong()">Like</button>';
-            likeButton.value = false;
-        }
+    }   
+    else {
+        likeButton.innerHTML = '<button id="likeButton" onclick="likeSong()">Like</button>';
+        likeButton.value = false;
     }
 }
 
