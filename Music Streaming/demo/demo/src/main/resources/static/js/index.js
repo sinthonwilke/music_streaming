@@ -36,7 +36,7 @@ function searchPage() {
                 out += '<p>No results found for "' + str + '"<br>Try searching for something else.</p>';
             }
             else {
-                
+
                 out += "<div class='vertical-menu'>";
                 if(music.length > 0) {
                     for(var i = 0; i < music.length; i++) {
@@ -57,8 +57,10 @@ function searchPage() {
                 else {
                     out += '<a>No album results found</a>';
                 }
+                out += "</div>";
+
             }
-            out += "</div>";
+            
             document.getElementById("searchResult").innerHTML = out;
         } 
         else {
