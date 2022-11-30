@@ -1,5 +1,7 @@
 window.onload = function() {
     homePage()
+    document.getElementById("likeButton").innerHTML = 'none';
+    document.getElementById("likeButton").innerHTML = '<button class="transparent">none</button>';
 };
 
 
@@ -60,7 +62,7 @@ function searchPage() {
                 out += "</div>";
 
             }
-            
+
             document.getElementById("searchResult").innerHTML = out;
         } 
         else {
@@ -96,18 +98,6 @@ function searchPage() {
         }
     }
     
-    function load(url) {
-        const xhttp = new XMLHttpRequest();
-        var res;
-        xhttp.onload = function() {
-            res = this.response;
-        }
-        xhttp.open("GET", url, false);
-        xhttp.send();
-        return res;
-    }
-
-
 function libraryPage() {
     const xhttp = new XMLHttpRequest();
     xhttp.onload = function() {
@@ -168,6 +158,50 @@ function accountPage() {
 function playAudio(id) {
     var audio = document.getElementById("audio");
     audio.src="assets/musics/" + id + ".wav";
+    audio.value = id;
     audio.volume = 0.75;
     audio.play();
+    checklike(id);
+}
+
+function checklike(id) {
+    var fav = JSON.parse(load("/library_fav"));
+    var likeButton = document.getElementById("likeButton");
+
+    for(var i = 0; i < fav.length; i++) {
+        if(fav[i].music.id == id) {
+            likeButton.innerHTML = '<button id="likeButton" onclick="likeSong()">Liked</button>';
+            likeButton.value = true;
+            break;
+        }
+        else {
+            likeButton.innerHTML = '<button id="likeButton" onclick="likeSong()">Like</button>';
+            likeButton.value = false;
+        }
+    }
+}
+
+function likeSong() {
+    var likeButton = document.getElementById("likeButton");
+    var id = document.getElementById("audio").value;
+    if (likeButton.value == true) {
+        alert("you just unliked the song");
+        likeButton.innerHTML = '<button id="likeButton" onclick="likeSong()">Like</button>';
+    }
+    else {
+        alert("you just liked the song");
+        load("/addFavorite=" + id);
+        likeButton.innerHTML = '<button id="likeButton" onclick="likeSong()">Liked</button>';
+    }
+}
+
+function load(url) {
+    const xhttp = new XMLHttpRequest();
+    var res;
+    xhttp.onload = function() {
+        res = this.response;
+    }
+    xhttp.open("GET", url, false);
+    xhttp.send();
+    return res;
 }

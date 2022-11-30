@@ -25,6 +25,7 @@ import com.example.demo.Service.containerPlaylistService;
 import com.example.demo.Service.favService;
 import com.example.demo.Service.musicService;
 import com.example.demo.Service.playlistService;
+import com.example.demo.Service.userService;
 import com.example.demo.User.userDetail;
 
 @Controller
@@ -36,6 +37,8 @@ public class mainController {
     @Autowired private favService favService;
     @Autowired private playlistService playlistService;
     @Autowired private containerPlaylistService containerPlaylistService;
+    @Autowired private userService userService;
+
 
     //admin
     @GetMapping("/admin")
@@ -119,6 +122,13 @@ public class mainController {
             return new ResponseEntity<>(playlist, HttpStatus.OK);
         }
 
+        @GetMapping("/addFavorite={id}")
+        public void addFavorite(@PathVariable("id") Long id, @AuthenticationPrincipal userDetail user) throws Exception{
+            favEntity fav = new favEntity();
+            fav.setMusic(musicService.findByID(id));
+            fav.setUser(userService.findByID(user.getId()));
+            favService.save(fav);
+        }
 
     @GetMapping("/account")
     public String accountPage(Model model, @AuthenticationPrincipal userDetail user) {
