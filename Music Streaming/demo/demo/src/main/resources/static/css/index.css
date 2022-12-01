@@ -47,10 +47,10 @@ div.scrollmenu {
     background-color: #2980B9;
   }
   
-  .dropdown {
+.dropdown {
     position: relative;
     display: inline-block;
-  }
+}
   
   .dropdown-content {
     display: none;
@@ -71,7 +71,9 @@ div.scrollmenu {
   
   .dropdown a:hover {background-color: #ddd;}
   
-  .show {display: block;}
+.show {
+  display: block;
+}
 
 /* ////////////////////////////////////////////////////////// */
 
