@@ -84,6 +84,7 @@ function searchPage() {
 
     function listPop() {
         document.getElementById("myDropdown").classList.toggle("show");
+        document.getElementById("bg").classList.toggle("bgLock");
         window.onclick = function(event) {
             if (!event.target.matches('.dropbtn')) {
                 var dropdowns = document.getElementsByClassName("dropdown-content");
@@ -92,6 +93,7 @@ function searchPage() {
                 var openDropdown = dropdowns[i];
                     if (openDropdown.classList.contains('show')) {
                         openDropdown.classList.remove('show');
+                        document.getElementById("bg").classList.remove("bgLock");
                     }
                 }
             }
