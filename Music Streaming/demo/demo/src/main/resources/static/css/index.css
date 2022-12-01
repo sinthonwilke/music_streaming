@@ -110,4 +110,7 @@ div.scrollmenu {
 
 /* ////////////////////////////////////////////////////////// */
 
-.transparent {opacity: 0.6;}
+.transparent {
+  opacity: 0.6;
+  pointer-events: none;
+}
