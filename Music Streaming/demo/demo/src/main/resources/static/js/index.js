@@ -358,5 +358,5 @@ function popupMessage(msg) {
     popup.classList.toggle("show");
     setTimeout(() => {
         popup.classList.toggle("show");
-      }, 3000);
-  }
+    }, 3000);
+}
