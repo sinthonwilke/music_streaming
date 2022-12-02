@@ -167,6 +167,55 @@ function playAudio(id) {
     audio.volume = 0.75;
     audio.play();
     checklike(id);
+    songHistory.push(id);
+    historyIndex = songHistory.length - 1;
+    updateHistory();
+}
+
+var songHistory = [];
+var historyIndex;
+function updateHistory() {
+
+    // prev
+    if(songHistory.length > 1 && historyIndex > 0) {
+        document.getElementById("prevSong").innerHTML = '<button onclick="playPrev()"> << </button>';
+    }
+    else {
+        document.getElementById("prevSong").innerHTML = '<button class="transparent"> << </button>';
+    }
+
+    // next
+    if(songHistory.length - 1 > historyIndex) {
+        document.getElementById("nextSong").innerHTML = '<button onclick="playNext()"> >> </button>';
+    }
+    else {
+        document.getElementById("nextSong").innerHTML = '<button class="transparent"> >> </button>';
+    }
+    
+}
+
+function playPrev() {
+    historyIndex--;
+    updateHistory();
+    id = songHistory[historyIndex];
+    var audio = document.getElementById("audio");
+    audio.src="assets/musics/" + id + ".wav";
+    audio.value = id;
+    audio.volume = 0.75;
+    audio.play();
+    checklike(id);
+}
+
+function playNext() {
+    historyIndex++;
+    updateHistory();
+    id = songHistory[historyIndex];
+    var audio = document.getElementById("audio");
+    audio.src="assets/musics/" + id + ".wav";
+    audio.value = id;
+    audio.volume = 0.75;
+    audio.play();
+    checklike(id);
 }
 
 function checklike(id) {
