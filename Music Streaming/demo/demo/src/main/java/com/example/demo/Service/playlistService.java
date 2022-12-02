@@ -26,4 +26,7 @@ public class playlistService {
         repo.save(playlist);
     }
 
+    public void del(Long id) {
+        repo.deleteById(id);
+    }
 }

@@ -6,7 +6,6 @@ window.onload = function() {
     document.getElementById("nextSong").innerHTML = '<button class="transparent"> >> </button>';
 };
 
-
 function homePage() {
     const xhttp = new XMLHttpRequest();
     xhttp.onload = function() {
@@ -15,7 +14,6 @@ function homePage() {
     xhttp.open("GET", "/home", false);
     xhttp.send();
 }
-
 
 function searchPage() {
     const xhttp = new XMLHttpRequest();
@@ -96,12 +94,16 @@ function libraryPage() {
 
     function favList() {
         var out = '';
-
         var favList = JSON.parse(load("/library_fav"));
-        for(var i = 0; i < favList.length; i++) {
-            out += '<a class="dropbtn" onclick="playAudio(' + favList[i].music.id + ')">' + favList[i].music.artist.name + " - " + favList[i].music.name + '</a>';
-        }
 
+        if(favList.length > 0) {
+            for(var i = 0; i < favList.length; i++) {
+                out += '<a class="dropbtn" onclick="playAudio(' + favList[i].music.id + ')">' + favList[i].music.artist.name + " - " + favList[i].music.name + '</a>';
+            }
+        }
+        else {
+            out += "<a>Songs you like will appear here</a>";
+        }
         document.getElementById("myDropdown").innerHTML = out;
         listPop();
     }
@@ -110,9 +112,9 @@ function libraryPage() {
         var out = '';
         var playlist = JSON.parse(load("/library_playlist"));
         for(var i = 0; i < playlist.length; i++) {
-            out += '<button onclick="showlists(' + playlist[i].id + ')" class="dropbtn">' + playlist[i].name + '</button><br>'
+            out += '<button onclick="showlists(' + playlist[i].id + ')" class="dropbtn">' + playlist[i].name + '</button>'
+            out += '<button onclick="deleteList(' + playlist[i].id + ')" class="dropbtn">Delete</button><br>'
         }
-
         document.getElementById("playlist").innerHTML = out;
     }
 
@@ -120,8 +122,15 @@ function libraryPage() {
         var out = '';
 
         var list = JSON.parse(load("/playlists=" + id));
-        for(var i = 0; i < list.length; i++) {
-            out += '<a class="dropbtn" onclick="playAudio(' + list[i].music.id + ')">' + list[i].music.artist.name + " - " + list[i].music.name + '</a>';
+
+        if(list.length > 0) {
+
+            for(var i = 0; i < list.length; i++) {
+                out += '<a class="dropbtn" onclick="playAudio(' + list[i].music.id + ')">' + list[i].music.artist.name + " - " + list[i].music.name + '</a>';
+            }
+        }
+        else {
+            out += '<a>No music in this playlist.</a>';
         }
         
         document.getElementById("myDropdown").innerHTML = out;
@@ -148,7 +157,10 @@ function libraryPage() {
         document.getElementById("playlistName").value = null;
     }
 
-
+    function deleteList(id) {
+        load("/dellist=" + id);
+        libraryPage();
+    }
 
 function accountPage() {
     const xhttp = new XMLHttpRequest();
@@ -158,7 +170,6 @@ function accountPage() {
     xhttp.open("GET", "/account", false);
     xhttp.send();
 }
-
 
 function playAudio(musicID) {
     var audio = document.getElementById("audio");

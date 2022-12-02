@@ -144,6 +144,12 @@ public class mainController {
             return new ResponseEntity<>(null, HttpStatus.ACCEPTED);
         }
 
+        @GetMapping("/dellist={id}")
+        public ResponseEntity<playlistEntity> dellist(@AuthenticationPrincipal userDetail user, @PathVariable("id") Long id) {
+            playlistService.del(id);
+            return new ResponseEntity<>(null, HttpStatus.ACCEPTED);
+        }
+
         
     @GetMapping("/account")
     public String accountPage(Model model, @AuthenticationPrincipal userDetail user) {
