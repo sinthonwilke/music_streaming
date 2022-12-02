@@ -37,7 +37,6 @@ public class mainController {
     @Autowired private containerPlaylistService containerPlaylistService;
     @Autowired private userService userService;
 
-
     //admin
     @GetMapping("/admin")
     public String adminPage() {
@@ -150,6 +149,14 @@ public class mainController {
             return new ResponseEntity<>(null, HttpStatus.ACCEPTED);
         }
 
+        @GetMapping("/addMusicToPlaylist={musicID}&{playlistID}")
+        public ResponseEntity<containerPlaylistEntity> add2Playlist(@AuthenticationPrincipal userDetail user, @PathVariable("musicID") Long musicID, @PathVariable("playlistID") Long playlistID) throws Exception {
+            containerPlaylistEntity container = new containerPlaylistEntity();
+            container.setMusic(musicService.findByID(musicID));
+            container.setPlaylist(playlistService.findById(playlistID));
+            containerPlaylistService.save(container);
+            return new ResponseEntity<>(null, HttpStatus.ACCEPTED);
+        }
         
     @GetMapping("/account")
     public String accountPage(Model model, @AuthenticationPrincipal userDetail user) {

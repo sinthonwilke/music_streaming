@@ -4,6 +4,9 @@ window.onload = function() {
     document.getElementById("likeButton").innerHTML = '<button class="transparent">none</button>';
     document.getElementById("prevSong").innerHTML = '<button class="transparent"> << </button>';
     document.getElementById("nextSong").innerHTML = '<button class="transparent"> >> </button>';
+    document.getElementById("songName").innerHTML = '<p>Nothing is playing.</p>';
+    document.getElementById("a2pl").innerHTML = "<button id='add2PlaylistButton' onclick='add2PlaylistAction()' class='dropbtn'>+2Playlist</button>";
+    document.getElementById("a2pl").classList.add("transparent");
 };
 
 function homePage() {
@@ -179,17 +182,6 @@ function accountPage() {
     xhttp.send();
 }
 
-function playAudio(musicID, musicName) {
-    document.getElementById("songName").innerHTML = musicName;
-    var audio = document.getElementById("audio");
-    audio.src="assets/musics/" + musicID + ".wav";
-    audio.value = musicID;
-    audio.volume = 0.75;
-    audio.play();
-    checklike(musicID);
-    updateIndex(musicID, musicName);
-}
-
 var songHistoryName = [];
 var songHistory = [];
 var historyIndex;
@@ -227,6 +219,19 @@ function updateHistory() {
     }
 }
 
+function playAudio(musicID, musicName) {
+    document.getElementById("songName").innerHTML = musicName;
+    var audio = document.getElementById("audio");
+    audio.src="assets/musics/" + musicID + ".wav";
+    audio.value = musicID;
+    audio.volume = 0.75;
+    audio.play();
+    checklike(musicID);
+    updateIndex(musicID, musicName);
+    document.getElementById("add2PlaylistButton").value = musicID;
+    document.getElementById("a2pl").classList.remove("transparent");
+}
+
 function playPrev() {
     historyIndex--;
     updateHistory();
@@ -238,6 +243,8 @@ function playPrev() {
     audio.volume = 0.75;
     audio.play();
     checklike(id);
+    document.getElementById("add2PlaylistButton").value = musicID;
+    document.getElementById("a2pl").classList.remove("transparent");
 }
 
 function playNext() {
@@ -251,6 +258,9 @@ function playNext() {
     audio.volume = 0.75;
     audio.play();
     checklike(id);
+    document.getElementById("add2PlaylistButton").value = musicID;
+    document.getElementById("a2pl").classList.remove("transparent");
+
 }
 
 function checklike(id) {
@@ -316,4 +326,21 @@ function load(url) {
     xhttp.open("GET", url, false);
     xhttp.send();
     return res;
+}
+
+function add2PlaylistAction() {
+    var musicID = document.getElementById("add2PlaylistButton").value;
+    var out = '';
+    var playlist = JSON.parse(load("/library_playlist"));
+    for(var i = 0; i < playlist.length; i++) {
+        out += '<a class="dropbtn" onclick="add2Playlist('+ musicID + "," + playlist[i].id +')">' + playlist[i].name + '</a>';
+    }
+    document.getElementById("myDropdown").innerHTML = out;
+    listPop();
+}
+
+function add2Playlist(musicID, playlistID) {
+    listPop();
+    document.getElementById("bg").classList.remove("bgLock");
+    load("/addMusicToPlaylist=" + musicID + "&" + playlistID);
 }

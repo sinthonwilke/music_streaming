@@ -29,4 +29,8 @@ public class playlistService {
     public void del(Long id) {
         repo.deleteById(id);
     }
+
+    public playlistEntity findById(Long id) {
+        return repo.findById(id).get();
+    }
 }
