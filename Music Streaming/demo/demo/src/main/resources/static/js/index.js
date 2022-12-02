@@ -2,6 +2,8 @@ window.onload = function() {
     homePage()
     document.getElementById("likeButton").innerHTML = 'none';
     document.getElementById("likeButton").innerHTML = '<button class="transparent">none</button>';
+    document.getElementById("prevSong").innerHTML = '<button class="transparent"> << </button>';
+    document.getElementById("nextSong").innerHTML = '<button class="transparent"> >> </button>';
 };
 
 
@@ -81,24 +83,6 @@ function searchPage() {
         document.getElementById("myDropdown").innerHTML = out;
         listPop();
     }
-
-    function listPop() {
-        document.getElementById("myDropdown").classList.toggle("show");
-        document.getElementById("bg").classList.add("bgLock");
-        window.onclick = function(event) {
-            if (!event.target.matches('.dropbtn')) {
-                var dropdowns = document.getElementsByClassName("dropdown-content");
-                var i;
-                for (i = 0; i < dropdowns.length; i++) {
-                var openDropdown = dropdowns[i];
-                    if (openDropdown.classList.contains('show')) {
-                        openDropdown.classList.remove('show');
-                        document.getElementById("bg").classList.remove("bgLock");
-                    }
-                }
-            }
-        }
-    }
     
 function libraryPage() {
     const xhttp = new XMLHttpRequest();
@@ -142,6 +126,26 @@ function libraryPage() {
         
         document.getElementById("myDropdown").innerHTML = out;
         listPop();
+    }
+
+    function addPlaylistPop() {
+        document.getElementById("myOverlay").style.display = "block";
+        document.getElementById("bg").classList.add("bgLock");
+    
+        window.onclick = function(event) {
+            if (event.target == document.getElementById("myOverlay")) {
+                document.getElementById("myOverlay").style.display = "none";
+                document.getElementById("bg").classList.remove("bgLock");
+            }
+        }
+    }
+    
+    function addPlaylist(form) {
+        load("/addPlaylist=" + form.playlistName.value);
+        libraryPage();
+        document.getElementById("myOverlay").style.display = "none";
+        document.getElementById("bg").classList.remove("bgLock");
+        document.getElementById("playlistName").value = null;
     }
 
 
@@ -201,6 +205,24 @@ function likeSong() {
     checklike(id);
 }
 
+function listPop() {
+    document.getElementById("myDropdown").classList.toggle("show");
+    document.getElementById("bg").classList.add("bgLock");
+    window.onclick = function(event) {
+        if (!event.target.matches('.dropbtn')) {
+            var dropdowns = document.getElementsByClassName("dropdown-content");
+            var i;
+            for (i = 0; i < dropdowns.length; i++) {
+            var openDropdown = dropdowns[i];
+                if (openDropdown.classList.contains('show')) {
+                    openDropdown.classList.remove('show');
+                    document.getElementById("bg").classList.remove("bgLock");
+                }
+            }
+        }
+    }
+}
+
 function load(url) {
     const xhttp = new XMLHttpRequest();
     var res;
@@ -210,24 +232,4 @@ function load(url) {
     xhttp.open("GET", url, false);
     xhttp.send();
     return res;
-}
-
-function addPlaylistPop() {
-    document.getElementById("myOverlay").style.display = "block";
-    document.getElementById("bg").classList.add("bgLock");
-
-    window.onclick = function(event) {
-        if (event.target == document.getElementById("myOverlay")) {
-            document.getElementById("myOverlay").style.display = "none";
-            document.getElementById("bg").classList.remove("bgLock");
-        }
-    }
-}
-
-function addPlaylist(form) {
-    load("/addPlaylist=" + form.playlistName.value);
-    libraryPage();
-    document.getElementById("myOverlay").style.display = "none";
-    document.getElementById("bg").classList.remove("bgLock");
-    document.getElementById("playlistName").value = null;
 }
