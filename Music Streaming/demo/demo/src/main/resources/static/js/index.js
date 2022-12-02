@@ -78,7 +78,7 @@ function searchPage() {
 
         var albumList = JSON.parse(load("/albums=" + id));
         for(var i = 0; i < albumList.length; i++) {
-            songName = albumList[i].artist.name + " - " + albumList[i].name;
+            songName = albumList[i].music.artist.name + " - " + albumList[i].music.name;
             out += '<a class="dropbtn" onclick="playAudio(' + albumList[i].music.id + ',' + "'" + songName + "'" + ')">' + songName + '</a>';
         }
 
