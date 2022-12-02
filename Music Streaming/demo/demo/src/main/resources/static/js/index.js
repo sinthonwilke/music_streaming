@@ -84,7 +84,7 @@ function searchPage() {
 
     function listPop() {
         document.getElementById("myDropdown").classList.toggle("show");
-        document.getElementById("bg").classList.toggle("bgLock");
+        document.getElementById("bg").classList.add("bgLock");
         window.onclick = function(event) {
             if (!event.target.matches('.dropbtn')) {
                 var dropdowns = document.getElementsByClassName("dropdown-content");
@@ -130,7 +130,6 @@ function libraryPage() {
         }
 
         document.getElementById("playlist").innerHTML = out;
-        listPop();
     }
 
     function showlists(id) {
@@ -213,32 +212,22 @@ function load(url) {
     return res;
 }
 
-// post request
-//
-// function post(url, data) {
-//     const xhttp = new XMLHttpRequest();
-//     xhttp.open("POST", url, false);
-//     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-//     xhttp.send("data="+data);
-
-//     //http.csrf().disable();
-// }
-
 function addPlaylistPop() {
     document.getElementById("myOverlay").style.display = "block";
-    document.getElementById("bg").classList.toggle("bgLock");
+    document.getElementById("bg").classList.add("bgLock");
 
     window.onclick = function(event) {
         if (event.target == document.getElementById("myOverlay")) {
             document.getElementById("myOverlay").style.display = "none";
-            document.getElementById("bg").classList.toggle("bgLock");
+            document.getElementById("bg").classList.remove("bgLock");
         }
     }
 }
 
 function addPlaylist(form) {
     load("/addPlaylist=" + form.playlistName.value);
+    libraryPage();
     document.getElementById("myOverlay").style.display = "none";
-    document.getElementById("bg").classList.toggle("bgLock");
-    document.getElementById("playlistName").value = "";
+    document.getElementById("bg").classList.remove("bgLock");
+    document.getElementById("playlistName").value = null;
 }
