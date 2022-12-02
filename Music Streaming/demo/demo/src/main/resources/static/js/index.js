@@ -223,4 +223,22 @@ function load(url) {
 
 //     //http.csrf().disable();
 // }
-  
+
+function addPlaylistPop() {
+    document.getElementById("myOverlay").style.display = "block";
+    document.getElementById("bg").classList.toggle("bgLock");
+
+    window.onclick = function(event) {
+        if (event.target == document.getElementById("myOverlay")) {
+            document.getElementById("myOverlay").style.display = "none";
+            document.getElementById("bg").classList.toggle("bgLock");
+        }
+    }
+}
+
+function addPlaylist(form) {
+    load("/addPlaylist=" + form.playlistName.value);
+    document.getElementById("myOverlay").style.display = "none";
+    document.getElementById("bg").classList.toggle("bgLock");
+    document.getElementById("playlistName").value = "";
+}

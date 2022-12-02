@@ -22,4 +22,8 @@ public class playlistService {
         return(List<playlistEntity>) repo.findByUserId(id);
     }
 
+    public void save(playlistEntity playlist) {
+        repo.save(playlist);
+    }
+
 }

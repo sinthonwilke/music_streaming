@@ -135,6 +135,15 @@ public class mainController {
             return new ResponseEntity<>(null, HttpStatus.ACCEPTED);
         }
 
+        @GetMapping("/addPlaylist={name}")
+        public ResponseEntity<playlistEntity> delFavorite(@AuthenticationPrincipal userDetail user, @PathVariable("name") String name) throws Exception {
+            playlistEntity playlist = new playlistEntity();
+            playlist.setName(name);
+            playlist.setUser(userService.findByID(user.getId()));
+            playlistService.save(playlist);
+            return new ResponseEntity<>(null, HttpStatus.ACCEPTED);
+        }
+
         
     @GetMapping("/account")
     public String accountPage(Model model, @AuthenticationPrincipal userDetail user) {
