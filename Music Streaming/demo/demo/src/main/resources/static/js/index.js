@@ -205,7 +205,6 @@ function updateIndex(musicID, musicName) {
         songHistoryName.push(musicName);
         historyIndex = songHistory.length - 1;
     }
-
     updateHistory();
 }
 
