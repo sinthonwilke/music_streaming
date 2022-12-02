@@ -152,6 +152,7 @@ function libraryPage() {
             if (event.target == document.getElementById("myOverlay")) {
                 document.getElementById("myOverlay").style.display = "none";
                 document.getElementById("bg").classList.remove("bgLock");
+                document.getElementById("playlistName").value = null;
             }
         }
     }
