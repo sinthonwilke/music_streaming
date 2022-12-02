@@ -343,4 +343,14 @@ function add2Playlist(musicID, playlistID) {
     listPop();
     document.getElementById("bg").classList.remove("bgLock");
     load("/addMusicToPlaylist=" + musicID + "&" + playlistID);
+    popupMessage("Added to playlist");
 }
+
+function popupMessage(msg) {
+    var popup = document.getElementById("myPopup");
+    document.getElementById("myPopup").innerHTML = msg;
+    popup.classList.toggle("show");
+    setTimeout(() => {
+        popup.classList.toggle("show");
+      }, 3000);
+  }
