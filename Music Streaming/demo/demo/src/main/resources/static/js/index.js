@@ -122,7 +122,8 @@ function libraryPage() {
         var playlist = JSON.parse(load("/library_playlist"));
         for(var i = 0; i < playlist.length; i++) {
             out += '<button onclick="showlists(' + playlist[i].id + ')" class="dropbtn">' + playlist[i].name + '</button>'
-            out += '<button onclick="deleteList(' + playlist[i].id + ')" class="dropbtn">Delete</button><br>'
+            out += '<button onclick="deleteList(' + playlist[i].id + ')" class="dropbtn">Delete</button>'
+            out += '<button onclick="renameList(' + playlist[i].id + ',' +  +')" class="dropbtn">Delete</button>'
         }
         document.getElementById("playlist").innerHTML = out;
     }
@@ -332,8 +333,13 @@ function add2PlaylistAction() {
     var musicID = document.getElementById("add2PlaylistButton").value;
     var out = '';
     var playlist = JSON.parse(load("/library_playlist"));
-    for(var i = 0; i < playlist.length; i++) {
-        out += '<a class="dropbtn" onclick="add2Playlist('+ musicID + "," + playlist[i].id +')">' + playlist[i].name + '</a>';
+    if(playlist.length != 0) {
+        for(var i = 0; i < playlist.length; i++) {
+                out += '<a class="dropbtn" onclick="add2Playlist('+ musicID + "," + playlist[i].id +')">' + playlist[i].name + '</a>';
+        }
+    }
+    else {
+        out = '<a>You don\'t have any playlist yet.</a>';        
     }
     document.getElementById("myDropdown").innerHTML = out;
     listPop();
