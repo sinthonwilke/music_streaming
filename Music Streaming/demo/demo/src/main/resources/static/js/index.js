@@ -1,7 +1,10 @@
 window.onload = function() {
     homePage()
+    document.getElementById("likeButton").innerHTML = 'none';
+    document.getElementById("likeButton").innerHTML = '<button class="transparent">none</button>';
+    document.getElementById("prevSong").innerHTML = '<button class="transparent"> << </button>';
+    document.getElementById("nextSong").innerHTML = '<button class="transparent"> >> </button>';
 };
-
 
 function homePage() {
     const xhttp = new XMLHttpRequest();
@@ -11,7 +14,6 @@ function homePage() {
     xhttp.open("GET", "/home", false);
     xhttp.send();
 }
-
 
 function searchPage() {
     const xhttp = new XMLHttpRequest();
@@ -26,75 +28,64 @@ function searchPage() {
     function searchResult() {
         var str = document.getElementById("searchBox").value;
         var out = "";
-        var music = JSON.parse(load("/search_results=" + str));
-        var album = JSON.parse(load("/search_albums=" + str));
+        var songName = "";
 
-        out += "<div class='vertical-menu'>";
         if(str.length > 0) {
-            if(music.length > 0) {
-                for(var i = 0; i < music.length; i++) {
-                    out += '<a onclick="playAudio(' + music[i].id + ')">' + music[i].artist.name + " - " + music[i].name + '</a>';
-                }
-            } else {
-                out += '<a>No music results found</a>';
-            }
-            out += "</div>";
 
-        out += "<div class='scrollmenu'>";
-            if(album.length > 0) {
-                for(var i = 0; i < album.length; i++) {
-                    out += '<a class="dropbtn" onclick="showAlbum(' + album[i].id + ')">' + album[i].name + " (" + album[i].artist.name + ")";
-                }
-            } else {
-                out += '<a>No album results found</a>';
+            var music = JSON.parse(load("/search_results=" + str));
+            var album = JSON.parse(load("/search_albums=" + str));
+
+            if(music.length == 0 && album.length == 0) {
+                out += '<p>No results found for "' + str + '"<br>Try searching for something else.</p>';
             }
-        out += "</div>";
-        document.getElementById("searchResult").innerHTML = out;
-        } else {
+            else {
+
+                out += "<div class='vertical-menu'>";
+                if(music.length > 0) {
+                    for(var i = 0; i < music.length; i++) {
+                        songName = music[i].artist.name + " - " + music[i].name;
+                        out += '<a onclick="playAudio(' + music[i].id + ',' + "'" + songName + "'" + ')">' + songName + '</a>';
+                    }
+                }
+                else {
+                    out += '<a>No music results found</a>';
+                }
+                out += "</div>";
+
+                out += "<div class='scrollmenu'>";
+                if(album.length > 0) {
+                    for(var i = 0; i < album.length; i++) {
+                        out += '<a class="dropbtn" onclick="showAlbum(' + album[i].id + ')">' + album[i].name + " (" + album[i].artist.name + ")";
+                    }
+                }
+                else {
+                    out += '<a>No album results found</a>';
+                }
+                out += "</div>";
+
+            }
+
+            document.getElementById("searchResult").innerHTML = out;
+        } 
+        else {
             document.getElementById("searchResult").innerHTML = document.getElementById("defualtResult").innerHTML;
         }
     }
 
     function showAlbum(id) {
         var out = '';
+        var songName = '';
 
         var albumList = JSON.parse(load("/albums=" + id));
         for(var i = 0; i < albumList.length; i++) {
-            out += '<a class="dropbtn" onclick="playAudio(' + albumList[i].music.id + ')">' + albumList[i].music.artist.name + " - " + albumList[i].music.name + '</a>';
+            songName = albumList[i].music.artist.name + " - " + albumList[i].music.name;
+            out += '<a class="dropbtn" onclick="playAudio(' + albumList[i].music.id + ',' + "'" + songName + "'" + ')">' + songName + '</a>';
         }
 
         document.getElementById("myDropdown").innerHTML = out;
         listPop();
     }
-
-    function listPop() {
-        document.getElementById("myDropdown").classList.toggle("show");
-        window.onclick = function(event) {
-            if (!event.target.matches('.dropbtn')) {
-                var dropdowns = document.getElementsByClassName("dropdown-content");
-                var i;
-                for (i = 0; i < dropdowns.length; i++) {
-                var openDropdown = dropdowns[i];
-                    if (openDropdown.classList.contains('show')) {
-                        openDropdown.classList.remove('show');
-                    }
-                }
-            }
-        }
-    }
     
-    function load(url) {
-        const xhttp = new XMLHttpRequest();
-        var res;
-        xhttp.onload = function() {
-            res = this.response;
-        }
-        xhttp.open("GET", url, false);
-        xhttp.send();
-        return res;
-    }
-
-
 function libraryPage() {
     const xhttp = new XMLHttpRequest();
     xhttp.onload = function() {
@@ -107,12 +98,18 @@ function libraryPage() {
 
     function favList() {
         var out = '';
-
+        var songName = '';
         var favList = JSON.parse(load("/library_fav"));
-        for(var i = 0; i < favList.length; i++) {
-            out += '<a class="dropbtn" onclick="playAudio(' + favList[i].music.id + ')">' + favList[i].music.artist.name + " - " + favList[i].music.name + '</a>';
-        }
 
+        if(favList.length > 0) {
+            for(var i = 0; i < favList.length; i++) {
+                songName = favList[i].music.artist.name + " - " + favList[i].music.name;
+                out += '<a class="dropbtn" onclick="playAudio(' + favList[i].music.id + ',' + "'" + songName + "'" +')">' + songName + '</a>';
+            }
+        }
+        else {
+            out += "<a>Songs you like will appear here</a>";
+        }
         document.getElementById("myDropdown").innerHTML = out;
         listPop();
     }
@@ -121,26 +118,57 @@ function libraryPage() {
         var out = '';
         var playlist = JSON.parse(load("/library_playlist"));
         for(var i = 0; i < playlist.length; i++) {
-            out += '<button onclick="showlists(' + playlist[i].id + ')" class="dropbtn">' + playlist[i].name + '</button><br>'
+            out += '<button onclick="showlists(' + playlist[i].id + ')" class="dropbtn">' + playlist[i].name + '</button>'
+            out += '<button onclick="deleteList(' + playlist[i].id + ')" class="dropbtn">Delete</button><br>'
         }
-
         document.getElementById("playlist").innerHTML = out;
-        listPop();
     }
 
     function showlists(id) {
         var out = '';
-
+        var songName = '';
         var list = JSON.parse(load("/playlists=" + id));
-        for(var i = 0; i < list.length; i++) {
-            out += '<a class="dropbtn" onclick="playAudio(' + list[i].music.id + ')">' + list[i].music.artist.name + " - " + list[i].music.name + '</a>';
+
+        if(list.length > 0) {
+
+            for(var i = 0; i < list.length; i++) {
+                songName = list[i].music.artist.name + " - " + list[i].music.name;
+                out += '<a class="dropbtn" onclick="playAudio(' + list[i].music.id + ',' + "'" + songName + "'" + ')">' + songName + '</a>';
+            }
+        }
+        else {
+            out += '<a>No music in this playlist.</a>';
         }
         
         document.getElementById("myDropdown").innerHTML = out;
         listPop();
     }
 
+    function addPlaylistPop() {
+        document.getElementById("myOverlay").style.display = "block";
+        document.getElementById("bg").classList.add("bgLock");
+    
+        window.onclick = function(event) {
+            if (event.target == document.getElementById("myOverlay")) {
+                document.getElementById("myOverlay").style.display = "none";
+                document.getElementById("bg").classList.remove("bgLock");
+                document.getElementById("playlistName").value = null;
+            }
+        }
+    }
+    
+    function addPlaylist(form) {
+        load("/addPlaylist=" + form.playlistName.value);
+        libraryPage();
+        document.getElementById("myOverlay").style.display = "none";
+        document.getElementById("bg").classList.remove("bgLock");
+        document.getElementById("playlistName").value = null;
+    }
 
+    function deleteList(id) {
+        load("/dellist=" + id);
+        libraryPage();
+    }
 
 function accountPage() {
     const xhttp = new XMLHttpRequest();
@@ -151,10 +179,141 @@ function accountPage() {
     xhttp.send();
 }
 
-
-function playAudio(id) {
+function playAudio(musicID, musicName) {
+    document.getElementById("songName").innerHTML = musicName;
     var audio = document.getElementById("audio");
-    audio.src="assets/musics/" + id + ".wav";
+    audio.src="assets/musics/" + musicID + ".wav";
+    audio.value = musicID;
     audio.volume = 0.75;
     audio.play();
+    checklike(musicID);
+    updateIndex(musicID, musicName);
+}
+
+var songHistoryName = [];
+var songHistory = [];
+var historyIndex;
+
+function updateIndex(musicID, musicName) {
+
+    if(historyIndex != songHistory.length - 1 && historyIndex != null) {
+        songHistory.splice(historyIndex + 1, 0, musicID);
+        songHistoryName.splice(historyIndex + 1, 0, musicName);
+        historyIndex++;
+    }
+    else {
+        songHistory.push(musicID);
+        songHistoryName.push(musicName);
+        historyIndex = songHistory.length - 1;
+    }
+    updateHistory();
+}
+
+function updateHistory() {
+    // prev
+    if(songHistory.length > 1 && historyIndex > 0) {
+        document.getElementById("prevSong").innerHTML = '<button onclick="playPrev()"> << </button>';
+    }
+    else {
+        document.getElementById("prevSong").innerHTML = '<button class="transparent"> << </button>';
+    }
+
+    // next
+    if(songHistory.length - 1 > historyIndex) {
+        document.getElementById("nextSong").innerHTML = '<button onclick="playNext()"> >> </button>';
+    }
+    else {
+        document.getElementById("nextSong").innerHTML = '<button class="transparent"> >> </button>';
+    }
+}
+
+function playPrev() {
+    historyIndex--;
+    updateHistory();
+    document.getElementById("songName").innerHTML = songHistoryName[historyIndex];
+    id = songHistory[historyIndex];
+    var audio = document.getElementById("audio");
+    audio.src="assets/musics/" + id + ".wav";
+    audio.value = id;
+    audio.volume = 0.75;
+    audio.play();
+    checklike(id);
+}
+
+function playNext() {
+    historyIndex++;
+    updateHistory();
+    document.getElementById("songName").innerHTML = songHistoryName[historyIndex];
+    id = songHistory[historyIndex];
+    var audio = document.getElementById("audio");
+    audio.src="assets/musics/" + id + ".wav";
+    audio.value = id;
+    audio.volume = 0.75;
+    audio.play();
+    checklike(id);
+}
+
+function checklike(id) {
+    var fav = JSON.parse(load("/library_fav"));
+    var likeButton = document.getElementById("likeButton");
+
+    if(fav.length != 0) {
+        for(var i = 0; i < fav.length; i++) {
+            if(fav[i].music.id == id) {
+                likeButton.innerHTML = '<button id="likeButton" onclick="likeSong()">Liked</button>';
+                likeButton.value = true;
+                break;
+            }
+            else {
+                likeButton.innerHTML = '<button id="likeButton" onclick="likeSong()">Like</button>';
+                likeButton.value = false;
+            }
+        }
+    }   
+    else {
+        likeButton.innerHTML = '<button id="likeButton" onclick="likeSong()">Like</button>';
+        likeButton.value = false;
+    }
+}
+
+function likeSong() {
+    var likeButton = document.getElementById("likeButton");
+    var id = document.getElementById("audio").value;
+
+    if (likeButton.value == true) {
+        load("/delFavorite=" + id);
+    }
+    else {
+        load("/addFavorite=" + id);
+    }
+    checklike(id);
+}
+
+function listPop() {
+    document.getElementById("myDropdown").classList.toggle("show");
+    document.getElementById("bg").classList.add("bgLock");
+    window.onclick = function(event) {
+        if (!event.target.matches('.dropbtn')) {
+            var dropdowns = document.getElementsByClassName("dropdown-content");
+            var i;
+            for (i = 0; i < dropdowns.length; i++) {
+            var openDropdown = dropdowns[i];
+                if (openDropdown.classList.contains('show')) {
+                    openDropdown.classList.remove('show');
+                    document.getElementById("bg").classList.remove("bgLock");
+                }
+            }
+        }
+    }
+}
+
+function load(url) {
+    const xhttp = new XMLHttpRequest();
+    var res;
+    xhttp.onload = function() {
+        res = this.response;
+    }
+    xhttp.open("GET", url, false);
+    xhttp.send();
+    return res;
 }

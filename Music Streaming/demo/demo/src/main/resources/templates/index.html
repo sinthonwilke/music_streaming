@@ -7,15 +7,33 @@
 </head>
 <body>
 
-
-    <div id="demo">
+    <div class="dropdown" hidden>
+        <div id="myDropdown" class="dropdown-content" hidden>
+        </div>
     </div>
 
+    <div id="myOverlay" class="overlay">
+        <div class="overlay-content">
+          <form onsubmit="addPlaylist(this); return false">
+            <input type="text" placeholder="Add Playlist name..." autocomplete="off" required id="playlistName">
+            <button type="submit">ADD</button>
+          </form>
+        </div>
+    </div>
 
-    
-    <audio controls id="audio">
-        <source src="" type="audio/wav">
-    </audio>
+    <div id="bg">
+        <div id="demo">
+    </div>
+
+    <div>
+        <div id="prevSong"></div>
+        <div id="nextSong"></div>
+        <div id="songName"></div>
+        <audio controls id="audio">
+            <source src="" type="audio/wav">
+        </audio>
+        <div id="likeButton"></div>
+    </div>
 
     <div>
         <button type="button" onclick="homePage()">Home</button>

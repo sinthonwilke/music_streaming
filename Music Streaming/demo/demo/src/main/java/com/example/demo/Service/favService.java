@@ -23,4 +23,17 @@ public class favService {
 
     public List<favEntity> findByUserId(Long id) {
         return(List<favEntity>) repo.findByUserId(id);
-    }}
+    }
+
+    public List<favEntity> findByUserIdAndMusicId(Long user, Long music) {
+        return(List<favEntity>) repo.findByUserIdAndMusicId(user, music);
+    }
+
+    public void delete(Long id) {
+        repo.deleteById(id);
+    }
+
+    public void deleteByUserIdAndMusicId(Long user, Long music) {
+        repo.deleteByUserIdAndMusicId(user, music);
+    }
+}

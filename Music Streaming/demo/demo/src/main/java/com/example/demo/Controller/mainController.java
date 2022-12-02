@@ -2,7 +2,6 @@ package com.example.demo.Controller;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,7 +10,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-
 import com.example.demo.Entity.albumEntity;
 import com.example.demo.Entity.containerAlbumEntity;
 import com.example.demo.Entity.containerPlaylistEntity;
@@ -25,6 +23,7 @@ import com.example.demo.Service.containerPlaylistService;
 import com.example.demo.Service.favService;
 import com.example.demo.Service.musicService;
 import com.example.demo.Service.playlistService;
+import com.example.demo.Service.userService;
 import com.example.demo.User.userDetail;
 
 @Controller
@@ -36,6 +35,8 @@ public class mainController {
     @Autowired private favService favService;
     @Autowired private playlistService playlistService;
     @Autowired private containerPlaylistService containerPlaylistService;
+    @Autowired private userService userService;
+
 
     //admin
     @GetMapping("/admin")
@@ -119,7 +120,37 @@ public class mainController {
             return new ResponseEntity<>(playlist, HttpStatus.OK);
         }
 
+        @GetMapping("/addFavorite={id}")
+        public ResponseEntity<favEntity> addFavorite(@AuthenticationPrincipal userDetail user, @PathVariable("id") Long id) throws Exception{
+            favEntity fav = new favEntity();
+            fav.setMusic(musicService.findByID(id));
+            fav.setUser(userService.findByID(user.getId()));
+            favService.save(fav);
+            return new ResponseEntity<>(null, HttpStatus.CREATED);
+        }
 
+        @GetMapping("/delFavorite={id}")
+        public ResponseEntity<favEntity> delFavorite(@AuthenticationPrincipal userDetail user, @PathVariable("id") Long id) {
+            favService.deleteByUserIdAndMusicId(user.getId(), id);
+            return new ResponseEntity<>(null, HttpStatus.ACCEPTED);
+        }
+
+        @GetMapping("/addPlaylist={name}")
+        public ResponseEntity<playlistEntity> delFavorite(@AuthenticationPrincipal userDetail user, @PathVariable("name") String name) throws Exception {
+            playlistEntity playlist = new playlistEntity();
+            playlist.setName(name);
+            playlist.setUser(userService.findByID(user.getId()));
+            playlistService.save(playlist);
+            return new ResponseEntity<>(null, HttpStatus.ACCEPTED);
+        }
+
+        @GetMapping("/dellist={id}")
+        public ResponseEntity<playlistEntity> dellist(@AuthenticationPrincipal userDetail user, @PathVariable("id") Long id) {
+            playlistService.del(id);
+            return new ResponseEntity<>(null, HttpStatus.ACCEPTED);
+        }
+
+        
     @GetMapping("/account")
     public String accountPage(Model model, @AuthenticationPrincipal userDetail user) {
         model.addAttribute("userEmail", user.getUsername());
