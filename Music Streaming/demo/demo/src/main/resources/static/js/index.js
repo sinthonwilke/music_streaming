@@ -160,22 +160,34 @@ function accountPage() {
 }
 
 
-function playAudio(id) {
+function playAudio(musicID) {
     var audio = document.getElementById("audio");
-    audio.src="assets/musics/" + id + ".wav";
-    audio.value = id;
+    audio.src="assets/musics/" + musicID + ".wav";
+    audio.value = musicID;
     audio.volume = 0.75;
     audio.play();
-    checklike(id);
-    songHistory.push(id);
-    historyIndex = songHistory.length - 1;
-    updateHistory();
+    checklike(musicID);
+    updateIndex(musicID);
 }
 
 var songHistory = [];
 var historyIndex;
-function updateHistory() {
 
+function updateIndex(musicID) {
+
+    if(historyIndex != songHistory.length - 1 && historyIndex != null) {
+        songHistory.splice(historyIndex + 1, 0, musicID);
+        historyIndex++;
+    }
+    else {
+        songHistory.push(musicID);
+        historyIndex = songHistory.length - 1;
+    }
+
+    updateHistory();
+}
+
+function updateHistory() {
     // prev
     if(songHistory.length > 1 && historyIndex > 0) {
         document.getElementById("prevSong").innerHTML = '<button onclick="playPrev()"> << </button>';
@@ -191,7 +203,6 @@ function updateHistory() {
     else {
         document.getElementById("nextSong").innerHTML = '<button class="transparent"> >> </button>';
     }
-    
 }
 
 function playPrev() {
