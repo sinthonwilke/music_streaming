@@ -21,6 +21,20 @@
         </div>
     </div>
 
+    <div id="myOverlay2" class="overlay">
+        <div class="overlay-content">
+          <form onsubmit="renamePlaylistLoad(this); return false">
+            <input type="text" hidden id="renamePlaylistID">
+            <input type="text" placeholder="Rename Playlist..." autocomplete="off" required id="renamePlaylist">
+            <button type="submit">Rename</button>
+          </form>
+        </div>
+    </div>
+
+    <div class="popup">
+        <span class="popuptext" id="myPopup">popup msg</span>
+    </div>
+
     <div id="bg">
         <div id="demo">
     </div>
@@ -33,13 +47,14 @@
             <source src="" type="audio/wav">
         </audio>
         <div id="likeButton"></div>
+        <div id="a2pl"></div>
     </div>
 
     <div>
-        <button type="button" onclick="homePage()">Home</button>
-        <button type="button" onclick="searchPage()">Search</button>
-        <button type="button" onclick="libraryPage()">Library</button>
-        <button type="button" onclick="accountPage()">Account</button>
+        <button type="button" onclick="homePage()" id="homePageId">Home</button>
+        <button type="button" onclick="searchPage()" id="searchPageId">Search</button>
+        <button type="button" onclick="libraryPage()" id="libraryPageId">Library</button>
+        <button type="button" onclick="accountPage()" id="accountPageId">Account</button>
     </div>
 
 </body>

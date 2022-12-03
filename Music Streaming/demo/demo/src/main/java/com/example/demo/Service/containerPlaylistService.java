@@ -21,4 +21,12 @@ public class containerPlaylistService {
     public List<containerPlaylistEntity> findByPlaylistId(Long id) {
         return (List<containerPlaylistEntity>) repo.findByPlaylistId(id);
     }
+
+    public void save(containerPlaylistEntity containerPlaylist) {
+        repo.save(containerPlaylist);
+    }
+
+    public void deleteByUserIdAndMusicId(Long playlistId, Long musicId) {
+        repo.deleteByPlaylistIdAndMusicId(playlistId, musicId);
+    }
 }

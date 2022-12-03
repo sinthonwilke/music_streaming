@@ -37,7 +37,6 @@ public class mainController {
     @Autowired private containerPlaylistService containerPlaylistService;
     @Autowired private userService userService;
 
-
     //admin
     @GetMapping("/admin")
     public String adminPage() {
@@ -69,6 +68,27 @@ public class mainController {
     public String homePage(Model model) {      
         return "user/home";
     }
+        @GetMapping("/recommend={str}")
+        public ResponseEntity<List<musicEntity>> recommend(@PathVariable("str") String str) {
+            System.out.println(str);
+            List<musicEntity> list;
+            try {
+                list = musicService.findByYear(Integer.valueOf(str));
+            } catch (Exception e) {
+                list = musicService.getRand();
+            }
+            return new ResponseEntity<List<musicEntity>>(list, HttpStatus.OK);
+        }
+
+        @GetMapping("/genreRecommend={str}")
+        public ResponseEntity<List<musicEntity>> genreRecommend(@PathVariable("str") String str) {
+            System.out.println(str);
+            List<musicEntity> list;
+            list = musicService.findByGenreName(str);
+            return new ResponseEntity<List<musicEntity>>(list, HttpStatus.OK);
+        }
+
+
     @GetMapping("/search")
     public String searchPage(Model model) {
         return "user/search";
@@ -76,10 +96,28 @@ public class mainController {
 
         @GetMapping("/search_results={str}")
         public ResponseEntity<List<musicEntity>> searchMusicResult(@PathVariable("str") String str) {
+            char firstSign = str.charAt(0);
+            if(firstSign == '@') {
+                List <musicEntity> music = new ArrayList<musicEntity>();
+                musicService.findByArtistName(str.substring(1)).forEach(music::add);
+                return new ResponseEntity<>(music, HttpStatus.OK);
+            }
+            else if(firstSign == '!') {
+                List <musicEntity> music = new ArrayList<musicEntity>();
+                musicService.findByGenreName(str.substring(1)).forEach(music::add);
+                return new ResponseEntity<>(music, HttpStatus.OK);
+            }
+            else if(firstSign == '$') {
+                List <musicEntity> music = new ArrayList<musicEntity>();
+                musicService.findByYear(Integer.valueOf(str.substring(1))).forEach(music::add);
+                return new ResponseEntity<>(music, HttpStatus.OK);
+            }
+ 
             List <musicEntity> music = new ArrayList<musicEntity>();
             musicService.findByName(str).forEach(music::add);
             return new ResponseEntity<>(music, HttpStatus.OK);
         }
+
         @GetMapping("/search_albums={str}")
         public ResponseEntity<List<albumEntity>> searchAlbumResult(@PathVariable("str") String str) {
             List <albumEntity> album = new ArrayList<albumEntity>();
@@ -150,6 +188,28 @@ public class mainController {
             return new ResponseEntity<>(null, HttpStatus.ACCEPTED);
         }
 
+        @GetMapping("/addMusicToPlaylist={musicID}&{playlistID}")
+        public ResponseEntity<containerPlaylistEntity> add2Playlist(@AuthenticationPrincipal userDetail user, @PathVariable("musicID") Long musicID, @PathVariable("playlistID") Long playlistID) throws Exception {
+            containerPlaylistEntity container = new containerPlaylistEntity();
+            container.setMusic(musicService.findByID(musicID));
+            container.setPlaylist(playlistService.findById(playlistID));
+            containerPlaylistService.save(container);
+            return new ResponseEntity<>(null, HttpStatus.ACCEPTED);
+        }
+
+        @GetMapping("/renamePlaylist={playlistID}&{rename}")
+        public ResponseEntity<playlistEntity> renamePlaylist(@AuthenticationPrincipal userDetail user, @PathVariable("playlistID") Long playlistID, @PathVariable("rename") String rename) throws Exception {
+            playlistEntity playlist = playlistService.findById(playlistID);
+            playlist.setName(rename);
+            playlistService.save(playlist);
+            return new ResponseEntity<>(null, HttpStatus.ACCEPTED);
+        }
+
+        @GetMapping("/delMusicFromPlaylist={playlistID}&{musicID}")
+        public ResponseEntity<containerPlaylistEntity> delMusicFromPlaylist(@AuthenticationPrincipal userDetail user, @PathVariable("playlistID") Long playlistID, @PathVariable("musicID") Long musicID) throws Exception {
+            containerPlaylistService.deleteByUserIdAndMusicId(playlistID, musicID);
+            return new ResponseEntity<>(null, HttpStatus.ACCEPTED);
+        }
         
     @GetMapping("/account")
     public String accountPage(Model model, @AuthenticationPrincipal userDetail user) {
