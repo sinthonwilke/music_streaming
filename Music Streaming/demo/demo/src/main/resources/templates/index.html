@@ -21,6 +21,16 @@
         </div>
     </div>
 
+    <div id="myOverlay2" class="overlay">
+        <div class="overlay-content">
+          <form onsubmit="renamePlaylistLoad(this); return false">
+            <input type="text" hidden id="renamePlaylistID">
+            <input type="text" placeholder="Rename Playlist..." autocomplete="off" required id="renamePlaylist">
+            <button type="submit">Rename</button>
+          </form>
+        </div>
+    </div>
+
     <div class="popup">
         <span class="popuptext" id="myPopup">popup msg</span>
     </div>

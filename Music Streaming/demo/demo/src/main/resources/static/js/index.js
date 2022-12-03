@@ -1,7 +1,7 @@
 window.onload = function() {
     homePage()
     document.getElementById("likeButton").innerHTML = 'none';
-    document.getElementById("likeButton").innerHTML = '<button class="transparent">none</button>';
+    document.getElementById("likeButton").innerHTML = '<button class="transparent">Like</button>';
     document.getElementById("prevSong").innerHTML = '<button class="transparent"> << </button>';
     document.getElementById("nextSong").innerHTML = '<button class="transparent"> >> </button>';
     document.getElementById("songName").innerHTML = '<p>Nothing is playing.</p>';
@@ -122,8 +122,8 @@ function libraryPage() {
         var playlist = JSON.parse(load("/library_playlist"));
         for(var i = 0; i < playlist.length; i++) {
             out += '<button onclick="showlists(' + playlist[i].id + ')" class="dropbtn">' + playlist[i].name + '</button>'
-            out += '<button onclick="deleteList(' + playlist[i].id + ')" class="dropbtn">Delete</button>'
-            out += '<button onclick="renameList(' + playlist[i].id + ',' +  +')" class="dropbtn">Delete</button>'
+            out += '<button onclick="renamePlaylistPop(' + playlist[i].id + "," + "'" + playlist[i].name + "'" + ')" class="dropbtn">Rename</button>'
+            out += '<button onclick="deleteList(' + playlist[i].id + ')" class="dropbtn">Delete</button><br>'
         }
         document.getElementById("playlist").innerHTML = out;
     }
@@ -146,6 +146,30 @@ function libraryPage() {
         
         document.getElementById("myDropdown").innerHTML = out;
         listPop();
+    }
+
+    function renamePlaylistPop(playlistID, playlistName) {
+        document.getElementById("myOverlay2").style.display = "block";
+        document.getElementById("bg").classList.add("bgLock");
+        document.getElementById("renamePlaylist").value = playlistName;
+        document.getElementById("renamePlaylistID").value = playlistID;
+        window.onclick = function(event) {
+            if (event.target == document.getElementById("myOverlay2")) {
+                document.getElementById("myOverlay2").style.display = "none";
+                document.getElementById("bg").classList.remove("bgLock");
+                document.getElementById("renamePlaylist").value = null;
+                document.getElementById("renamePlaylistID").value = null;
+            }
+        }
+    }
+
+    function renamePlaylistLoad(form) {
+        load("/renamePlaylist=" + form.renamePlaylistID.value + "&" + form.renamePlaylist.value);
+        libraryPage();
+        document.getElementById("myOverlay2").style.display = "none";
+        document.getElementById("bg").classList.remove("bgLock");
+        document.getElementById("renamePlaylist").value = null;
+
     }
 
     function addPlaylistPop() {

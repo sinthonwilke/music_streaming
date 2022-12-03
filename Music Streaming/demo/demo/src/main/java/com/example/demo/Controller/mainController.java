@@ -157,6 +157,14 @@ public class mainController {
             containerPlaylistService.save(container);
             return new ResponseEntity<>(null, HttpStatus.ACCEPTED);
         }
+
+        @GetMapping("/renamePlaylist={playlistID}&{rename}")
+        public ResponseEntity<playlistEntity> renamePlaylist(@AuthenticationPrincipal userDetail user, @PathVariable("playlistID") Long playlistID, @PathVariable("rename") String rename) throws Exception {
+            playlistEntity playlist = playlistService.findById(playlistID);
+            playlist.setName(rename);
+            playlistService.save(playlist);
+            return new ResponseEntity<>(null, HttpStatus.ACCEPTED);
+        }
         
     @GetMapping("/account")
     public String accountPage(Model model, @AuthenticationPrincipal userDetail user) {
