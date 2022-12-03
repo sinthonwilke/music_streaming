@@ -1,4 +1,5 @@
 window.onload = function() {
+    page();
     homePage()
     document.getElementById("likeButton").innerHTML = 'none';
     document.getElementById("likeButton").innerHTML = '<button class="transparent">Like</button>';
@@ -9,6 +10,14 @@ window.onload = function() {
     document.getElementById("a2pl").classList.add("transparent");
 };
 
+function page() {
+    document.getElementById("homePageId").style.color = "Black";
+    document.getElementById("searchPageId").style.color = "Black";
+    document.getElementById("libraryPageId").style.color = "Black";
+    document.getElementById("accountPageId").style.color = "Black";
+
+}
+
 function homePage() {
     const xhttp = new XMLHttpRequest();
     xhttp.onload = function() {
@@ -16,6 +25,8 @@ function homePage() {
     }
     xhttp.open("GET", "/home", false);
     xhttp.send();
+    page();
+    document.getElementById("homePageId").style.color = "Pink";
     recommendLoad();
     genreLoad();
     yourPlaylistLoad();
@@ -116,6 +127,8 @@ function searchPage() {
     }
     xhttp.open("GET", "/search", false);
     xhttp.send();
+    page();
+    document.getElementById("searchPageId").style.color = "Pink";
     document.getElementById("searchResult").innerHTML = document.getElementById("defualtResult").innerHTML;
 }
 
@@ -193,6 +206,8 @@ function libraryPage() {
     }
     xhttp.open("GET", "/library", false);
     xhttp.send();
+    page();
+    document.getElementById("libraryPageId").style.color = "Pink";
     playlists();
 }
 
@@ -212,6 +227,7 @@ function libraryPage() {
             for(var i = 0; i < favList.length; i++) {
                 songName = favList[i].music.artist.name + " - " + favList[i].music.name;
                 out += '<a class="dropbtn" onclick="playAudio(' + favList[i].music.id + ',' + "'" + songName + "'" +'); audioHistory(' + "'" + musicIdList + "'" + ',' + "'" + musicNameList + "'" + ',' + i +')">' + songName + '</a>';
+                out += '<a class="dropbtn" onclick="deleteFav(' + favList[i].music.id + ')"> >>Unlike<< </a>';
             }
         }
         else {
@@ -219,6 +235,12 @@ function libraryPage() {
         }
         document.getElementById("myDropdown").innerHTML = out;
         listPop();
+    }
+
+    function deleteFav(id) {
+        load("/delFavorite=" + id);
+        listPop();
+        document.getElementById("bg").classList.remove("bgLock");
     }
 
     function playlists() {
@@ -315,6 +337,8 @@ function accountPage() {
     }
     xhttp.open("GET", "/account", false);
     xhttp.send();
+    page();
+    document.getElementById("accountPageId").style.color = "Pink";
 }
 
 var songHistoryName = [];
