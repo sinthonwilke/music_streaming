@@ -38,6 +38,7 @@ function homePage() {
     var list2022 = JSON.parse(load("/recommend=2022"));
     var poplist = JSON.parse(load("/genreRecommend=Pop"));
     var hiphoplist = JSON.parse(load("/genreRecommend=Hip Hop"));
+    var rocklist = JSON.parse(load("/genreRecommend=Rock"));
 
     function recommendLoad() {
         var out = '';
@@ -51,7 +52,7 @@ function homePage() {
 
     function genreLoad() {
         var out = '';
-        var list = ['Pop', 'Hip Hop']
+        var list = ['Pop', 'Hip Hop', 'Rock']
         for(var i = 0; i < list.length; i++) {
             out += '<button onclick="showGenreList(' + "'" + list[i] + "'" + ')" class="dropbtn">' + list[i] + '</button>'
         }
@@ -64,6 +65,7 @@ function homePage() {
         var recList = [];
         if (str == 'Pop') {recList = poplist;}
         else if (str == 'Hip Hop') {recList = hiphoplist;}
+        else if (str == 'Rock') {recList = rocklist;}
     
         var musicIdList = "";
         var musicNameList = "";
