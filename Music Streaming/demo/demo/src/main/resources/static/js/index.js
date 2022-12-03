@@ -51,7 +51,7 @@ function searchPage() {
                     }
                 }
                 else {
-                    out += '<a>No music results found</a>';
+                    out += '<a>No music results found.</a>';
                 }
                 out += "</div>";
 
@@ -62,7 +62,7 @@ function searchPage() {
                     }
                 }
                 else {
-                    out += '<a>No album results found</a>';
+                    out += '<a>No album results found.</a>';
                 }
                 out += "</div>";
 
@@ -244,50 +244,6 @@ function updateHistory() {
     }
 }
 
-function playAudio(musicID, musicName) {
-    document.getElementById("songName").innerHTML = musicName;
-    var audio = document.getElementById("audio");
-    audio.src="assets/musics/" + musicID + ".wav";
-    audio.value = musicID;
-    audio.volume = 0.75;
-    audio.play();
-    checklike(musicID);
-    updateIndex(musicID, musicName);
-    document.getElementById("add2PlaylistButton").value = musicID;
-    document.getElementById("a2pl").classList.remove("transparent");
-}
-
-function playPrev() {
-    historyIndex--;
-    updateHistory();
-    document.getElementById("songName").innerHTML = songHistoryName[historyIndex];
-    id = songHistory[historyIndex];
-    var audio = document.getElementById("audio");
-    audio.src="assets/musics/" + id + ".wav";
-    audio.value = id;
-    audio.volume = 0.75;
-    audio.play();
-    checklike(id);
-    document.getElementById("add2PlaylistButton").value = musicID;
-    document.getElementById("a2pl").classList.remove("transparent");
-}
-
-function playNext() {
-    historyIndex++;
-    updateHistory();
-    document.getElementById("songName").innerHTML = songHistoryName[historyIndex];
-    id = songHistory[historyIndex];
-    var audio = document.getElementById("audio");
-    audio.src="assets/musics/" + id + ".wav";
-    audio.value = id;
-    audio.volume = 0.75;
-    audio.play();
-    checklike(id);
-    document.getElementById("add2PlaylistButton").value = musicID;
-    document.getElementById("a2pl").classList.remove("transparent");
-
-}
-
 function checklike(id) {
     var fav = JSON.parse(load("/library_fav"));
     var likeButton = document.getElementById("likeButton");
@@ -383,4 +339,47 @@ function popupMessage(msg) {
     setTimeout(() => {
         popup.classList.toggle("show");
     }, 3000);
+}
+
+function playAudio(musicID, musicName) {
+    document.getElementById("songName").innerHTML = musicName;
+    var audio = document.getElementById("audio");
+    audio.src="assets/musics/" + musicID + ".wav";
+    audio.value = musicID;
+    audio.volume = 0.75;
+    audio.play();
+    checklike(musicID);
+    updateIndex(musicID, musicName);
+    document.getElementById("add2PlaylistButton").value = musicID;
+    document.getElementById("a2pl").classList.remove("transparent");
+}
+
+function playPrev() {
+    historyIndex--;
+    updateHistory();
+    document.getElementById("songName").innerHTML = songHistoryName[historyIndex];
+    id = songHistory[historyIndex];
+    var audio = document.getElementById("audio");
+    audio.src="assets/musics/" + id + ".wav";
+    audio.value = id;
+    audio.volume = 0.75;
+    audio.play();
+    checklike(id);
+    document.getElementById("add2PlaylistButton").value = musicID;
+    document.getElementById("a2pl").classList.remove("transparent");
+}
+
+function playNext() {
+    historyIndex++;
+    updateHistory();
+    document.getElementById("songName").innerHTML = songHistoryName[historyIndex];
+    id = songHistory[historyIndex];
+    var audio = document.getElementById("audio");
+    audio.src="assets/musics/" + id + ".wav";
+    audio.value = id;
+    audio.volume = 0.75;
+    audio.play();
+    checklike(id);
+    document.getElementById("add2PlaylistButton").value = musicID;
+    document.getElementById("a2pl").classList.remove("transparent");
 }

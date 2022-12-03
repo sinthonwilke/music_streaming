@@ -75,10 +75,23 @@ public class mainController {
 
         @GetMapping("/search_results={str}")
         public ResponseEntity<List<musicEntity>> searchMusicResult(@PathVariable("str") String str) {
+            char firstSign = str.charAt(0);
+            if(firstSign == '@') {
+                List <musicEntity> music = new ArrayList<musicEntity>();
+                musicService.findByArtistName(str.substring(1)).forEach(music::add);
+                return new ResponseEntity<>(music, HttpStatus.OK);
+            }
+            else if(firstSign == '!') {
+                List <musicEntity> music = new ArrayList<musicEntity>();
+                musicService.findByGenreName(str.substring(1)).forEach(music::add);
+                return new ResponseEntity<>(music, HttpStatus.OK);
+            }
+ 
             List <musicEntity> music = new ArrayList<musicEntity>();
             musicService.findByName(str).forEach(music::add);
             return new ResponseEntity<>(music, HttpStatus.OK);
         }
+
         @GetMapping("/search_albums={str}")
         public ResponseEntity<List<albumEntity>> searchAlbumResult(@PathVariable("str") String str) {
             List <albumEntity> album = new ArrayList<albumEntity>();

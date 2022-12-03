@@ -49,4 +49,13 @@ public class musicService {
 
     public List<musicEntity> findByName(String name) {
         return(List<musicEntity>) repo.findByNameLike("%"+name+"%");
-    }}
+    }
+
+    public List<musicEntity> findByGenreName(String genre) {
+        return(List<musicEntity>) repo.findByGenreNameLike(genre);
+    }
+
+    public List<musicEntity> findByArtistName(String name) {
+        return(List<musicEntity>) repo.findByArtistNameLike(name);
+    }
+}
