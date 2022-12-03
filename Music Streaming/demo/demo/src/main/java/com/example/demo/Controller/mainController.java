@@ -68,6 +68,19 @@ public class mainController {
     public String homePage(Model model) {      
         return "user/home";
     }
+        @GetMapping("/recommend={str}")
+        public ResponseEntity<List<musicEntity>> recommend(@PathVariable("str") String str) {
+            System.out.println(str);
+            List<musicEntity> list;
+            try {
+                list = musicService.findByYear(Integer.valueOf(str));
+            } catch (Exception e) {
+                list = musicService.getRand();
+            }
+            return new ResponseEntity<List<musicEntity>>(list, HttpStatus.OK);
+        }
+
+
     @GetMapping("/search")
     public String searchPage(Model model) {
         return "user/search";

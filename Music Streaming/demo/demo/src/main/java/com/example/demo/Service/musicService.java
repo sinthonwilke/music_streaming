@@ -58,4 +58,12 @@ public class musicService {
     public List<musicEntity> findByArtistName(String name) {
         return(List<musicEntity>) repo.findByArtistNameLike(name);
     }
+
+    public List<musicEntity> getRand() {
+        return(List<musicEntity>) repo.getRand();
+    }
+
+    public List<musicEntity> findByYear(Integer year) {
+        return(List<musicEntity>) repo.findByYear(year);
+    }
 }

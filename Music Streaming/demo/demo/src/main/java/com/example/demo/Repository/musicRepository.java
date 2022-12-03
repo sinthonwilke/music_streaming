@@ -13,6 +13,13 @@ public interface musicRepository extends JpaRepository<musicEntity, Long> {
     List<musicEntity> findByArtist(Long id);
     List<musicEntity> findByNameLike(String name);
 
+
+    @Query("select m from musicEntity m where year(m.releaseDate)=?1 order by id")
+    List<musicEntity> findByYear(Integer year);
+
+    @Query("select m from musicEntity m order by rand()")
+    List<musicEntity> getRand();
+
     @Query("select m from musicEntity m where m.artist.name like %?1%")
     List<musicEntity> findByArtistNameLike(String name);
 

@@ -17,26 +17,38 @@ function homePage() {
     xhttp.open("GET", "/home", false);
     xhttp.send();
     recommendLoad();
-    genreLoad();
+    // genreLoad();
     yourPlaylistLoad();
 }
 
     function recommendLoad() {
         var out = '';
-        var playlist = JSON.parse(load("/library_playlist"));
-        for(var i = 0; i < playlist.length; i++) {
-            out += '<button onclick="showlists(' + playlist[i].id + ')" class="dropbtn">' + playlist[i].name + '</button>'
+        var list = ['rand', '2022', '2021', '2020']
+        var listProperName = ['Random Song', 'Songs in 2022', 'Songs in 2021', 'Songs in 2020']
+        for(var i = 0; i < list.length; i++) {
+            out += '<button onclick="showRecLists(' + "'" + list[i] + "'" + ')" class="dropbtn">' + listProperName[i] + '</button>'
         }
         document.getElementById("recommendPlaylist").innerHTML = out;
     }
 
-    function genreLoad() {
+    function showRecLists(str) {
         var out = '';
-        var playlist = JSON.parse(load("/library_playlist"));
-        for(var i = 0; i < playlist.length; i++) {
-            out += '<button onclick="showlists(' + playlist[i].id + ')" class="dropbtn">' + playlist[i].name + '</button>'
+        var songName = '';
+        var recList = JSON.parse(load("/recommend=" + str));
+        var musicIdList = "";
+        var musicNameList = "";
+        for(var i = 0; i < recList.length; i++) {
+            musicIdList += recList[i].id + ";sep;";
+            musicNameList += recList[i].artist.name + " - " + recList[i].name + ";sep;";
         }
-        document.getElementById("genrePlaylist").innerHTML = out;
+
+        for(var i = 0; i < recList.length; i++) {
+            songName = recList[i].artist.name + " - " + recList[i].name;
+            out += '<a class="dropbtn" onclick="playAudio(' + recList[i].id + ',' + "'" + songName + "'" + '); audioHistory(' + "'" + musicIdList + "'" + ',' + "'" + musicNameList + "'" + ',' + i +')">' + songName + '</a>';
+        }
+
+        document.getElementById("myDropdown").innerHTML = out;
+        listPop();
     }
 
     function yourPlaylistLoad() {
