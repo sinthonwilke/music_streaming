@@ -47,7 +47,7 @@ function searchPage() {
                 if(music.length > 0) {
                     for(var i = 0; i < music.length; i++) {
                         songName = music[i].artist.name + " - " + music[i].name;
-                        out += '<a onclick="playAudio(' + music[i].id + ',' + "'" + songName + "'" + ')">' + songName + '</a>';
+                        out += '<a onclick="playAudio(' + music[i].id + ',' + "'" + songName + "'" + '); resetHistory();">' + songName + '</a>';
                     }
                 }
                 else {
@@ -229,21 +229,6 @@ function accountPage() {
 var songHistoryName = [];
 var songHistory = [];
 var historyIndex;
-
-// function updateIndex(musicID, musicName) {
-
-//     if(historyIndex != songHistory.length - 1 && historyIndex != null) {
-//         songHistory.splice(historyIndex + 1, 0, musicID);
-//         songHistoryName.splice(historyIndex + 1, 0, musicName);
-//         historyIndex++;
-//     }
-//     else {
-//         songHistory.push(musicID);
-//         songHistoryName.push(musicName);
-//         historyIndex = songHistory.length - 1;
-//     }
-//     updateHistory();
-// }
 
 function updateHistory() {
     // prev
@@ -434,5 +419,12 @@ function audioHistory(musicId, musicName, index) {
     songHistory = musicIdList
     historyIndex = index;
 
+    updateHistory();
+}
+
+function resetHistory() {
+    songHistory = [];
+    songHistoryName = [];
+    historyIndex = 0;
     updateHistory();
 }
