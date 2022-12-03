@@ -5,7 +5,7 @@ window.onload = function() {
     document.getElementById("prevSong").innerHTML = '<button class="transparent"> << </button>';
     document.getElementById("nextSong").innerHTML = '<button class="transparent"> >> </button>';
     document.getElementById("songName").innerHTML = '<p>Nothing is playing.</p>';
-    document.getElementById("a2pl").innerHTML = "<button id='add2PlaylistButton' onclick='add2PlaylistAction()' class='dropbtn'>+2Playlist</button>";
+    document.getElementById("a2pl").innerHTML = "<button id='add2PlaylistButton' onclick='add2PlaylistAction()' class='dropbtn'>Add to playlist</button>";
     document.getElementById("a2pl").classList.add("transparent");
 };
 
@@ -16,7 +16,40 @@ function homePage() {
     }
     xhttp.open("GET", "/home", false);
     xhttp.send();
+    recommendLoad();
+    genreLoad();
+    yourPlaylistLoad();
 }
+
+    function recommendLoad() {
+        var out = '';
+        var playlist = JSON.parse(load("/library_playlist"));
+        for(var i = 0; i < playlist.length; i++) {
+            out += '<button onclick="showlists(' + playlist[i].id + ')" class="dropbtn">' + playlist[i].name + '</button>'
+        }
+        document.getElementById("recommendPlaylist").innerHTML = out;
+    }
+
+    function genreLoad() {
+        var out = '';
+        var playlist = JSON.parse(load("/library_playlist"));
+        for(var i = 0; i < playlist.length; i++) {
+            out += '<button onclick="showlists(' + playlist[i].id + ')" class="dropbtn">' + playlist[i].name + '</button>'
+        }
+        document.getElementById("genrePlaylist").innerHTML = out;
+    }
+
+    function yourPlaylistLoad() {
+        var out = '';
+        var playlist = JSON.parse(load("/library_playlist"));
+        for(var i = 0; i < playlist.length; i++) {
+            out += '<button onclick="showlists(' + playlist[i].id + ')" class="dropbtn">' + playlist[i].name + '</button>'
+        }
+        document.getElementById("yourPlaylist").innerHTML = out;
+    }
+
+
+
 
 function searchPage() {
     const xhttp = new XMLHttpRequest();
