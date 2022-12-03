@@ -342,44 +342,49 @@ function popupMessage(msg) {
 }
 
 function playAudio(musicID, musicName) {
-    document.getElementById("songName").innerHTML = musicName;
-    var audio = document.getElementById("audio");
-    audio.src="assets/musics/" + musicID + ".wav";
-    audio.value = musicID;
-    audio.volume = 0.75;
-    audio.play();
-    checklike(musicID);
     updateIndex(musicID, musicName);
-    document.getElementById("add2PlaylistButton").value = musicID;
-    document.getElementById("a2pl").classList.remove("transparent");
+
+    var src = "assets/musics/" + musicID + ".wav";
+
+    audioControl(src, musicID, musicName);
 }
 
 function playPrev() {
     historyIndex--;
     updateHistory();
-    document.getElementById("songName").innerHTML = songHistoryName[historyIndex];
-    id = songHistory[historyIndex];
-    var audio = document.getElementById("audio");
-    audio.src="assets/musics/" + id + ".wav";
-    audio.value = id;
-    audio.volume = 0.75;
-    audio.play();
-    checklike(id);
-    document.getElementById("add2PlaylistButton").value = musicID;
-    document.getElementById("a2pl").classList.remove("transparent");
+
+    var musicName = songHistoryName[historyIndex];
+    var musicID = songHistory[historyIndex];
+    var src = "assets/musics/" + musicID + ".wav";
+
+    audioControl(src, musicID, musicName);
 }
 
 function playNext() {
     historyIndex++;
     updateHistory();
-    document.getElementById("songName").innerHTML = songHistoryName[historyIndex];
-    id = songHistory[historyIndex];
-    var audio = document.getElementById("audio");
-    audio.src="assets/musics/" + id + ".wav";
-    audio.value = id;
-    audio.volume = 0.75;
-    audio.play();
-    checklike(id);
+    
+    var musicName = songHistoryName[historyIndex];
+    var musicID = songHistory[historyIndex];
+    var src = "assets/musics/" + musicID + ".wav";
+
+    audioControl(src, musicID, musicName);
+}
+
+function audioControl(src, musicID, musicName) {
+
+    checklike(musicID);
+
+    document.getElementById("songName").innerHTML = musicName;
     document.getElementById("add2PlaylistButton").value = musicID;
     document.getElementById("a2pl").classList.remove("transparent");
+
+    var audio = document.getElementById("audio");
+    audio.src = src;
+    audio.value = musicID;
+    audio.volume = 0.75;
+    audio.play();
+    // audio.addEventListener("ended", function() {
+    //     playNext();
+    // });
 }
