@@ -16,7 +16,7 @@ public interface musicRepository extends JpaRepository<musicEntity, Long> {
     @Query("select m from musicEntity m where m.artist.name like %?1%")
     List<musicEntity> findByArtistNameLike(String name);
 
-    @Query("select m from musicEntity m where m.genre.name like %?1%")
+    @Query("select m from musicEntity m where m.genre.name like %?1% order by rand()")
     List<musicEntity> findByGenreNameLike(String genre);
 
     @Query("select m from musicEntity m where (?1 is null or id=?1) and " +
