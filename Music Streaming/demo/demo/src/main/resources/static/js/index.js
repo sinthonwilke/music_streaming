@@ -20,6 +20,13 @@ function homePage() {
     genreLoad();
     yourPlaylistLoad();
 }
+    // first time random
+    var randomList = JSON.parse(load("/recommend=rand"));
+    var list2020 = JSON.parse(load("/recommend=2020"));
+    var list2021 = JSON.parse(load("/recommend=2021"));
+    var list2022 = JSON.parse(load("/recommend=2022"));
+    var poplist = JSON.parse(load("/genreRecommend=Pop"));
+    var hiphoplist = JSON.parse(load("/genreRecommend=Hip Hop"));
 
     function recommendLoad() {
         var out = '';
@@ -40,18 +47,12 @@ function homePage() {
         document.getElementById("genrePlaylist").innerHTML = out;
     }
 
-    var poplist = JSON.parse(load("/genreRecommend=Pop"));
-    var hiphoplist = JSON.parse(load("/genreRecommend=Hip Hop"));
     function showGenreList(str) {
         var out = '';
         var songName = '';
         var recList = [];
-        if (str == 'Pop') {
-            recList = poplist;
-        }
-        else if (str == 'Hip Hop') {
-            recList = hiphoplist;
-        }
+        if (str == 'Pop') {recList = poplist;}
+        else if (str == 'Hip Hop') {recList = hiphoplist;}
     
         var musicIdList = "";
         var musicNameList = "";
@@ -69,17 +70,15 @@ function homePage() {
         listPop();
     }
 
-    var randomList = JSON.parse(load("/recommend=rand"));
     function showRecLists(str) {
         var out = '';
         var songName = '';
         var recList = [];
-        if(str == 'rand') {
-            recList = randomList;
-        } 
-        else {
-            recList = JSON.parse(load("/recommend=" + str));
-        }
+        if(str == 'rand') {recList = randomList;} 
+        else if (str == '2020') {recList = list2020;}
+        else if (str == '2021') {recList = list2021;}
+        else if (str == '2022') {recList = list2022;}
+
         var musicIdList = "";
         var musicNameList = "";
         for(var i = 0; i < recList.length; i++) {
@@ -99,8 +98,13 @@ function homePage() {
     function yourPlaylistLoad() {
         var out = '';
         var playlist = JSON.parse(load("/library_playlist"));
-        for(var i = 0; i < playlist.length; i++) {
-            out += '<button onclick="showlists(' + playlist[i].id + ')" class="dropbtn">' + playlist[i].name + '</button>'
+        if(playlist.length != 0) {
+            for(var i = 0; i < playlist.length; i++) {
+                out += '<button onclick="showlists(' + playlist[i].id + ')" class="dropbtn">' + playlist[i].name + '</button>'
+            }
+        }
+        else {
+            out = "<a>You don't have any playlist yet.</a>"
         }
         document.getElementById("yourPlaylist").innerHTML = out;
     }
@@ -433,10 +437,7 @@ function popupMessage(msg) {
 }
 
 function playAudio(musicID, musicName) {
-    // updateIndex(musicID, musicName);
-
     var src = "assets/musics/" + musicID + ".wav";
-
     audioControl(src, musicID, musicName);
 }
 
