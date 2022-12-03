@@ -25,4 +25,8 @@ public class containerPlaylistService {
     public void save(containerPlaylistEntity containerPlaylist) {
         repo.save(containerPlaylist);
     }
+
+    public void deleteByUserIdAndMusicId(Long playlistId, Long musicId) {
+        repo.deleteByPlaylistIdAndMusicId(playlistId, musicId);
+    }
 }

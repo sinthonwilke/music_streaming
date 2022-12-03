@@ -272,7 +272,7 @@ function libraryPage() {
             for(var i = 0; i < list.length; i++) {
                 songName = list[i].music.artist.name + " - " + list[i].music.name;
                 out += '<a class="dropbtn" onclick="playAudio(' + list[i].music.id + ',' + "'" + songName + "'" + '); audioHistory(' + "'" + musicIdList + "'" + ',' + "'" + musicNameList + "'" + ',' + i +')">' + songName + '</a>';
-            }
+                out += '<a class="dropbtn" onclick="deleteListMusic(' + id + ',' + list[i].music.id + ')"> >>Remove<< </a>';            }
         }
         else {
             out += '<a>No music in this playlist.</a>';
@@ -280,6 +280,12 @@ function libraryPage() {
         
         document.getElementById("myDropdown").innerHTML = out;
         listPop();
+    }
+
+    function deleteListMusic(playlistID, musicID) {
+        load("/delMusicFromPlaylist=" + playlistID + "&" + musicID);
+        listPop();
+        document.getElementById("bg").classList.remove("bgLock");
     }
 
     function renamePlaylistPop(playlistID, playlistName) {

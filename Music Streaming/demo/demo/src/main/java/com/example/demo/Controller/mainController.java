@@ -199,6 +199,12 @@ public class mainController {
             playlistService.save(playlist);
             return new ResponseEntity<>(null, HttpStatus.ACCEPTED);
         }
+
+        @GetMapping("/delMusicFromPlaylist={playlistID}&{musicID}")
+        public ResponseEntity<containerPlaylistEntity> delMusicFromPlaylist(@AuthenticationPrincipal userDetail user, @PathVariable("playlistID") Long playlistID, @PathVariable("musicID") Long musicID) throws Exception {
+            containerPlaylistService.deleteByUserIdAndMusicId(playlistID, musicID);
+            return new ResponseEntity<>(null, HttpStatus.ACCEPTED);
+        }
         
     @GetMapping("/account")
     public String accountPage(Model model, @AuthenticationPrincipal userDetail user) {
