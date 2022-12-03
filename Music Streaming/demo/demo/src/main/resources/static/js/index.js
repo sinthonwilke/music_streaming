@@ -78,11 +78,17 @@ function searchPage() {
     function showAlbum(id) {
         var out = '';
         var songName = '';
-
         var albumList = JSON.parse(load("/albums=" + id));
+        var musicIdList = "";
+        var musicNameList = "";
+        for(var i = 0; i < albumList.length; i++) {
+            musicIdList += albumList[i].music.id + ";sep;";
+            musicNameList += albumList[i].music.artist.name + " - " + albumList[i].music.name + ";sep;";
+        }
+
         for(var i = 0; i < albumList.length; i++) {
             songName = albumList[i].music.artist.name + " - " + albumList[i].music.name;
-            out += '<a class="dropbtn" onclick="playAudio(' + albumList[i].music.id + ',' + "'" + songName + "'" + ')">' + songName + '</a>';
+            out += '<a class="dropbtn" onclick="playAudio(' + albumList[i].music.id + ',' + "'" + songName + "'" + '); audioHistory(' + "'" + musicIdList + "'" + ',' + "'" + musicNameList + "'" + ',' + i +')">' + songName + '</a>';
         }
 
         document.getElementById("myDropdown").innerHTML = out;
@@ -105,9 +111,16 @@ function libraryPage() {
         var favList = JSON.parse(load("/library_fav"));
 
         if(favList.length > 0) {
+            var musicIdList = "";
+            var musicNameList = "";
+            for(var i = 0; i < favList.length; i++) {
+                musicIdList += favList[i].music.id + ";sep;";
+                musicNameList += favList[i].music.artist.name + " - " + favList[i].music.name + ";sep;";
+            }
+
             for(var i = 0; i < favList.length; i++) {
                 songName = favList[i].music.artist.name + " - " + favList[i].music.name;
-                out += '<a class="dropbtn" onclick="playAudio(' + favList[i].music.id + ',' + "'" + songName + "'" +')">' + songName + '</a>';
+                out += '<a class="dropbtn" onclick="playAudio(' + favList[i].music.id + ',' + "'" + songName + "'" +'); audioHistory(' + "'" + musicIdList + "'" + ',' + "'" + musicNameList + "'" + ',' + i +')">' + songName + '</a>';
             }
         }
         else {
@@ -134,10 +147,16 @@ function libraryPage() {
         var list = JSON.parse(load("/playlists=" + id));
 
         if(list.length > 0) {
+            var musicIdList = "";
+            var musicNameList = "";
+            for(var i = 0; i < list.length; i++) {
+                musicIdList += list[i].music.id + ";sep;";
+                musicNameList += list[i].music.artist.name + " - " + list[i].music.name + ";sep;";
+            }
 
             for(var i = 0; i < list.length; i++) {
                 songName = list[i].music.artist.name + " - " + list[i].music.name;
-                out += '<a class="dropbtn" onclick="playAudio(' + list[i].music.id + ',' + "'" + songName + "'" + ')">' + songName + '</a>';
+                out += '<a class="dropbtn" onclick="playAudio(' + list[i].music.id + ',' + "'" + songName + "'" + '); audioHistory(' + "'" + musicIdList + "'" + ',' + "'" + musicNameList + "'" + ',' + i +')">' + songName + '</a>';
             }
         }
         else {
@@ -211,20 +230,20 @@ var songHistoryName = [];
 var songHistory = [];
 var historyIndex;
 
-function updateIndex(musicID, musicName) {
+// function updateIndex(musicID, musicName) {
 
-    if(historyIndex != songHistory.length - 1 && historyIndex != null) {
-        songHistory.splice(historyIndex + 1, 0, musicID);
-        songHistoryName.splice(historyIndex + 1, 0, musicName);
-        historyIndex++;
-    }
-    else {
-        songHistory.push(musicID);
-        songHistoryName.push(musicName);
-        historyIndex = songHistory.length - 1;
-    }
-    updateHistory();
-}
+//     if(historyIndex != songHistory.length - 1 && historyIndex != null) {
+//         songHistory.splice(historyIndex + 1, 0, musicID);
+//         songHistoryName.splice(historyIndex + 1, 0, musicName);
+//         historyIndex++;
+//     }
+//     else {
+//         songHistory.push(musicID);
+//         songHistoryName.push(musicName);
+//         historyIndex = songHistory.length - 1;
+//     }
+//     updateHistory();
+// }
 
 function updateHistory() {
     // prev
@@ -342,7 +361,7 @@ function popupMessage(msg) {
 }
 
 function playAudio(musicID, musicName) {
-    updateIndex(musicID, musicName);
+    // updateIndex(musicID, musicName);
 
     var src = "assets/musics/" + musicID + ".wav";
 
@@ -351,7 +370,12 @@ function playAudio(musicID, musicName) {
 
 function playPrev() {
     historyIndex--;
-    updateHistory();
+    if(songHistory.length > 1 && historyIndex > 0) {
+        document.getElementById("prevSong").innerHTML = '<button onclick="playPrev()"> << </button>';
+    }
+    else {
+        document.getElementById("prevSong").innerHTML = '<button class="transparent"> << </button>';
+    }
 
     var musicName = songHistoryName[historyIndex];
     var musicID = songHistory[historyIndex];
@@ -362,7 +386,12 @@ function playPrev() {
 
 function playNext() {
     historyIndex++;
-    updateHistory();
+    if(songHistory.length - 1 > historyIndex) {
+        document.getElementById("nextSong").innerHTML = '<button onclick="playNext()"> >> </button>';
+    }
+    else {
+        document.getElementById("nextSong").innerHTML = '<button class="transparent"> >> </button>';
+    }
     
     var musicName = songHistoryName[historyIndex];
     var musicID = songHistory[historyIndex];
@@ -372,19 +401,38 @@ function playNext() {
 }
 
 function audioControl(src, musicID, musicName) {
-
+    // like
     checklike(musicID);
 
+    // element
     document.getElementById("songName").innerHTML = musicName;
     document.getElementById("add2PlaylistButton").value = musicID;
     document.getElementById("a2pl").classList.remove("transparent");
 
+    // audio
     var audio = document.getElementById("audio");
     audio.src = src;
     audio.value = musicID;
     audio.volume = 0.75;
     audio.play();
-    // audio.addEventListener("ended", function() {
-    //     playNext();
-    // });
+    audio.addEventListener("ended", function() {
+        if(songHistory.length - 1 > historyIndex) {
+            playNext();
+        }
+    });
+
+    updateHistory();
+}
+
+function audioHistory(musicId, musicName, index) {
+    var musicIdList = musicId.split(';sep;');
+    var musicNameList = musicName.split(';sep;');
+    musicIdList.pop();
+    musicNameList.pop();
+
+    songHistoryName = musicNameList
+    songHistory = musicIdList
+    historyIndex = index;
+
+    updateHistory();
 }
