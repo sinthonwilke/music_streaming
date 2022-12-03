@@ -17,24 +17,35 @@ function homePage() {
     xhttp.open("GET", "/home", false);
     xhttp.send();
     recommendLoad();
-    // genreLoad();
+    genreLoad();
     yourPlaylistLoad();
 }
 
     function recommendLoad() {
         var out = '';
         var list = ['rand', '2022', '2021', '2020']
-        var listProperName = ['Random Song', 'Songs in 2022', 'Songs in 2021', 'Songs in 2020']
+        var listProperName = ['Random List', 'Songs in 2022', 'Songs in 2021', 'Songs in 2020']
         for(var i = 0; i < list.length; i++) {
             out += '<button onclick="showRecLists(' + "'" + list[i] + "'" + ')" class="dropbtn">' + listProperName[i] + '</button>'
         }
         document.getElementById("recommendPlaylist").innerHTML = out;
     }
 
-    function showRecLists(str) {
+    function genreLoad() {
+        var out = '';
+        var list = ['Pop', 'Hip Hop']
+        for(var i = 0; i < list.length; i++) {
+            out += '<button onclick="showGenreList(' + "'" + list[i] + "'" + ')" class="dropbtn">' + list[i] + '</button>'
+        }
+        document.getElementById("genrePlaylist").innerHTML = out;
+    }
+
+    function showGenreList(str) {
         var out = '';
         var songName = '';
-        var recList = JSON.parse(load("/recommend=" + str));
+        var recList = [];
+        recList = JSON.parse(load("/genreRecommend=" + str));
+    
         var musicIdList = "";
         var musicNameList = "";
         for(var i = 0; i < recList.length; i++) {
@@ -46,7 +57,34 @@ function homePage() {
             songName = recList[i].artist.name + " - " + recList[i].name;
             out += '<a class="dropbtn" onclick="playAudio(' + recList[i].id + ',' + "'" + songName + "'" + '); audioHistory(' + "'" + musicIdList + "'" + ',' + "'" + musicNameList + "'" + ',' + i +')">' + songName + '</a>';
         }
+        
+        document.getElementById("myDropdown").innerHTML = out;
+        listPop();
+    }
 
+    var randomList = JSON.parse(load("/recommend=rand"));
+    function showRecLists(str) {
+        var out = '';
+        var songName = '';
+        var recList = [];
+        if(str == 'rand') {
+            recList = randomList;
+        } 
+        else {
+            recList = JSON.parse(load("/recommend=" + str));
+        }
+        var musicIdList = "";
+        var musicNameList = "";
+        for(var i = 0; i < recList.length; i++) {
+            musicIdList += recList[i].id + ";sep;";
+            musicNameList += recList[i].artist.name + " - " + recList[i].name + ";sep;";
+        }
+
+        for(var i = 0; i < recList.length; i++) {
+            songName = recList[i].artist.name + " - " + recList[i].name;
+            out += '<a class="dropbtn" onclick="playAudio(' + recList[i].id + ',' + "'" + songName + "'" + '); audioHistory(' + "'" + musicIdList + "'" + ',' + "'" + musicNameList + "'" + ',' + i +')">' + songName + '</a>';
+        }
+        
         document.getElementById("myDropdown").innerHTML = out;
         listPop();
     }
@@ -59,9 +97,6 @@ function homePage() {
         }
         document.getElementById("yourPlaylist").innerHTML = out;
     }
-
-
-
 
 function searchPage() {
     const xhttp = new XMLHttpRequest();
