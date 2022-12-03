@@ -107,6 +107,11 @@ public class mainController {
                 musicService.findByGenreName(str.substring(1)).forEach(music::add);
                 return new ResponseEntity<>(music, HttpStatus.OK);
             }
+            else if(firstSign == '$') {
+                List <musicEntity> music = new ArrayList<musicEntity>();
+                musicService.findByYear(Integer.valueOf(str.substring(1))).forEach(music::add);
+                return new ResponseEntity<>(music, HttpStatus.OK);
+            }
  
             List <musicEntity> music = new ArrayList<musicEntity>();
             musicService.findByName(str).forEach(music::add);
