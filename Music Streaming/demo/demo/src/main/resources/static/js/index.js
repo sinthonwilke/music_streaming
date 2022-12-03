@@ -508,7 +508,7 @@ function audioControl(src, musicID, musicName) {
     document.getElementById("add2PlaylistButton").value = musicID;
     document.getElementById("a2pl").classList.remove("transparent");
 
-    // audio
+    // audio control
     var audio = document.getElementById("audio");
     audio.src = src;
     audio.value = musicID;
@@ -520,6 +520,7 @@ function audioControl(src, musicID, musicName) {
         }
     });
 
+    // update history
     updateHistory();
 }
 
