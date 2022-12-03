@@ -40,11 +40,18 @@ function homePage() {
         document.getElementById("genrePlaylist").innerHTML = out;
     }
 
+    var poplist = JSON.parse(load("/genreRecommend=Pop"));
+    var hiphoplist = JSON.parse(load("/genreRecommend=Hip Hop"));
     function showGenreList(str) {
         var out = '';
         var songName = '';
         var recList = [];
-        recList = JSON.parse(load("/genreRecommend=" + str));
+        if (str == 'Pop') {
+            recList = poplist;
+        }
+        else if (str == 'Hip Hop') {
+            recList = hiphoplist;
+        }
     
         var musicIdList = "";
         var musicNameList = "";
