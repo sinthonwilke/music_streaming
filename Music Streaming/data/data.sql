@@ -40,7 +40,8 @@ insert into artists(name) values
 ("Three Man Down"),
 ("Tilly Birds"),
 ("POLYCAT"),
-("Bruno Mars");
+("Bruno Mars"),
+("HONNE");
 
 
 -- musics 
@@ -155,7 +156,28 @@ insert into musics(name, release_date, artists, genres) values
 ("777 Feat.Silk Sonic", "2021-11-12", 17, 9),
 ("Skate Feat.Silk Sonic", "2021-07-30", 17, 9),
 ("Love's Train Feat.Silk Sonic", "2021-07-30", 17, 9),
-("Blast Off Feat.Silk Sonic", "2021-11-12", 17, 9);
+("Blast Off Feat.Silk Sonic", "2021-11-12", 17, 9),
+("24K Magic", "2016-10-07", 17, 9),
+("Chunky", "2016-11-18", 17, 9),
+("Versace on the Floor", "2016-11-17", 17, 9),
+("That's What I Like", "2016-11-17", 17, 9),
+("Perm", "2016-11-18", 17, 9),
+("Straight up & Down", "2016-11-17", 17, 9),
+("Calling All My Lovelies", "2016-11-17", 17, 9),
+("Finesse", "2016-12-08", 17, 9),
+("Too Good to Say Goodbye", "2016-11-17", 17, 9),
+("I Might ◑", "2018-08-24", 18, 4),
+("Me & You ◑", "2018-04-27", 18, 4),
+("I Got You ◑ (feat. Nana Rogues)", "2018-06-29", 18, 4),
+("Day 1 ◑", "2018-03-29", 18, 4),
+("Feels So Good ◑", "2018-07-28", 18, 4),
+("306 ◑", "2018-05-25", 18, 4),
+("Location Unknown ◐ (feat. BEKA) (Brooklyn Session)", "2018-11-14", 18, 4),
+("Shrink ◐", "2018-07-28", 18, 4),
+("Crying Over You ◐ (feat. BEKA)", "2018-08-24", 18, 4),
+("I Just Wanna Go Back ◐", "2018-04-27", 18, 4),
+("Sometimes ◐", "2018-03-29", 18, 4),
+("Forget Me Not ◐", "2018-06-29", 18, 4);
 
 
 -- fav
@@ -202,7 +224,9 @@ insert into albums(artists, name) values
 (15, "It's Gonna Be Ok"),
 (15, "ผู้เดียว"),
 (16, "Kisses"),
-(17, "An Evening With Silk Sonic");
+(17, "An Evening With Silk Sonic"),
+(17, "24K Magic"),
+(18, "Love Me/Love Me Not");
 
 
 -- album_music
@@ -303,6 +327,27 @@ insert into album_music(albums, musics) values
 (20, 108),
 (20, 109),
 (20, 110),
-(20, 111);
+(20, 111),
+(21, 112),
+(21, 113),
+(21, 114),
+(21, 115),
+(21, 116),
+(21, 117),
+(21, 118),
+(21, 119),
+(21, 120),
+(22, 121),
+(22, 122),
+(22, 123),
+(22, 124),
+(22, 125),
+(22, 126),
+(22, 127),
+(22, 128),
+(22, 129),
+(22, 130),
+(22, 131),
+(22, 132);
 
 
