@@ -38,7 +38,8 @@ insert into artists(name) values
 ('Bigass'),
 ('COCKTAIL'), 
 ('Three Man Down'),
-('Tilly Birds');
+('Tilly Birds'),
+('POLYCAT');
 
 
 -- musics 
@@ -134,7 +135,17 @@ insert into musics(name, release_date, artists, genres) values
 ('ยังคงสวยงาม (When The Film’s Over)', '2020-07-14', 15, 8),
 ('ผู้เดียว Part 2 (What’s Left...)', '2020-09-06', 15, 8),
 ('ฉันมันเป็นใคร (Who I Am)', '2020-08-18', 15, 8),
-('ไม่รู้สึก (Unspoken)', '2020-09-06', 15, 8);
+('ไม่รู้สึก (Unspoken)', '2020-09-06', 15, 8),
+('เพื่อนไม่จริง (Extended Version)', '2017-03-24', 16, 8),
+('ภักดี | FAITH', '2016-08-30', 16, 8),
+('เพื่อนพระเอก | GOODFELLA', '2016-08-30', 16, 8),
+('ซิ่ง | Friday on The Highway', '2017-02-05', 16, 8),
+('ปืน', '2017-03-24', 16, 8),
+('เวลาเธอยิ้ม | you had me at hello', '2014-10-14', 16, 8),
+('มันเป็นใคร | Alright', '2015-11-11', 16, 8),
+('พบกันใหม่ ? | So Long', '2014-10-14', 16, 8),
+('เป็นเพราะฝน | Teardrops', '2016-03-29', 16, 8),
+('อาวรณ์ | I Want You', '2018-08-07', 16, 8);
 
 
 -- fav
@@ -179,7 +190,8 @@ insert into albums(artists, name) values
 (13, 'Fade alpha'),
 (14, 'This City Will not Be Lonely Anymore'),
 (15, 'It’s Gonna Be Ok'),
-(15, 'ผู้เดียว');
+(15, 'ผู้เดียว'),
+(16, 'Kisses');
 
 
 -- album_music
@@ -262,6 +274,15 @@ insert into album_music(albums, musics) values
 (18, 89),
 (18, 90),
 (18, 91),
-(18, 92);
+(18, 92),
+(19, 93),
+(19, 94),
+(19, 95),
+(19, 96),
+(19, 97),
+(19, 98),
+(19, 99),
+(19, 100),
+(19, 101);
 
 
