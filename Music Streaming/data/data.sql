@@ -154,7 +154,8 @@ insert into albums(artists, name) values
 (12, 'Begins'),
 (12, 'แดนเนรมิตร'),
 (13, 'The lords of misery'),
-(13, 'Fade alpha');
+(13, 'Fade alpha'),
+(14, 'This City Will not Be Lonely Anymore');
 
 
 -- album_music
@@ -200,6 +201,22 @@ insert into album_music(albums, musics) values
 (15, 52),
 (15, 53),
 (15, 54),
-(15, 55);
+(15, 55),
+(16, 56),
+(16, 57),
+(16, 58),
+(16, 59),
+(16, 60),
+(16, 61),
+(16, 62),
+(16, 63),
+(16, 64),
+(16, 65),
+(16, 66),
+(16, 67),
+(16, 68),
+(16, 69),
+(16, 70),
+(16, 71);
 
 
