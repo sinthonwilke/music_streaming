@@ -113,13 +113,39 @@ function homePage() {
         var playlist = JSON.parse(load("/library_playlist"));
         if(playlist.length != 0) {
             for(var i = 0; i < playlist.length; i++) {
-                out += '<button onclick="showlists(' + playlist[i].id + ')" class="dropbtn">' + playlist[i].name + '</button>'
+                out += '<button onclick="showYourPlaylists(' + playlist[i].id + ')" class="dropbtn">' + playlist[i].name + '</button>'
             }
         }
         else {
             out = "<a>You don't have any playlist yet.</a>"
         }
         document.getElementById("yourPlaylist").innerHTML = out;
+    }
+
+    function showYourPlaylists(id) {
+        var out = '';
+        var songName = '';
+        var list = JSON.parse(load("/playlists=" + id));
+
+        if(list.length > 0) {
+            var musicIdList = "";
+            var musicNameList = "";
+            for(var i = 0; i < list.length; i++) {
+                musicIdList += list[i].music.id + ";sep;";
+                musicNameList += list[i].music.artist.name + " - " + list[i].music.name + ";sep;";
+            }
+
+            for(var i = 0; i < list.length; i++) {
+                songName = list[i].music.artist.name + " - " + list[i].music.name;
+                out += '<a class="dropbtn" onclick="playAudio(' + list[i].music.id + ',' + "'" + songName + "'" + '); audioHistory(' + "'" + musicIdList + "'" + ',' + "'" + musicNameList + "'" + ',' + i +')">' + songName + '</a>';
+            }
+        }
+        else {
+            out += '<a>No music in this playlist.</a>';
+        }
+        
+        document.getElementById("myDropdown").innerHTML = out;
+        listPop();
     }
 
 function searchPage() {
