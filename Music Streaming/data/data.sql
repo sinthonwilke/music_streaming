@@ -41,7 +41,8 @@ insert into artists(name) values
 ("Tilly Birds"),
 ("POLYCAT"),
 ("Bruno Mars"),
-("HONNE");
+("HONNE"),
+("Eminem");
 
 
 -- musics 
@@ -177,7 +178,19 @@ insert into musics(name, release_date, artists, genres) values
 ("Crying Over You ◐ (feat. BEKA)", "2018-08-24", 18, 4),
 ("I Just Wanna Go Back ◐", "2018-04-27", 18, 4),
 ("Sometimes ◐", "2018-03-29", 18, 4),
-("Forget Me Not ◐", "2018-06-29", 18, 4);
+("Forget Me Not ◐", "2018-06-29", 18, 4),
+("Cold Wind Blows", "2018-07-24", 19, 6),
+("Talkin' 2 Myself", "2018-07-24", 19, 6),
+("On Fire", "2018-07-24", 19, 6),
+("Won't Back Down (Ft. P!nk)", "2022-09-12", 19, 6),
+("W.T.P.", "2018-07-24", 19, 6),
+("Going Through Changes", "2018-07-24", 19, 6),
+("Not Afraid", "2010-06-05", 19, 6),
+("No Love (Explicit Version) ft. Lil Wayne", "2010-09-30", 19, 6),
+("Space Bound", "2011-06-27", 19, 6),
+("Cinderella Man", "2018-07-26", 19, 6),
+("25 To Life", "2018-07-24", 19, 6),
+("Love The Way You Lie ft. Rihanna", "2010-08-06", 19, 6);
 
 
 -- fav
@@ -226,7 +239,8 @@ insert into albums(artists, name) values
 (16, "Kisses"),
 (17, "An Evening With Silk Sonic"),
 (17, "24K Magic"),
-(18, "Love Me/Love Me Not");
+(18, "Love Me/Love Me Not"),
+(19, "Recovery");
 
 
 -- album_music
@@ -348,6 +362,18 @@ insert into album_music(albums, musics) values
 (22, 129),
 (22, 130),
 (22, 131),
-(22, 132);
+(22, 132),
+(23, 133),
+(23, 134),
+(23, 135),
+(23, 136),
+(23, 137),
+(23, 138),
+(23, 139),
+(23, 140),
+(23, 141),
+(23, 142),
+(23, 143),
+(23, 144);
 
 
