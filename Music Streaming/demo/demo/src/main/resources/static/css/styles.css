@@ -120,10 +120,11 @@
 }
 .sb-sub-ul {
     margin-left: 20px;
+    display: none;
 }
 .sb-ul-active {
-    background: var(--theme-sub) !important;
-    color: var(--theme-cut) !important;
+    background: #8e44ad !important;
+    color: black !important;
     font-weight: bold;
 }
 .chev-pos {
