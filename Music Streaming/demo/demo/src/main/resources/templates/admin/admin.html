@@ -4,41 +4,54 @@
 <head>
     <meta charset="UTF-8" />
     <link href="webjars/bootstrap/3.3.6/css/bootstrap.min.css"rel="stylesheet">
-    <link href="styles.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" rel="stylesheet">
+    <link href="css/styles.css" rel="stylesheet">
     <script src="admin.js"></script>
 </head>
 <body>
-    <a class="navbar-brand navbar-logo" href="#">Database Management</a>
-    <button class="navbar-toggler" type="button" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <i class="fas fa-bars text-white"></i>
-    </button>
-
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav ml-auto">
-        <div class="hori-selector"><div class="left"></div><div class="right"></div></div>
-            <li class="nav-item">
-                <a class="nav-link" th:href="@{/admin/music-database}" href="javascript:void(0);">Music Database</a>
-            <li class="nav-item">
-                <a class="nav-link" th:href="@{/admin/artist-database}" href="javascript:void(0);">Artist Database</a>
-            <li class="nav-item">
-                <a class="nav-link" th:href="@{/admin/album-database}" href="javascript:void(0);">Album Database</a><a th:href="@{/admin/containerAlbum-database}">(contains)</a>
-            <li class="nav-item">
-                <a class="nav-link" th:href="@{/admin/genre-database}" href="javascript:void(0);">Genre Database</a>
-            <li class="nav-item">
-                <a class="nav-link" th:href="@{/admin/user-database}" href="javascript:void(0);">User Database</a>
-            <li class="nav-item">
-                <a class="nav-link" th:href="@{/admin/fav-database}" href="javascript:void(0);">Favorite Database</a>
-            <li class="nav-item">
-                <a class="nav-link" th:href="@{/admin/playlist-database}" href="javascript:void(0);">Playlist Database</a><a th:href="@{/admin/containerPlaylist-database}">(contains)</a>
-        <li class="nav-item">
-        </li>
-        </ul>
-        </div>
-
-    <form th:action="@{/logout}" method="post">
-        <input type="submit" value="Sign Out" />
-    </form>
-
+       <section class="main">
+         <div class="btn btn-hamburger">
+                   <i class="fas fa-bars"></i>
+               </div>
+               <div class="sidebar">
+                   <div class="sidebar-top">
+                       <div class="sb-logo">
+                          
+                       </div>
+                       <ul class="sb-ul">
+                            <li><a th:href="@{/admin/music-database}" href="javascript:void(0);"><i class="fa-solid fa-music"></i><span>Music Database</span></a>
+                            </li>
+                            <li><a th:href="@{/admin/artist-database}" href="javascript:void(0);"><i class="fa-sharp fa-solid fa-palette"></i><span>Artist Database</span></a>
+                            </li>
+                            <li><a th:href="@{/admin/album-database}" href="javascript:void(0);"><i class="fa-sharp fa-solid fa-headphones"></i><span>Album Database</span><i class="fa-solid fa-caret-down"></i></a>
+                               <ul class="sb-sub-ul">
+                                   <li><a th:href="@{/admin/containerAlbum-database}" href="javascript:void(0);"><i class="fa-solid fa-music"></i><span>contain</span></a></li>     
+                               </ul>
+                            </li>
+                            <li><a th:href="@{/admin/genre-database}" href="javascript:void(0);"><i class="fa-solid fa-tablet"></i><span>Genre Database</span></a>                               
+                            </li>
+                            <li><a th:href="@{/admin/user-database}" href="javascript:void(0);"><i class="fa-solid fa-user"></i><span>User Database</span></a>                               
+                            </li>
+                            <li><a th:href="@{/admin/fav-database}" href="javascript:void(0);"><i class="fa-solid fa-heart"></i><span>Favorite Database</span></a>                                
+                            </li>
+                            <li><a th:href="@{/admin/playlist-database}" href="javascript:void(0);"><i class="fa-sharp fa-solid fa-bars"></i><span>Playlist Database</span><i class="fa-solid fa-caret-down"></i></a>
+                                <ul class="sb-sub-ul">
+                                    <li><a th:href="@{/admin/containerPlaylist-database}" href="javascript:void(0);"><i class="fa-solid fa-music"></i><span>contain</span></a></li>     
+                                </ul>
+                            </li>
+                            </ul>
+                   </div>
+                   <div class="sidebar-bottom">
+                    <form th:action="@{/logout}" method="post">
+                        <input type="submit" value="Sign Out" />
+                    </form>
+                   </div>
+               </div>
+               <div class="dashboard">
+                   <div class="dashboard-title-control">
+                       <h2 class="dashboard-title">Database Management</h2>
+                   </div>
+               </div>
+           </section>
 </body>
-</nav>
 </html>
