@@ -1,25 +1,44 @@
 <!DOCTYPE html>
 <html xmlns:th="https://www.thymeleaf.org">
+<nav class="navbar navbar-expand-custom navbar-mainbg">
 <head>
     <meta charset="UTF-8" />
     <link href="webjars/bootstrap/3.3.6/css/bootstrap.min.css"rel="stylesheet">
+    <link href="styles.css" rel="stylesheet">
+    <script src="admin.js"></script>
 </head>
 <body>
-    <h1>Database Manager</h1>
+    <a class="navbar-brand navbar-logo" href="#">Database Management</a>
+    <button class="navbar-toggler" type="button" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <i class="fas fa-bars text-white"></i>
+    </button>
 
-    <div>
-    <a th:href="@{/admin/music-database}"><button>Music Database</button></a><br>
-    <a th:href="@{/admin/artist-database}"><button>Artist Database</button></a><br>
-    <a th:href="@{/admin/album-database}"><button>Album Database</button></a><a th:href="@{/admin/containerAlbum-database}"><button>(contains)</button></a><br>
-    <a th:href="@{/admin/genre-database}"><button>Genre Database</button></a><br>
-    <a th:href="@{/admin/user-database}"><button>User Database</button></a><br>
-    <a th:href="@{/admin/fav-database}"><button>Favorite Database</button></a><br>
-    <a th:href="@{/admin/playlist-database}"><button>Playlist Database</button></a><a th:href="@{/admin/containerPlaylist-database}"><button>(contains)</button></a><br>
-    </div><br>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">
+        <div class="hori-selector"><div class="left"></div><div class="right"></div></div>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/admin/music-database}" href="javascript:void(0);">Music Database</a>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/admin/artist-database}" href="javascript:void(0);">Artist Database</a>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/admin/album-database}" href="javascript:void(0);">Album Database</a><a th:href="@{/admin/containerAlbum-database}">(contains)</a>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/admin/genre-database}" href="javascript:void(0);">Genre Database</a>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/admin/user-database}" href="javascript:void(0);">User Database</a>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/admin/fav-database}" href="javascript:void(0);">Favorite Database</a>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/admin/playlist-database}" href="javascript:void(0);">Playlist Database</a><a th:href="@{/admin/containerPlaylist-database}">(contains)</a>
+        <li class="nav-item">
+        </li>
+        </ul>
+        </div>
 
     <form th:action="@{/logout}" method="post">
         <input type="submit" value="Sign Out" />
     </form>
 
 </body>
+</nav>
 </html>
