@@ -131,6 +131,11 @@ public class mainController {
             return new ResponseEntity<>(albumList, HttpStatus.OK);
         }
 
+        @GetMapping("/musicName={id}")
+        public ResponseEntity<musicEntity> musicNameList(@PathVariable("id") Long id) throws Exception{
+            musicEntity musicName = musicService.findByID(id);
+            return new ResponseEntity<>(musicName, HttpStatus.OK);
+        }
 
     @GetMapping("/library")
     public String libraryPage(Model model) {
