@@ -70,7 +70,6 @@ public class mainController {
     }
         @GetMapping("/recommend={str}")
         public ResponseEntity<List<musicEntity>> recommend(@PathVariable("str") String str) {
-            System.out.println(str);
             List<musicEntity> list;
             try {
                 list = musicService.findByYear(Integer.valueOf(str));
