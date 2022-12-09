@@ -81,7 +81,6 @@ public class mainController {
 
         @GetMapping("/genreRecommend={str}")
         public ResponseEntity<List<musicEntity>> genreRecommend(@PathVariable("str") String str) {
-            System.out.println(str);
             List<musicEntity> list;
             list = musicService.findByGenreName(str);
             return new ResponseEntity<List<musicEntity>>(list, HttpStatus.OK);
