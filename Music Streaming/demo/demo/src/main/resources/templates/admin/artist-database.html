@@ -2,11 +2,10 @@
 <html xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8" />
-    <link href="webjars/bootstrap/3.3.6/css/bootstrap.min.css"rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" rel="stylesheet">
-    <link href="css/styles.css" rel="stylessheet">
+    <link th:href="@{/css/styles.css}" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-    <script src="js/admin.js"></script>
+    <script th:src="@{/js/admin.js}"></script>
 </head>
 <body>
        <section class="main">
@@ -16,7 +15,7 @@
                <div class="sidebar">
                    <div class="sidebar-top">
                        <div class="sb-logo">
-                          
+                            <img th:src="@{/media/logo.png}" />
                        </div>
                        <ul class="sb-ul">
                             <li><a th:href="@{/admin}" href="javascript:void(0);"><i class="fa-solid fa-gauge-simple-high"></i><span>Dashboard</span></a>
@@ -55,8 +54,6 @@
                    <div class="dashboard-title-control">
                        <h2 class="dashboard-title"><center>Database Management</center></h2>
                        <h3>Artist Database</h3>
-                        <a th:href="@{/admin}"><button>Go back</button></a><br>
-
                         <div th:if="${pageMessage}">
                             <p>[[${pageMessage}]]</p>
                         </div><br>

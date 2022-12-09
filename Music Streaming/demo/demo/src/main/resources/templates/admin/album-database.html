@@ -2,45 +2,95 @@
 <html xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" rel="stylesheet">
+    <link th:href="@{/css/styles.css}" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script th:src="@{/js/admin.js}"></script>
 </head>
 <body>
+       <section class="main">
+         <div class="btn btn-hamburger">
+                   <i class="fas fa-bars"></i>
+               </div>
+               <div class="sidebar">
+                   <div class="sidebar-top">
+                       <div class="sb-logo">
+                            <img th:src="@{/media/logo.png}" />
+                       </div>
+                       <ul class="sb-ul">
+                            <li><a th:href="@{/admin}" href="javascript:void(0);"><i class="fa-solid fa-gauge-simple-high"></i><span>Dashboard</span></a>
+                            </li>
+                            <li><a th:href="@{/admin/music-database}" href="javascript:void(0);"><i class="fa-solid fa-music"></i><span>Music</span></a>
+                            </li>
+                            <li><a th:href="@{/admin/artist-database}" href="javascript:void(0);"><i class="fa-sharp fa-solid fa-palette"></i><span>Artist</span></a>
+                            </li>
+                            <li><a href="javascript:void(0);"><i class="fa-sharp fa-solid fa-headphones"></i><span>Album</span><i class="fa-solid fa-caret-down chev-pos"></i></a>
+                               <ul class="sb-sub-ul">
+                                    <li><a th:href="@{/admin/album-database}" href="javascript:void(0);"><i class="fa-sharp fa-solid fa-headphones"></i><span>Album Database</span></a></li>
+                                    <li><a th:href="@{/admin/containerAlbum-database}" href="javascript:void(0);"><i class="fa-solid fa-music"></i><span>contain</span></a></li>     
+                               </ul>
+                            </li>
+                            <li><a th:href="@{/admin/genre-database}" href="javascript:void(0);"><i class="fa-solid fa-tablet"></i><span>Genre</span></a>                               
+                            </li>
+                            <li><a th:href="@{/admin/user-database}" href="javascript:void(0);"><i class="fa-solid fa-user"></i><span>User</span></a>                               
+                            </li>
+                            <li><a th:href="@{/admin/fav-database}" href="javascript:void(0);"><i class="fa-solid fa-heart"></i><span>Favorite</span></a>                                
+                            </li>
+                            <li><a href="javascript:void(0);"><i class="fa-sharp fa-solid fa-bars"></i><span>Playlist</span><i class="fa-solid fa-caret-down chev-pos"></i></a>
+                                <ul class="sb-sub-ul">
+                                    <li><a th:href="@{/admin/playlist-database}" href="javascript:void(0);"><i class="fa-sharp fa-solid fa-bars"></i><span>Playlist Database</span></a>
+                                    <li><a th:href="@{/admin/containerPlaylist-database}" href="javascript:void(0);"><i class="fa-solid fa-music"></i><span>contain</span></a></li>     
+                                </ul>
+                            </li>
+                            </ul>
+                   </div>
+                   <div class="sidebar-bottom">
+                    <form th:action="@{/logout}" method="post">
+                        <input class="btn btn-logout" type="submit" value="Sign Out" />
+                    </form>
+                   </div>
+               </div>
+               <div class="dashboard">
+                   <div class="dashboard-title-control">
+                       <h2 class="dashboard-title"><center>Database Management</center></h2>
+                                    <h3>Album Database</h3>
+                    <a th:href="@{/admin}"><button>Go back</button></a><br>
 
-    <h1>Album Database</h1>
-    <a th:href="@{/admin}"><button>Go back</button></a><br>
+                    <div th:if="${pageMessage}">
+                        <p>[[${pageMessage}]]</p>
+                    </div><br>
 
-    <div th:if="${pageMessage}">
-        <p>[[${pageMessage}]]</p>
-    </div><br>
-
-    <form th:action="@{/admin/album-database/find}" method="get">
-        <label>album(id):</label><input type="number" name="id" th:value="${id}">
-        <label>album(name):</label><input type="text" name="name" th:value="${name}">
-        <label>artist(id):</label><input type="number" name="artist" th:value="${artist}">
-        <button type="submit">Find</button>
-        <a th:href="@{/admin/album-database}"><button type="button">Reset</button></a>
-    </form>
+                    <form th:action="@{/admin/album-database/find}" method="get">
+                        <label>album(id):</label><input type="number" name="id" th:value="${id}">
+                        <label>album(name):</label><input type="text" name="name" th:value="${name}">
+                        <label>artist(id):</label><input type="number" name="artist" th:value="${artist}">
+                        <button type="submit">Find</button>
+                        <a th:href="@{/admin/album-database}"><button type="button">Reset</button></a>
+                    </form>
 
 
-    <a th:href="@{/admin/album-database/add}"><button>Add new album</button></a><br>
+                    <a th:href="@{/admin/album-database/add}"><button>Add new album</button></a><br>
 
-     <div>
-        <table>
-        <thead><tr>
-            <th>Album ID</th>
-            <th>Album Name</th>
-            <th>Artist ID (Name)</th>
-            <th></th>
-        </tr></thead>
-        <tbody><th:block th:each="album: ${albums}"><tr>
-            <td>[[${album.id}]]</td>
-            <td>[[${album.name}]]</td>
-            <td>[[${album.artist.id}]] ([[${album.artist.name}]])</td>
-            <td><a th:href="@{'/admin/album-database/edit-id-' + ${album.id}}"><button>Edit</button></a>
-                <a th:href="@{'/admin/album-database/delete-id-' + ${album.id}}"><button>Delete</button></a>
-        </th:block>
-        </tbody>
-        </table>
-    </div>
-
+                    <div>
+                        <table>
+                        <thead><tr>
+                            <th>Album ID</th>
+                            <th>Album Name</th>
+                            <th>Artist ID (Name)</th>
+                            <th></th>
+                        </tr></thead>
+                        <tbody><th:block th:each="album: ${albums}"><tr>
+                            <td>[[${album.id}]]</td>
+                            <td>[[${album.name}]]</td>
+                            <td>[[${album.artist.id}]] ([[${album.artist.name}]])</td>
+                            <td><a th:href="@{'/admin/album-database/edit-id-' + ${album.id}}"><button>Edit</button></a>
+                                <a th:href="@{'/admin/album-database/delete-id-' + ${album.id}}"><button>Delete</button></a>
+                        </th:block>
+                        </tbody>
+                        </table>
+                    </div>
+                   </div>
+               </div>
+           </section>
 </body>
 </html>
