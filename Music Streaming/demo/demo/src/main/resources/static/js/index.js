@@ -238,6 +238,7 @@ function libraryPage() {
 
     function deleteFav(id) {
         load("/delFavorite=" + id);
+        checklike(document.getElementById("add2PlaylistButton").value)
         listPop();
         document.getElementById("bg").classList.remove("bgLock");
     }
