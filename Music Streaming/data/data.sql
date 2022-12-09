@@ -1,7 +1,7 @@
 -- uplaylist_musicser
 insert into users(email, password, role) values
-("admin",				"$2a$12$X5K/wQD7FjSQypVmqaioBesL3iaQXMfS9bdW2oep0FuX7A/H5iEgO",	"ADMIN"),
-("tester@gmail.com",	"$2a$12$X5K/wQD7FjSQypVmqaioBesL3iaQXMfS9bdW2oep0FuX7A/H5iEgO",	"USER");
+("admin", "$2a$12$X5K/wQD7FjSQypVmqaioBesL3iaQXMfS9bdW2oep0FuX7A/H5iEgO",	"ADMIN"),
+("test", "$2a$12$X5K/wQD7FjSQypVmqaioBesL3iaQXMfS9bdW2oep0FuX7A/H5iEgO",	"USER");
 
 
 -- genre
@@ -255,29 +255,6 @@ insert into musics(name, release_date, artists, genres) values
 ("ลงใจ (Longjai)", "2019-11-18", 26, 8),
 ("ทราบแล้วเปลี่ยน (attention please)", "2022-03-17", 26, 8),
 ("พิจารณา (Consider) Ft. MAIYARAP", "2022-09-08", 27, 8);
-
-
--- fav
-insert into fav(users, musics) values
-(1, 1),
-(1, 5),
-(2, 3),
-(2, 4);
-
-
--- playlist
-insert into playlists(users, name) values
-(1, "Listen when break up."),
-(1, "#Electric wavy in my heart#"),
-(2, "Check later.");
-
-
--- playlist_music
-insert into playlist_music(playlists, musics) values
-(1, 3),
-(2, 1),
-(3, 2),
-(2, 4);
 
 
 -- album
