@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html xmlns:th="https://www.thymeleaf.org">
-<nav class="navbar navbar-expand-custom navbar-mainbg">
 <head>
     <meta charset="UTF-8" />
     <link href="webjars/bootstrap/3.3.6/css/bootstrap.min.css"rel="stylesheet">
@@ -20,6 +19,8 @@
                           
                        </div>
                        <ul class="sb-ul">
+                            <li><a th:href="@{/admin}" href="javascript:void(0);"><i class="fa-solid fa-gauge-simple-high"></i><span>Dashboard</span></a>
+                            </li>
                             <li><a th:href="@{/admin/music-database}" href="javascript:void(0);"><i class="fa-solid fa-music"></i><span>Music</span></a>
                             </li>
                             <li><a th:href="@{/admin/artist-database}" href="javascript:void(0);"><i class="fa-sharp fa-solid fa-palette"></i><span>Artist</span></a>
@@ -53,6 +54,7 @@
                <div class="dashboard">
                    <div class="dashboard-title-control">
                        <h2 class="dashboard-title"><center>Database Management</center></h2>
+                       
                    </div>
                </div>
            </section>
