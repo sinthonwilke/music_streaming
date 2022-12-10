@@ -2,60 +2,82 @@
 <html xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8" />
-    <link href="css/index.css" rel="stylesheet">
-    <script src="js/index.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <link th:href="@{/css/indexstyles.css}" rel="stylesheet">
+    <script th:src="@{/js/index.js}"></script>
 </head>
 <body>
-
-    <div class="dropdown" hidden>
-        <div id="myDropdown" class="dropdown-content" hidden>
-        </div>
-    </div>
-
-    <div id="myOverlay" class="overlay">
-        <div class="overlay-content">
-          <form onsubmit="addPlaylist(this); return false">
-            <input type="text" placeholder="Add Playlist name..." autocomplete="off" required id="playlistName">
-            <button type="submit">ADD</button>
-          </form>
-        </div>
-    </div>
-
-    <div id="myOverlay2" class="overlay">
-        <div class="overlay-content">
-          <form onsubmit="renamePlaylistLoad(this); return false">
-            <input type="text" hidden id="renamePlaylistID">
-            <input type="text" placeholder="Rename Playlist..." autocomplete="off" required id="renamePlaylist">
-            <button type="submit">Rename</button>
-          </form>
-        </div>
-    </div>
-
-    <div class="popup">
-        <span class="popuptext" id="myPopup">popup msg</span>
-    </div>
-
-    <div id="bg">
-        <div id="demo">
-    </div>
-
-    <div>
-        <div id="prevSong"></div>
-        <div id="nextSong"></div>
-        <div id="songName"></div>
-        <audio controls id="audio">
-            <source src="" type="audio/wav">
-        </audio>
-        <div id="likeButton"></div>
-        <div id="a2pl"></div>
-    </div>
-
-    <div>
-        <button type="button" onclick="homePage()" id="homePageId">Home</button>
-        <button type="button" onclick="searchPage()" id="searchPageId">Search</button>
-        <button type="button" onclick="libraryPage()" id="libraryPageId">Library</button>
-        <button type="button" onclick="accountPage()" id="accountPageId">Account</button>
-    </div>
-
-</body>
+       <section class="main">
+         <div class="btn btn-hamburger">
+                   <i class="fas fa-bars"></i>
+               </div>
+               <div class="sidebar">
+                   <div class="sidebar-top">
+                       <div class="sb-logo">
+                            <img th:src="@{/media/logo.png}" />
+                       </div>
+                       <ul class="sb-ul">
+                            <li><a href="javascript:void(0);" type="button" onclick="homePage()" id="homePageId"><i class="fa-sharp fa-solid fa-house"></i><span>Home</span></a>
+                            </li>
+                            <li><a href="javascript:void(0);" type="button" onclick="searchPage()" id="searchPageId"><i class="fa-solid fa-magnifying-glass"></i><span>Search</span></a> 
+                            </li>
+                            <li><a href="javascript:void(0);" type="button" onclick="libraryPage()" id="libraryPageId"><i class="fa-solid fa-book"></i></i><span>Library</span></a>
+                            </li>
+                            <li><a href="javascript:void(0);" type="button" onclick="accountPage()" id="accountPageId"><i class="fa-solid fa-user"></i><span>Account</span></a>
+                            </li>
+                        </ul>
+                   </div>
+                   <div class="sidebar-bottom">
+                    <form th:action="@{/logout}" method="post">
+                        <input class="btn btn-logout" type="submit" value="Sign Out" />
+                    </form>
+                   </div>
+               </div>
+               <div class="dashboard">
+                    <div class="dropdown" hidden>
+                        <div id="myDropdown" class="dropdown-content" hidden>
+                        </div>
+                    </div>
+                
+                    <div id="myOverlay" class="overlay">
+                        <div class="overlay-content">
+                        <form onsubmit="addPlaylist(this); return false">
+                            <input type="text" placeholder="Add Playlist name..." autocomplete="off" required id="playlistName">
+                            <button type="submit">ADD</button>
+                        </form>
+                        </div>
+                    </div>
+                
+                    <div id="myOverlay2" class="overlay">
+                        <div class="overlay-content">
+                        <form onsubmit="renamePlaylistLoad(this); return false">
+                            <input type="text" hidden id="renamePlaylistID">
+                            <input type="text" placeholder="Rename Playlist..." autocomplete="off" required id="renamePlaylist">
+                            <button type="submit">Rename</button>
+                        </form>
+                        </div>
+                    </div>
+                
+                    <div class="popup">
+                        <span class="popuptext" id="myPopup">popup msg</span>
+                    </div>
+                
+                    <div id="bg">
+                        <div id="demo">
+                    </div>
+                
+                    <div>
+                        <div id="prevSong"></div>
+                        <div id="nextSong"></div>
+                        <div id="songName"></div>
+                        <audio controls id="audio">
+                            <source src="" type="audio/wav">
+                        </audio>
+                        <div id="likeButton"></div>
+                        <div id="a2pl"></div>
+                    </div>
+               </div>
+           </section>
+    </body>
 </html>

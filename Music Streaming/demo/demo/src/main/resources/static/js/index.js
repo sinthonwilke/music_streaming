@@ -11,10 +11,10 @@ window.onload = function() {
 };
 
 function page() {
-    document.getElementById("homePageId").style.color = "Black";
-    document.getElementById("searchPageId").style.color = "Black";
-    document.getElementById("libraryPageId").style.color = "Black";
-    document.getElementById("accountPageId").style.color = "Black";
+    document.getElementById("homePageId").style.color = "black";
+    document.getElementById("searchPageId").style.color = "black";
+    document.getElementById("libraryPageId").style.color = "black";
+    document.getElementById("accountPageId").style.color = "black";
 
 }
 
@@ -26,7 +26,7 @@ function homePage() {
     xhttp.open("GET", "/home", false);
     xhttp.send();
     page();
-    document.getElementById("homePageId").style.color = "Pink";
+    document.getElementById("homePageId").style.color = "white";
     recommendLoad();
     genreLoad();
     yourPlaylistLoad();
@@ -130,7 +130,7 @@ function searchPage() {
     xhttp.open("GET", "/search", false);
     xhttp.send();
     page();
-    document.getElementById("searchPageId").style.color = "Pink";
+    document.getElementById("searchPageId").style.color = "white";
     document.getElementById("searchResult").innerHTML = document.getElementById("defualtResult").innerHTML;
 }
 
@@ -209,7 +209,7 @@ function libraryPage() {
     xhttp.open("GET", "/library", false);
     xhttp.send();
     page();
-    document.getElementById("libraryPageId").style.color = "Pink";
+    document.getElementById("libraryPageId").style.color = "white";
     playlists();
 }
 
@@ -346,7 +346,7 @@ function accountPage() {
     xhttp.open("GET", "/account", false);
     xhttp.send();
     page();
-    document.getElementById("accountPageId").style.color = "Pink";
+    document.getElementById("accountPageId").style.color = "white";
 }
 
 var songHistoryName = [];
