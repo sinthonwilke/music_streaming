@@ -2,22 +2,14 @@
 <html xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8" />
-    <link href="css/index.css" rel="stylesheet">
 </head>
 <body>
 
     <h1>Search</h1>
 
     <div>
-        <input type="text" id="searchBox" oninput="searchResult()">
+        <input type="text" id="searchBox" oninput="searchResult()" autocomplete="off" placeholder="Search Here (Song, !Genre, @Artist, $Year)">
     </div>
-
-
-    <div class="dropdown" hidden>
-        <div id="myDropdown" class="dropdown-content" hidden>
-        </div>
-    </div>
-
 
     <div id="searchResult">
     </div>

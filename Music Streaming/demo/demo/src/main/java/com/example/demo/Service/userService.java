@@ -1,5 +1,7 @@
 package com.example.demo.Service;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -23,6 +25,14 @@ public class userService implements UserDetailsService{
             throw new UsernameNotFoundException("user not found.");
         }
         return new userDetail(user);
+    }
+
+    public userEntity findByID(Long id) throws Exception {
+        Optional<userEntity> user = repo.findById(id);
+        if (user.isPresent()) {
+            return user.get();
+        }
+        throw new Exception("Could not find any user id: " + id);
     }
     
 }

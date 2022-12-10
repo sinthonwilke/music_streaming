@@ -1,24 +1,23 @@
 <!DOCTYPE html>
 <html xmlns:th="https://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8" />
-  <link href="webjars/bootstrap/3.3.6/css/bootstrap.min.css"rel="stylesheet">
-  <link href="css/home.css" rel="stylesheet">
-  <script src="js/home.js"></script>
+    <meta charset="UTF-8" />
 </head>
 <body>
 
-  <h1>Recommend</h1>
+    <h1>Recommend</h1>
 
-  <h2>Recommend Playlist</h2>
-  <div class="dropdown">
-    <button class="dropbtn">Playlist#1</button>
-    <div class="dropdown-content">
-        <a onclick="playAudio(1)">music 1</a>
-        <a onclick="playAudio(2)">music 2</a>
-        <a onclick="playAudio(3)">music 3</a>
-    </div>
-  </div>
+    <h2>Recommend Playlist</h2>
+        <div id="recommendPlaylist">
+        </div>
+
+    <h2>Recommend By Genre</h2>
+        <div id="genrePlaylist">
+        </div>
+
+    <h2>Your Playlist</h2>
+        <div id="yourPlaylist">
+        </div>
 
 </body>
 </html>
