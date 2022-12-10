@@ -384,3 +384,60 @@ div.scrollmenu {
   to {opacity:1 ;}
 }
 
+    
+.player{
+    height: 95vh;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: left;
+}
+  .wrapper{
+    border: 1px solid transparent;
+    padding: 30px;
+    border-radius: 20px;
+    background-color: pink;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+  }
+  
+  .details {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  }
+  
+  .track-art {
+  margin: 25px;
+  height: 250px;
+  width: 250px;
+  border:2px solid 	#FFFAFA;
+  background-size: cover;
+  background-position: center;
+  border-radius: 50%;
+  -moz-box-shadow: 0px 6px 5px black;
+  -webkit-box-shadow: 0px 6px 5px black;
+  box-shadow: 0px 6px 5px black;
+  -moz-border-radius:190px;
+  -webkit-border-radius:190px;
+  border-radius:190px;
+  }
+  .track-art img {
+    border-radius: 50%;
+    height: 250px;
+    width: 250px;
+  }
+  
+  .track-name {
+  font-size: 1.5rem;
+  }
+  
+  
+  .buttons {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 30px;
+  }
+  
+  

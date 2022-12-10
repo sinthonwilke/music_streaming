@@ -66,16 +66,30 @@
                     <div id="bg">
                         <div id="demo">
                     </div>
-                
-                    <div>
-                        <div id="prevSong"></div>
-                        <div id="nextSong"></div>
-                        <div id="songName"></div>
-                        <audio controls id="audio">
-                            <source src="" type="audio/wav">
-                        </audio>
-                        <div id="likeButton"></div>
-                        <div id="a2pl"></div>
+
+                    <div class="player">
+                        <div class="wrapper">
+                            <div class="details">
+                                <div class="track-art"> <img src="media/playlist.jpg"></div>
+                                <div class="track-name" id="songName">Track Name</div>
+                                <audio controls id="audio">
+                                    <source src="" type="audio/wav">
+                                </audio>
+                            </div>
+                        
+                            <div class="buttons">
+                                <div id="prevSong">
+                                     <i class="fa fa-step-backward fa-2x"></i>
+                                 </div>
+                                 <div id="likeButton">
+                                     <i class="fa fa-play-circle fa-5x"></i>
+                                 </div>
+                                 <div id="nextSong">
+                                     <i class="fa fa-step-forward fa-2x"></i>
+                                 </div>
+                            </div>
+                            <div id="a2pl"></div>
+                        </div>
                     </div>
                </div>
            </section>

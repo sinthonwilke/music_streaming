@@ -75,7 +75,7 @@
     width: 100%;
 }
 .dashboard {
-    width: 80%;
+    width: 90%;
     overflow: auto;
     background: #F4F9FD;
     border-radius: 20px;
@@ -170,4 +170,21 @@
     .dashboard {
         width: 100%;
     }
+}
+
+table{
+    border-collapse: collapse;
+    border-spacing: 0;
+    border: 2px solid rgb(0, 0, 0);
+}
+table thead th{
+    border: 2px solid rgb(0, 0, 0);
+    padding: 10px;
+    text-align: center;
+}
+
+tbody tr td{
+    border: 2px solid rgb(0, 0, 0);
+    padding: 10px;
+    text-align: left;
 }
