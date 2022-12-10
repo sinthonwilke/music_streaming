@@ -549,3 +549,4 @@ function resetHistory() {
     historyIndex = 0;
     updateHistory();
 }
+
