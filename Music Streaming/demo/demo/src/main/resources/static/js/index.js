@@ -1,12 +1,13 @@
 window.onload = function() {
     page();
     homePage()
-    document.getElementById("likeButton").innerHTML = '<class="transparent"><i class="fa-regular fa-heart"></i>';
-    document.getElementById("prevSong").innerHTML = '<class="transparent"><i class="fa fa-step-backward fa-2x"></i>';
-    document.getElementById("nextSong").innerHTML = '<class="transparent"><i class="fa fa-step-forward fa-2x"></i>';
+    document.getElementById("likeButton").innerHTML = '<class="transparent"><i class="fa-regular fa-heart" style="opacity:0.6;"></i>';
+    document.getElementById("prevSong").innerHTML = '<class="transparent"><i class="fa fa-step-backward fa-2x"  style="opacity:0.6;"></i>';
+    document.getElementById("nextSong").innerHTML = '<class="transparent"><i class="fa fa-step-forward fa-2x"  style="opacity:0.6;"></i>';
     document.getElementById("songName").innerHTML = '<p>Nothing is playing.</p>';
     document.getElementById("a2pl").innerHTML = "<button id='add2PlaylistButton' onclick='add2PlaylistAction()' class='dropbtn'>Add to playlist</button>";
     document.getElementById("a2pl").classList.add("transparent");
+    document.getElementById("audio").classList.add("transparent");
 };
 
 function page() {
@@ -444,7 +445,7 @@ function updateHistory() {
         document.getElementById("prevSong").innerHTML = '<class"buttons" id="prevSong" onclick="playPrev()"><i class="fa fa-step-backward fa-2x"></i>';
     }
     else {
-        document.getElementById("prevSong").innerHTML = '<class="transparent"><i class="fa fa-step-backward fa-2x"></i>';
+        document.getElementById("prevSong").innerHTML = '<class="transparent"><i class="fa fa-step-backward fa-2x"  style="opacity:0.6;"></i>';
     }
 
     // next
@@ -452,7 +453,7 @@ function updateHistory() {
         document.getElementById("nextSong").innerHTML = '<class="buttons" id="nextSong" onclick="playNext()"><i class="fa fa-step-forward fa-2x"></i>';
     }
     else {
-        document.getElementById("nextSong").innerHTML = '<class="transparent"><i class="fa fa-step-forward fa-2x"></i>';
+        document.getElementById("nextSong").innerHTML = '<class="transparent"><i class="fa fa-step-forward fa-2x"  style="opacity:0.6;"></i>';
     }
 }
 
@@ -495,6 +496,7 @@ function audioControl(src, musicID) {
     document.getElementById("songName").innerHTML = musicName;
     document.getElementById("add2PlaylistButton").value = musicID;
     document.getElementById("a2pl").classList.remove("transparent");
+    document.getElementById("audio").classList.remove("transparent");
 
     // audio control
     var audio = document.getElementById("audio");
