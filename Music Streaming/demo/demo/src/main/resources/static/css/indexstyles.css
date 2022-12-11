@@ -121,8 +121,8 @@
     display: none;
 }
 .sb-ul-active {
-    background: #8e44ad !important;
-    color: black !important;
+    background: pink !important;
+    color: white !important;
     font-weight: bold;
 }
 .chev-pos {
