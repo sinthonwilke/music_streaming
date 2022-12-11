@@ -1,12 +1,63 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:400,400i,700,900&display=swap" rel="stylesheet">
     <meta charset="UTF-8" />
 </head>
 <body>
 
+    <div class="card">
+        <div style="border-radius:200px; height:200px; width:200px; background: #F8FAF5; margin:0 auto;">
+          <i class="checkmark">✓</i>
+        </div>
+        
     <h1>You have signed up successfully!</h3>
-    <h2><a th:href="@{/login}">Click here to Login</a></h2>
+    <h2><a th:href="@{/login}"><button>Click here to Login</button></a></h2>
 
 </body>
 </html>
+<style>
+    body {
+      text-align: center;
+      padding: 40px 0;
+      background: #EBF0F5;
+    }
+      h1 {
+        color: #88B04B;
+        font-family: "Nunito Sans", "Helvetica Neue", sans-serif;
+        font-weight: 900;
+        font-size: 40px;
+        margin-bottom: 10px;
+      }
+      h2 button{
+        margin-top: 50px;
+        width: 60%;
+        background-color: #FF6699;
+        color: #ffffff;
+        padding: 15px 0;
+        font-size: 18px;
+        font-weight: 600;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      p {
+        color: #404F5E;
+        font-family: "Nunito Sans", "Helvetica Neue", sans-serif;
+        font-size:20px;
+        margin: 0;
+      }
+    i {
+      color: #9ABC66;
+      font-size: 100px;
+      line-height: 200px;
+      margin-left:-15px;
+    }
+    .card {
+      background: white;
+      padding: 60px;
+      border-radius: 4px;
+      box-shadow: 0 2px 3px #C8D0D8;
+      display: inline-block;
+      margin: 0 auto;
+    }
+  </style>
