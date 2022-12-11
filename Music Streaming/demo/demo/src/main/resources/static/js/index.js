@@ -39,6 +39,8 @@ function homePage() {
     var poplist = JSON.parse(load("/genreRecommend=Pop"));
     var hiphoplist = JSON.parse(load("/genreRecommend=Hip Hop"));
     var rocklist = JSON.parse(load("/genreRecommend=Rock"));
+    var rnblist = JSON.parse(load("/genreRecommend=R&B"));
+    var electroniclist = JSON.parse(load("/genreRecommend=Electronic"));
 
     function recommendLoad() {
         var out = '';
@@ -52,7 +54,7 @@ function homePage() {
 
     function genreLoad() {
         var out = '';
-        var list = ['Pop', 'Hip Hop', 'Rock']
+        var list = ['Pop', 'Hip Hop', 'Rock', 'R&B', 'Electronic']
         for(var i = 0; i < list.length; i++) {
             out += '<button onclick="showRecLists(' + "'" + list[i] + "'" + ')" class="dropbtn">' + list[i] + '</button>'
         }
@@ -70,6 +72,8 @@ function homePage() {
         else if (str == 'Pop') {recList = poplist;}
         else if (str == 'Hip Hop') {recList = hiphoplist;}
         else if (str == 'Rock') {recList = rocklist;}
+        else if (str == 'R&B') {recList = rnblist;}
+        else if (str == 'Electronic') {recList = electroniclist;}
 
         var musicIdList = "";
         for(var i = 0; i < recList.length; i++) {
