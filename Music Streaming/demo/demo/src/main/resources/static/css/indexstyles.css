@@ -171,7 +171,7 @@
     }
 }
 .vertical-menu {
-    width: 250px;
+    width: 50%;
     min-height: auto;
     max-height: 50vh;
     overflow: scroll;
@@ -193,13 +193,14 @@ div.scrollmenu {
     background-color: #333;
     overflow: auto;
     white-space: nowrap;
-    width: 250px;
+    width: 50%;
 }
     div.scrollmenu a {
+        height: auto;
         display: inline-block;
         color: white;
         text-align: center;
-        padding: 14px;
+        padding: 25px;
         text-decoration: none;
     }
     div.scrollmenu a:hover {
