@@ -31,7 +31,7 @@ function homePage() {
     genreLoad();
     yourPlaylistLoad();
 }
-    // first time random
+    // preload
     var randomList = JSON.parse(load("/recommend=rand"));
     var list2020 = JSON.parse(load("/recommend=2020"));
     var list2021 = JSON.parse(load("/recommend=2021"));
@@ -79,7 +79,7 @@ function homePage() {
         for(var i = 0; i < recList.length; i++) {
             tempSongHistory.push(recList[i].id)
             songName = recList[i].artist.name + " - " + recList[i].name;
-            out += '<a class="dropbtn" onclick="playAudio(' + recList[i].id + ',' + "'" + songName + "'" + '); audioHistory('+ i +')">' + songName + '</a>';
+            out += '<a class="dropbtn" onclick="playAudio('+ recList[i].id +'); audioHistory('+ i +')">' + songName + '</a>';
         }
         
         document.getElementById("myDropdown").innerHTML = out;
@@ -110,7 +110,7 @@ function homePage() {
             for(var i = 0; i < list.length; i++) {
                 tempSongHistory.push(list[i].music.id)
                 songName = list[i].music.artist.name + " - " + list[i].music.name;
-                out += '<a class="dropbtn" onclick="playAudio(' + list[i].music.id + ',' + "'" + songName + "'" + '); audioHistory('+ i +')">' + songName + '</a>';
+                out += '<a class="dropbtn" onclick="playAudio('+ list[i].music.id +'); audioHistory('+ i +')">' + songName + '</a>';
             }
         }
         else {
@@ -152,7 +152,7 @@ function searchPage() {
                 if(music.length > 0) {
                     for(var i = 0; i < music.length; i++) {
                         songName = music[i].artist.name + " - " + music[i].name;
-                        out += '<a onclick="playAudio(' + music[i].id + ',' + "'" + songName + "'" + '); resetHistory();">' + songName + '</a>';
+                        out += '<a onclick="playAudio('+ music[i].id +'); resetHistory();">' + songName + '</a>';
                     }
                 }
                 else {
@@ -189,7 +189,7 @@ function searchPage() {
         for(var i = 0; i < albumList.length; i++) {
             tempSongHistory.push(albumList[i].music.id)
             songName = albumList[i].music.artist.name + " - " + albumList[i].music.name;
-            out += '<a class="dropbtn" onclick="playAudio(' + albumList[i].music.id + ',' + "'" + songName + "'" + '); audioHistory('+ i +')">' + songName + '</a>';
+            out += '<a class="dropbtn" onclick="playAudio('+ albumList[i].music.id +'); audioHistory('+ i +')">' + songName + '</a>';
         }
 
         document.getElementById("myDropdown").innerHTML = out;
@@ -218,8 +218,8 @@ function libraryPage() {
             for(var i = 0; i < favList.length; i++) {
                 tempSongHistory.push(favList[i].music.id)
                 songName = favList[i].music.artist.name + " - " + favList[i].music.name;
-                out += '<a class="dropbtn" onclick="playAudio(' + favList[i].music.id + ',' + "'" + songName + "'" +'); audioHistory('+ i +')">' + songName + '</a>';
-                out += '<a class="dropbtn" onclick="deleteFav(' + favList[i].music.id + ')"> >>Unlike<< </a>';
+                out += '<a class="dropbtn" onclick="playAudio('+ favList[i].music.id +'); audioHistory('+ i +')">' + songName + '</a>';
+                out += '<a class="dropbtn" onclick="deleteFav('+ favList[i].music.id +')"> >>Unlike<< </a>';
             }
         }
         else {
@@ -258,7 +258,7 @@ function libraryPage() {
             for(var i = 0; i < list.length; i++) {
                 tempSongHistory.push(list[i].music.id)
                 songName = list[i].music.artist.name + " - " + list[i].music.name;
-                out += '<a class="dropbtn" onclick="playAudio(' + list[i].music.id + ',' + "'" + songName + "'" + '); audioHistory('+ i +')">' + songName + '</a>';
+                out += '<a class="dropbtn" onclick="playAudio('+ list[i].music.id +'); audioHistory('+ i +')">' + songName + '</a>';
                 out += '<a class="dropbtn" onclick="deleteListMusic(' + id + ',' + list[i].music.id + ')"> >>Remove<< </a>';            
             }
         }
@@ -297,7 +297,7 @@ function libraryPage() {
         document.getElementById("myOverlay2").style.display = "none";
         document.getElementById("bg").classList.remove("bgLock");
         document.getElementById("renamePlaylist").value = null;
-
+        popupMessage("Playlist renamed.");
     }
 
     function addPlaylistPop() {
@@ -324,6 +324,7 @@ function libraryPage() {
     function deleteList(id) {
         load("/dellist=" + id);
         libraryPage();
+        popupMessage("Playlist deleted.");
     }
 
 function accountPage() {
@@ -434,11 +435,6 @@ function popupMessage(msg) {
     }, 3000);
 }
 
-function playAudio(musicID) {
-    var src = "assets/musics/" + musicID + ".wav";
-    audioControl(src, musicID);
-}
-
 var tempSongHistory = [];
 var songHistory = [];
 var historyIndex;
@@ -459,6 +455,11 @@ function updateHistory() {
     else {
         document.getElementById("nextSong").innerHTML = '<class="transparent"><i class="fa fa-step-forward fa-2x"></i>';
     }
+}
+
+function playAudio(musicID) {
+    var src = "assets/musics/" + musicID + ".wav";
+    audioControl(src, musicID);
 }
 
 function playPrev() {
@@ -492,7 +493,6 @@ function audioControl(src, musicID) {
 
     // element
     var musicName = getMusicName(musicID);
-
     document.getElementById("songName").innerHTML = musicName;
     document.getElementById("add2PlaylistButton").value = musicID;
     document.getElementById("a2pl").classList.remove("transparent");
