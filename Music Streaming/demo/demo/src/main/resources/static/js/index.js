@@ -2,19 +2,19 @@ window.onload = function() {
     page();
     homePage()
     document.getElementById("likeButton").innerHTML = 'none';
-    document.getElementById("likeButton").innerHTML = '<button class="transparent">Like</button>';
-    document.getElementById("prevSong").innerHTML = '<button class="transparent"> << </button>';
-    document.getElementById("nextSong").innerHTML = '<button class="transparent"> >> </button>';
+    document.getElementById("likeButton").innerHTML = '<class="transparent"><i class="fa-regular fa-heart"></i>';
+    document.getElementById("prevSong").innerHTML = '<class="transparent"><i class="fa fa-step-backward fa-2x"></i>';
+    document.getElementById("nextSong").innerHTML = '<class="transparent"><i class="fa fa-step-forward fa-2x"></i>';
     document.getElementById("songName").innerHTML = '<p>Nothing is playing.</p>';
     document.getElementById("a2pl").innerHTML = "<button id='add2PlaylistButton' onclick='add2PlaylistAction()' class='dropbtn'>Add to playlist</button>";
     document.getElementById("a2pl").classList.add("transparent");
 };
 
 function page() {
-    document.getElementById("homePageId").style.color = "Black";
-    document.getElementById("searchPageId").style.color = "Black";
-    document.getElementById("libraryPageId").style.color = "Black";
-    document.getElementById("accountPageId").style.color = "Black";
+    document.getElementById("homePageId").style.color = "black";
+    document.getElementById("searchPageId").style.color = "black";
+    document.getElementById("libraryPageId").style.color = "black";
+    document.getElementById("accountPageId").style.color = "black";
 
 }
 
@@ -26,7 +26,7 @@ function homePage() {
     xhttp.open("GET", "/home", false);
     xhttp.send();
     page();
-    document.getElementById("homePageId").style.color = "Pink";
+    document.getElementById("homePageId").style.color = "white";
     recommendLoad();
     genreLoad();
     yourPlaylistLoad();
@@ -131,7 +131,7 @@ function searchPage() {
     xhttp.open("GET", "/search", false);
     xhttp.send();
     page();
-    document.getElementById("searchPageId").style.color = "Pink";
+    document.getElementById("searchPageId").style.color = "white";
     document.getElementById("searchResult").innerHTML = document.getElementById("defualtResult").innerHTML;
 }
 
@@ -208,7 +208,7 @@ function libraryPage() {
     xhttp.open("GET", "/library", false);
     xhttp.send();
     page();
-    document.getElementById("libraryPageId").style.color = "Pink";
+    document.getElementById("libraryPageId").style.color = "white";
     playlists();
 }
 
@@ -342,7 +342,7 @@ function accountPage() {
     xhttp.open("GET", "/account", false);
     xhttp.send();
     page();
-    document.getElementById("accountPageId").style.color = "Pink";
+    document.getElementById("accountPageId").style.color = "white";
 }
 
 var songHistory = [];
@@ -351,18 +351,18 @@ var historyIndex;
 function updateHistory() {
     // prev
     if(songHistory.length > 1 && historyIndex > 0) {
-        document.getElementById("prevSong").innerHTML = '<button onclick="playPrev()"> << </button>';
+        document.getElementById("prevSong").innerHTML = '<class"buttons" id="prevSong" onclick="playPrev()"><i class="fa fa-step-backward fa-2x"></i>';
     }
     else {
-        document.getElementById("prevSong").innerHTML = '<button class="transparent"> << </button>';
+        document.getElementById("prevSong").innerHTML = '<class="transparent"><i class="fa fa-step-backward fa-2x"></i>';
     }
 
     // next
     if(songHistory.length - 1 > historyIndex) {
-        document.getElementById("nextSong").innerHTML = '<button onclick="playNext()"> >> </button>';
+        document.getElementById("nextSong").innerHTML = '<class="buttons" id="nextSong" onclick="playNext()"><i class="fa fa-step-forward fa-2x"></i>';
     }
     else {
-        document.getElementById("nextSong").innerHTML = '<button class="transparent"> >> </button>';
+        document.getElementById("nextSong").innerHTML = '<class="transparent"><i class="fa fa-step-forward fa-2x"></i>';
     }
 }
 
@@ -373,18 +373,18 @@ function checklike(id) {
     if(fav.length != 0) {
         for(var i = 0; i < fav.length; i++) {
             if(fav[i].music.id == id) {
-                likeButton.innerHTML = '<button id="likeButton" onclick="likeSong()">Liked</button>';
+                likeButton.innerHTML = '<class="buttons" id="likeButton" onclick="likeSong()"><i class="fa-solid fa-heart"></i></class>';
                 likeButton.value = true;
                 break;
             }
             else {
-                likeButton.innerHTML = '<button id="likeButton" onclick="likeSong()">Like</button>';
+                likeButton.innerHTML = '<class="buttons" id="likeButton" onclick="likeSong()"><i class="fa-regular fa-heart"></i></class>';
                 likeButton.value = false;
             }
         }
     }   
     else {
-        likeButton.innerHTML = '<button id="likeButton" onclick="likeSong()">Like</button>';
+        likeButton.innerHTML = '<class="buttons" id="likeButton" onclick="likeSong()"><i class="fa-regular fa-heart"></i></class>';
         likeButton.value = false;
     }
 }
@@ -471,10 +471,10 @@ function playAudio(musicID) {
 function playPrev() {
     historyIndex--;
     if(songHistory.length > 1 && historyIndex > 0) {
-        document.getElementById("prevSong").innerHTML = '<button onclick="playPrev()"> << </button>';
+        document.getElementById("prevSong").innerHTML = '<class"buttons" id="prevSong" onclick="playPrev()"><i class="fa fa-step-backward fa-2x"></i>';
     }
     else {
-        document.getElementById("prevSong").innerHTML = '<button class="transparent"> << </button>';
+        document.getElementById("prevSong").innerHTML = '<class="transparent"><i class="fa fa-step-backward fa-2x"></i>';
     }
 
     var musicID = songHistory[historyIndex];
@@ -486,10 +486,10 @@ function playPrev() {
 function playNext() {
     historyIndex++;
     if(songHistory.length - 1 > historyIndex) {
-        document.getElementById("nextSong").innerHTML = '<button onclick="playNext()"> >> </button>';
+        document.getElementById("nextSong").innerHTML = '<class="buttons" id="nextSong" onclick="playNext()"><i class="fa fa-step-forward fa-2x"></i>';
     }
     else {
-        document.getElementById("nextSong").innerHTML = '<button class="transparent"> >> </button>';
+        document.getElementById("nextSong").innerHTML = '<class="transparent"><i class="fa fa-step-forward fa-2x"></i>';
     }
     
     var musicID = songHistory[historyIndex];
@@ -545,3 +545,4 @@ function resetHistory() {
     historyIndex = 0;
     updateHistory();
 }
+
