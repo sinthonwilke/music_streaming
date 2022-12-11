@@ -1,7 +1,6 @@
 window.onload = function() {
     page();
     homePage()
-    document.getElementById("likeButton").innerHTML = 'none';
     document.getElementById("likeButton").innerHTML = '<class="transparent"><i class="fa-regular fa-heart"></i>';
     document.getElementById("prevSong").innerHTML = '<class="transparent"><i class="fa fa-step-backward fa-2x"></i>';
     document.getElementById("nextSong").innerHTML = '<class="transparent"><i class="fa fa-step-forward fa-2x"></i>';
