@@ -393,6 +393,7 @@ div.scrollmenu {
     
 .player{
     height: 95vh;
+    width: 300px;
     display: flex;
     align-items: center;
     flex-direction: row;
@@ -403,7 +404,6 @@ div.scrollmenu {
     padding: 30px;
     border-radius: 20px;
     background-color: pink;
-    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
   }
   
   .details {
@@ -436,6 +436,7 @@ div.scrollmenu {
   
   .track-name {
   font-size: 1.5rem;
+  margin-bottom: 10px;
   }
   
   

@@ -2,3 +2,38 @@ body {
     color: white;
     font-weight: bold;
 }
+*{
+    /* box-sizing: border-box; */
+    font-family: 'Sarabun', sans-serif;
+}
+.container {
+    margin-left: 5px;
+}
+.search-bar {
+    width: 100%;
+    max-width: 700px;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    border-radius: 60px;
+    padding: 5px 30px;
+}
+.search-bar input {
+    background: transparent;
+    flex: 1;
+    border: 0;
+    outline: none;
+    padding: 5px 8px;
+    font-size: 13px;
+}
+.search-bar button img{
+    width: 30px;
+}
+.search-bar button {
+    border: 0;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    background: #fff;
+    cursor: pointer;
+}
