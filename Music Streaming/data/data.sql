@@ -1,4 +1,4 @@
--- uplaylist_musicser
+-- user
 insert into users(email, password, role) values
 ("admin", "$2a$12$X5K/wQD7FjSQypVmqaioBesL3iaQXMfS9bdW2oep0FuX7A/H5iEgO",	"ADMIN"),
 ("test", "$2a$12$X5K/wQD7FjSQypVmqaioBesL3iaQXMfS9bdW2oep0FuX7A/H5iEgO",	"USER");
