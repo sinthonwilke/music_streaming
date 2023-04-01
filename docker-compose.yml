@@ -11,14 +11,21 @@ services:
       MYSQL_DATABASE: musicstreaming
     networks: 
       - springboot-mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "--password=password"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   springboot-container:
+    build: .
     container_name: springboot-container
     image: springboot
     ports:
       - 8080:8080
     depends_on:
-      - mysql-container
+      mysql-container:
+        condition: service_healthy
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://mysql-container:3306/musicstreaming
       SPRING_DATASOURCE_USERNAME: root
