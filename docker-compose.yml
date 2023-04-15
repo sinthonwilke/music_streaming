@@ -20,7 +20,7 @@ services:
   springboot-container:
     build: .
     container_name: springboot-container
-    image: springboot
+    image: sinthonwilke/springboot:tagname
     ports:
       - 8080:8080
     depends_on:
