@@ -416,5 +416,3 @@ insert into album_music(albums, musics) values
 (23, 142),
 (23, 143),
 (23, 144);
-
-
