@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: springboot-deployment
+  namespace: webapp
   labels:
     app: springboot
 spec:
@@ -16,12 +17,12 @@ spec:
     spec:
       containers:
       - name: springboot
-        image: sinthonwilke/springboot:tagname
+        image: sinthonwilke/springboot:latest
         ports:
         - containerPort: 8080
         env:
         - name: SPRING_DATASOURCE_URL
-          value: jdbc:mysql://mysql-service:3306/musicstreaming
+          value: jdbc:mysql://mysql.webapp.svc.cluster.local:3306/musicstreaming
         - name: SPRING_DATASOURCE_USERNAME
           valueFrom:
             secretKeyRef:
@@ -32,3 +33,7 @@ spec:
             secretKeyRef:
               name: mysql-secret
               key: MYSQL_ROOT_PASSWORD
+        resources:
+          limits:
+            cpu: "0.50"
+            memory: 512Mi
