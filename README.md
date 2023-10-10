@@ -17,4 +17,3 @@ just like its name.
 
 - **Database:**
   - MySQL
-
